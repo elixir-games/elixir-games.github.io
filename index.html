@@ -108,10 +108,19 @@
       .wrap{padding:28px}
       /* show hamburger, hide nav by default */
       .nav-toggle{display:inline-flex}
-      nav{display:flex;flex-direction:column;gap:8px;margin-top:12px;max-height:0;overflow:hidden;opacity:0;width:100%}
+
+      /* backdrop to dim content and catch clicks when nav is open */
+      .nav-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.45);backdrop-filter:blur(2px);z-index:20;opacity:0;transition:opacity .18s ease}
+      .nav-backdrop[aria-hidden="false"], .nav-backdrop[hidden="false"], .nav-backdrop.show{opacity:1}
+
+      /* nav sits above content but below backdrop's clickable layer */
+      nav{display:flex;flex-direction:column;gap:8px;margin-top:12px;max-height:0;overflow:hidden;opacity:0;width:100%;position:relative;z-index:30}
       nav.open{max-height:400px;opacity:1}
       nav.open a{transform:none;opacity:1}
       nav a{transform:translateY(-6px);opacity:0}
+
+      /* when nav is open, prevent body scrolling */
+      body.nav-open{overflow:hidden}
     }
     @media (max-width:640px){
       .hero{grid-template-columns:1fr;}
@@ -184,6 +193,7 @@
         <a class="nav-btn" href="#contact">Contact</a>
         <a class="btn" href="#play">Play Now</a>
       </nav>
+      <div id="nav-backdrop" class="nav-backdrop" hidden></div>
     </header>
 
     <main class="hero">
@@ -508,21 +518,28 @@
     (function(){
       const btn = document.querySelector('.nav-toggle');
       const nav = document.getElementById('site-nav');
-      if(!btn || !nav) return;
+      const backdrop = document.getElementById('nav-backdrop');
+      if(!btn || !nav || !backdrop) return;
       function open(){
         nav.classList.add('open');
         btn.setAttribute('aria-expanded','true');
+        backdrop.hidden = false; backdrop.classList.add('show'); backdrop.setAttribute('aria-hidden','false');
+        document.body.classList.add('nav-open');
       }
       function close(){
         nav.classList.remove('open');
         btn.setAttribute('aria-expanded','false');
+        backdrop.classList.remove('show'); backdrop.hidden = true; backdrop.setAttribute('aria-hidden','true');
+        document.body.classList.remove('nav-open');
       }
       btn.addEventListener('click', (e)=>{
         if(nav.classList.contains('open')) close(); else open();
       });
       // close on escape
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-      // close when clicking outside nav on small screens
+      // clicking the backdrop closes menu
+      backdrop.addEventListener('click', (e)=>{ close(); });
+      // close when clicking outside nav on small screens (retain as fallback)
       document.addEventListener('click',(e)=>{
         if(window.innerWidth > 900) return;
         if(!nav.contains(e.target) && !btn.contains(e.target)) close();
