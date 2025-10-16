@@ -9,6 +9,33 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#070707">
+  <link rel="canonical" href="https://elixirgames.io/">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Elixir Games — Playful, performant games">
+  <meta property="og:description" content="Elixir Games builds compact, polished games that run everywhere — web, mobile, and native.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elixirgames.io/">
+  <meta property="og:image" content="https://elixirgames.io/favicon-192.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Elixir Games — Playful, performant games">
+  <meta name="twitter:description" content="Elixir Games builds compact, polished games that run everywhere — web, mobile, and native.">
+  <meta name="twitter:image" content="https://elixirgames.io/favicon-192.png">
+
+  <script type="application/ld+json">{
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Elixir Games",
+    "url":"https://elixirgames.io/",
+    "logo":"https://elixirgames.io/favicon-192.png",
+    "sameAs":["https://github.com/elixirgames"],
+    "contactPoint":[{"@type":"ContactPoint","email":"contact@elixirgames.io","contactType":"customer support"}]
+  }</script>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <style>
     :root{
@@ -17,55 +44,97 @@
       --muted:#9aa0a6;
       --accent:#609C66; /* sampled from avatar */
       --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
       --radius:12px;
-      --max:1100px;
-      --gap:24px;
+      --max:1200px;
+      --gap:28px;
+      --soft-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,#050505 0%, #0b0b0b 100%); color:#e9eef1; -webkit-font-smoothing:antialiased}
-    .wrap{max-width:var(--max);margin:40px auto;padding:40px;}
-    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+
+    .wrap{max-width:var(--max);margin:36px auto;padding:36px 28px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:6px}
     .brand{display:flex;align-items:center;gap:14px}
-    .logo{width:54px;height:54px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(57,255,20,0.06), rgba(57,255,20,0.01));border-radius:10px;box-shadow:0 6px 18px rgba(57,255,20,0.06);}
-    .logo svg{width:34px;height:34px}
-    h1{font-size:28px;margin:0;color:#fff}
-    nav{display:flex;gap:12px;align-items:center}
-    a.nav-btn{background:transparent;color:var(--muted);padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:600;border:1px solid rgba(255,255,255,0.04);transition:all .16s}
-    a.nav-btn:hover{background:rgba(57,255,20,0.06);color:var(--accent);border-color:rgba(57,255,20,0.12);box-shadow:0 8px 22px rgba(57,255,20,0.04)}
-    a.btn{background:var(--glass);color:var(--accent);padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:600;border:1px solid rgba(57,255,20,0.08)}
+    .logo{width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(96,156,102,0.06), rgba(96,156,102,0.02));border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.02);} 
+    .logo img{width:44px;height:44px;border-radius:9px;object-fit:cover;display:block}
+    h1{font-size:20px;margin:0;color:#fff}
+    header .studio{font-size:12px;color:var(--muted);margin-top:2px}
+
+    nav{display:flex;gap:10px;align-items:center}
+    a.nav-btn{background:transparent;color:var(--muted);padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:700;border:1px solid transparent;transition:all .14s;font-size:13px}
+    a.nav-btn:hover{background:rgba(96,156,102,0.06);color:var(--accent);border-color:rgba(96,156,102,0.12);box-shadow:0 8px 22px rgba(57,255,20,0.03)}
+    a.btn{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.006));color:var(--accent);padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:700;border:1px solid rgba(96,156,102,0.08);font-size:13px}
     a.ghost{color:var(--muted);background:transparent;border:1px solid transparent}
 
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:var(--gap);align-items:center;margin-top:48px}
-    .hero-left{padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);}
-    .kicker{display:inline-block;padding:6px 10px;background:rgba(57,255,20,0.08);color:var(--accent);border-radius:999px;font-weight:700;font-size:12px}
-    .lead{font-size:44px;line-height:1.02;margin:18px 0;color:#fff}
-    .desc{color:var(--muted);margin-bottom:20px}
+    /* hero layout */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:var(--gap);align-items:start;margin-top:18px}
+    .hero-left{padding:26px;background:linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.006));border-radius:16px;border:1px solid rgba(255,255,255,0.02);box-shadow:var(--soft-shadow)}
+    .kicker{display:inline-block;padding:6px 10px;background:linear-gradient(90deg, rgba(96,156,102,0.09), rgba(96,156,102,0.03));color:var(--accent);border-radius:999px;font-weight:800;font-size:12px}
+    .lead{font-size:40px;line-height:1.02;margin:14px 0 8px;color:#fff}
+    .desc{color:var(--muted);margin-bottom:18px;font-size:15px}
     .ctas{display:flex;gap:12px}
-    .card{background:linear-gradient(90deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
 
-    .hero-right{display:flex;flex-direction:column;gap:16px}
-    .preview{height:320px;background:linear-gradient(180deg, rgba(57,255,20,0.04), rgba(0,0,0,0.2));border-radius:12px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(57,255,20,0.06)}
-    .preview .device{width:85%;height:85%;background:linear-gradient(180deg,#020202,#0b0b0b);border-radius:10px;border:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;color:var(--muted)}
+    .card{background:linear-gradient(90deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.02)}
 
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
-    .feature{padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
-    .feature h3{margin:0 0 6px 0;color:#fff;font-size:16px}
+    .hero-right{display:flex;flex-direction:column;gap:14px}
+    .preview{height:320px;background:linear-gradient(180deg, rgba(96,156,102,0.04), rgba(0,0,0,0.2));border-radius:12px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(96,156,102,0.06)}
+    .preview .device{width:92%;height:88%;background:linear-gradient(180deg,#020202,#0b0b0b);border-radius:12px;border:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;color:var(--muted);padding:18px}
+
+    /* sections */
+    section.card{padding:22px;margin-top:24px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));border:1px solid rgba(255,255,255,0.02);box-shadow:0 8px 26px rgba(0,0,0,0.45)}
+    section.card h2{font-size:20px;margin:0 0 8px;color:#fff}
+    section.card .desc{margin:0 0 12px}
+    .section-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    .feature{padding:18px;background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(255,255,255,0.01));border-radius:12px;border:1px solid rgba(255,255,255,0.02);min-height:110px}
+    .feature h3{margin:0 0 8px 0;color:#fff;font-size:16px}
     .feature p{margin:0;color:var(--muted);font-size:13px}
+    .feature .meta{margin-top:10px;color:var(--muted);font-size:13px}
 
-    footer{margin-top:48px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+    /* new utilities */
+    .section-header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+    .section-header h2{font-size:22px;margin:0}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(96,156,102,0.06), rgba(96,156,102,0.02));color:var(--accent);font-weight:800;font-size:13px}
 
-    /* small screens */
-    @media (max-width:900px){
+    .game-card{display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.008), rgba(255,255,255,0.004));border:1px solid rgba(255,255,255,0.02)}
+    .game-thumb{width:84px;height:84px;border-radius:10px;overflow:hidden;background:#0b0b0b;display:flex;align-items:center;justify-content:center}
+    .game-meta{font-size:13px;color:var(--muted);margin-top:6px}
+    .actions{margin-top:12px;display:flex;gap:8px}
+
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+    .team-card{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.008), rgba(255,255,255,0.004));border:1px solid rgba(255,255,255,0.02);text-align:left}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start}
+    .contact-card{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.008), rgba(255,255,255,0.004));border:1px solid rgba(255,255,255,0.02)}
+
+    /* team list */
+    .team-list{display:flex;gap:12px;flex-direction:column}
+    .team-list > div{background:transparent;padding:6px 0}
+
+    /* forms */
+    form input, form select, form textarea{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-size:14px}
+
+    /* footer */
+    footer{margin-top:36px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+
+    /* responsive */
+    @media (max-width:1000px){
       .hero{grid-template-columns:1fr;}
-      .brand h1{font-size:18px}
-      .lead{font-size:32px}
-      .preview{height:220px}
+      .lead{font-size:34px}
       .features{grid-template-columns:1fr 1fr}
+      .wrap{padding:24px}
+      .contact-grid{grid-template-columns:1fr}
     }
     @media (max-width:520px){
-      .wrap{padding:20px;margin:20px}
+      .wrap{padding:18px;margin:16px}
       .features{grid-template-columns:1fr}
+      .preview{height:220px}
+      .lead{font-size:26px}
     }
 
     /* small animation for liquid */
@@ -73,6 +142,9 @@
     @keyframes wave{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
     .logo img{transition:filter .35s, transform .35s}
     .logo.liquid-active img{filter:url(#liquid-filter);transform:translateY(-3px) scale(1.04);box-shadow:0 10px 24px rgba(0,0,0,0.35)}
+
+    /* subtle section separators */
+    section.card + section.card{margin-top:18px}
   </style>
 </head>
 <body>
@@ -161,68 +233,123 @@
       </aside>
     </main>
 
-    <section id="games" class="card" style="margin-top:28px">
-      <h2 style="margin-top:0">Games</h2>
+    <section id="games" class="card">
+      <div class="section-header">
+        <h2>Games</h2>
+        <div class="pill">Play & Demos</div>
+      </div>
       <p class="desc">A catalog of small, focused games—each designed for short, repeatable sessions and smooth performance.</p>
-      <div class="features" style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
-        <div class="feature">
-          <h3>Reactor Rush</h3>
-          <p>Arcade elixir-mixing puzzler; tap to combine reactions.</p>
-          <div style="margin-top:10px;color:var(--muted);font-size:13px">Platforms: Web, Mobile · Tech: HTML5, Canvas</div>
-          <div style="margin-top:8px"><a class="btn" href="#play">Play Demo</a></div>
+
+      <div class="section-grid" style="margin-top:16px">
+        <div class="game-card">
+          <div class="game-thumb"><img src="/avatar.png" alt="Reactor Rush" style="width:100%;height:100%;object-fit:cover"/></div>
+          <div style="flex:1">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-weight:800;color:#fff">Reactor Rush</div>
+                <div class="game-meta">Arcade elixir-mixing puzzler — quick runs, tight controls.</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-weight:700;color:var(--accent)">Web Demo</div>
+                <div class="game-meta">HTML5 · ~10MB</div>
+              </div>
+            </div>
+            <div class="actions"><a class="btn" href="#play">Play Demo</a> <a class="ghost" href="#about">Notes</a></div>
+          </div>
         </div>
-        <div class="feature">
-          <h3>Emberbound</h3>
-          <p>Minimal roguelite with quick run loops and expressive controls.</p>
-          <div style="margin-top:10px;color:var(--muted);font-size:13px">Platforms: Desktop, Web · Tech: Native, OpenGL</div>
-          <div style="margin-top:8px"><a class="btn" href="#contact">Wishlist / Download</a></div>
+
+        <div class="game-card">
+          <div class="game-thumb"><div style="width:56px;height:56px;background:linear-gradient(90deg,#ff7b7b,#ffb37b);border-radius:8px"></div></div>
+          <div style="flex:1">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-weight:800;color:#fff">Emberbound</div>
+                <div class="game-meta">Minimal roguelite with short run loops and expressive controls.</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-weight:700;color:var(--muted)">Wishlist</div>
+                <div class="game-meta">Desktop · Native</div>
+              </div>
+            </div>
+            <div class="actions"><a class="btn" href="#contact">Wishlist / Download</a> <a class="ghost" href="#about">Dev Log</a></div>
+          </div>
         </div>
-        <div class="feature">
-          <h3>Pocket Orchard</h3>
-          <p>Relaxing harvest puzzler with procedural levels.</p>
-          <div style="margin-top:10px;color:var(--muted);font-size:13px">Platforms: Mobile · Tech: Unity / Lightweight</div>
-          <div style="margin-top:8px"><a class="btn" href="#play">Play Mobile Demo</a></div>
+
+        <div class="game-card">
+          <div class="game-thumb"><div style="width:56px;height:56px;background:linear-gradient(90deg,#7be7ff,#7bffd9);border-radius:8px"></div></div>
+          <div style="flex:1">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-weight:800;color:#fff">Pocket Orchard</div>
+                <div class="game-meta">Relaxing harvest puzzler with procedural levels.</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-weight:700;color:var(--muted)">Mobile</div>
+                <div class="game-meta">Unity · Lightweight</div>
+              </div>
+            </div>
+            <div class="actions"><a class="btn" href="#play">Play Mobile Demo</a> <a class="ghost" href="#about">Art Notes</a></div>
+          </div>
         </div>
       </div>
+
       <div style="margin-top:14px;color:var(--muted);font-size:13px">See developer notes and prototypes on our <a href="https://github.com/elixirgames" style="color:var(--accent)">GitHub</a>.</div>
     </section>
 
-    <section id="careers" class="card" style="margin-top:28px">
-      <h2 style="margin-top:0">Careers</h2>
+    <section id="careers" class="card">
+      <div class="section-header">
+        <h2>Careers</h2>
+        <div class="pill">We're hiring</div>
+      </div>
       <p class="desc">Join a tiny team shipping meaningful moments — we value craft, curiosity, and code that runs well.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px">
-        <div class="feature">
-          <h3>Gameplay Engineer</h3>
-          <p>Ship tight, performant gameplay systems; comfortable with low-level optimization.</p>
-          <div style="margin-top:8px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Gameplay%20Engineer%20Application">Apply</a></div>
+
+      <div class="section-grid" style="margin-top:12px">
+        <div class="team-card">
+          <div style="font-weight:800;color:#fff">Gameplay Engineer</div>
+          <div class="game-meta">Ship tight, performant gameplay systems; comfortable with low-level optimization.</div>
+          <div class="actions" style="margin-top:10px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Gameplay%20Engineer%20Application">Apply</a></div>
         </div>
-        <div class="feature">
-          <h3>Technical Artist</h3>
-          <p>Polish visuals while keeping memory & draw calls lean.</p>
-          <div style="margin-top:8px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Technical%20Artist%20Application">Apply</a></div>
+        <div class="team-card">
+          <div style="font-weight:800;color:#fff">Technical Artist</div>
+          <div class="game-meta">Polish visuals while keeping memory & draw calls lean.</div>
+          <div class="actions" style="margin-top:10px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Technical%20Artist%20Application">Apply</a></div>
         </div>
-        <div class="feature">
-          <h3>Community Manager (part-time)</h3>
-          <p>Grow our player base and keep devs & players connected.</p>
-          <div style="margin-top:8px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Community%20Manager%20Application">Apply</a></div>
+        <div class="team-card">
+          <div style="font-weight:800;color:#fff">Community Manager (part-time)</div>
+          <div class="game-meta">Grow our player base and keep devs & players connected.</div>
+          <div class="actions" style="margin-top:10px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Community%20Manager%20Application">Apply</a></div>
         </div>
       </div>
+
       <div style="margin-top:12px;color:var(--muted);font-size:13px">Hiring process: Apply → Short playbook task → Pair interview → Offer.</div>
     </section>
 
-    <section id="support" class="card" style="margin-top:28px">
-      <h2 style="margin-top:0">Support</h2>
+    <section id="support" class="card">
+      <div class="section-header">
+        <h2>Support</h2>
+        <div class="pill">Help</div>
+      </div>
       <p class="desc">Fast help for players and partners — bugs, refunds, accessibility, and modding guidance.</p>
-      <div style="margin-top:12px">
-        <h3 style="margin:8px 0">FAQ</h3>
-        <div style="color:var(--muted);font-size:13px">How do I improve performance? Try closing other tabs, enable hardware acceleration, or use the native build.</div>
-        <div style="color:var(--muted);font-size:13px;margin-top:8px">Controller support? Most games support touch and keyboard; controller mapping is listed per game.</div>
-        <div style="margin-top:12px"><a class="btn" href="#contact">Report a bug</a> <a class="ghost" href="#contact">Contact Support</a></div>
+
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 260px;gap:12px;align-items:start">
+        <div>
+          <h3 style="margin:8px 0">FAQ</h3>
+          <div style="color:var(--muted);font-size:13px">How do I improve performance? Try closing other tabs, enable hardware acceleration, or use the native build.</div>
+          <div style="color:var(--muted);font-size:13px;margin-top:8px">Controller support? Most games support touch and keyboard; controller mapping is listed per game.</div>
+          <div style="margin-top:12px"><a class="btn" href="#contact">Report a bug</a> <a class="ghost" href="#contact">Contact Support</a></div>
+        </div>
+        <div class="contact-card">
+          <div style="font-weight:700">Quick links</div>
+          <div style="margin-top:8px;color:var(--muted);font-size:13px">Discord · GitHub Issues · Modding Docs</div>
+        </div>
       </div>
     </section>
 
-    <section id="about" class="card" style="margin-top:28px">
-      <h2 style="margin-top:0">About</h2>
+    <section id="about" class="card">
+      <div class="section-header">
+        <h2>About</h2>
+        <div class="pill">Our Story</div>
+      </div>
       <p class="desc">Make small games that delight and scale — craft over scope, performance over bloat.</p>
       <div style="margin-top:12px;display:grid;grid-template-columns:1fr 240px;gap:12px;align-items:start">
         <div>
@@ -247,47 +374,68 @@
       </div>
     </section>
 
-    <section id="contact" class="card" style="margin-top:28px">
-      <h2 style="margin-top:0">Contact</h2>
+    <section id="contact" class="card">
+      <div class="section-header">
+        <h2>Contact</h2>
+        <div class="pill">Say Hi</div>
+      </div>
       <p class="desc">Talk to us — feedback, press, partnership, or just say hi. We typically respond within 3–5 business days.</p>
-      <form action="mailto:contact@elixirgames.io" method="post" enctype="text/plain" style="margin-top:12px;display:grid;gap:8px;max-width:640px">
-        <label style="font-size:13px;color:var(--muted)">Name
-          <input name="name" type="text" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
-        </label>
-        <label style="font-size:13px;color:var(--muted)">Email
-          <input name="email" type="email" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
-        </label>
-        <label style="font-size:13px;color:var(--muted)">Topic
-          <select name="topic" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit">
-            <option>Feedback</option>
-            <option>Press</option>
-            <option>Partnership</option>
-            <option>Bug</option>
-            <option>Other</option>
-          </select>
-        </label>
-        <label style="font-size:13px;color:var(--muted)">Message
-          <textarea name="message" rows="4" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></textarea>
-        </label>
-        <div style="display:flex;gap:8px">
-          <button class="btn" type="submit">Send</button>
-          <a class="ghost" href="#privacy">Privacy</a>
+
+      <div class="contact-grid" style="margin-top:12px">
+        <div>
+          <form action="mailto:contact@elixirgames.io" method="post" enctype="text/plain" style="display:grid;gap:8px">
+            <label style="font-size:13px;color:var(--muted)">Name
+              <input name="name" type="text" />
+            </label>
+            <label style="font-size:13px;color:var(--muted)">Email
+              <input name="email" type="email" />
+            </label>
+            <label style="font-size:13px;color:var(--muted)">Topic
+              <select name="topic">
+                <option>Feedback</option>
+                <option>Press</option>
+                <option>Partnership</option>
+                <option>Bug</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label style="font-size:13px;color:var(--muted)">Message
+              <textarea name="message" rows="4"></textarea>
+            </label>
+            <div style="display:flex;gap:8px">
+              <button class="btn" type="submit">Send</button>
+              <a class="ghost" href="#privacy">Privacy</a>
+            </div>
+          </form>
+          <div style="margin-top:12px;color:var(--muted);font-size:13px">Or email us directly at <a href="mailto:contact@elixirgames.io" style="color:var(--accent)">contact@elixirgames.io</a></div>
         </div>
-      </form>
-      <div style="margin-top:12px;color:var(--muted);font-size:13px">Or email us directly at <a href="mailto:contact@elixirgames.io" style="color:var(--accent)">hello@elixirgames.example</a></div>
+        <aside class="contact-card">
+          <div style="font-weight:700">Office</div>
+          <div style="margin-top:8px;color:var(--muted);font-size:13px">Remote-first · Open to contractors and remote hires.</div>
+        </aside>
+      </div>
     </section>
 
-    <section id="play" class="card" style="margin-top:28px">
-      <h2 style="margin-top:0">Play Now — Reactor Rush</h2>
-      <p class="desc">Jump into a 5-minute demo that shows what we do best. Recommended: modern browser with WebGL enabled.</p>
-      <div style="margin-top:14px;display:flex;gap:12px;flex-direction:column">
-        <div style="background:#020202;border-radius:8px;padding:12px;border:1px solid rgba(255,255,255,0.02);color:var(--muted)">[Embedded demo placeholder — replace with game's iframe or WASM build]</div>
-        <div style="display:flex;gap:8px">
-          <a class="btn" href="#" onclick="alert('Play demo placeholder')">Play in Browser</a>
-          <a class="btn" href="#" onclick="alert('Download placeholder')">Download Builds</a>
-          <a class="ghost" href="https://github.com/elixirgames" target="_blank">Source & Tools</a>
+    <section id="play" class="card">
+      <div class="section-header">
+        <h2>Play Now</h2>
+        <div class="pill">Reactor Rush</div>
+      </div>
+      <p class="desc">Jump into a short demo that shows our approach: quick to learn, fun to repeat, and well optimized for web.</p>
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 320px;gap:12px;align-items:start">
+        <div style="background:#020202;border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.02);min-height:220px;color:var(--muted)">[Embedded demo placeholder — replace with game's iframe or WASM build]</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="card" style="padding:12px">
+            <div style="font-weight:700">Play in browser</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">Recommended: modern browser with WebGL enabled.</div>
+            <div class="actions"><a class="btn" href="#" onclick="alert('Play demo placeholder')">Play</a> <a class="ghost" href="#contact">Report Issue</a></div>
+          </div>
+          <div class="card" style="padding:12px">
+            <div style="font-weight:700">Downloads</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">Native builds and mobile links will appear here when available.</div>
+            <div class="actions"><a class="btn" href="#" onclick="alert('Download placeholder')">Download Builds</a></div>
+          </div>
         </div>
-        <div style="margin-top:10px;color:var(--muted);font-size:13px">Feedback: <a href="#contact" style="color:var(--accent)">Tell us what you think</a> — 30 seconds.</div>
       </div>
     </section>
 
