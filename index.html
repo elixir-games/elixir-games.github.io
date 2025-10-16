@@ -68,13 +68,14 @@
     .liquid{animation:wave 2.6s linear infinite}
     @keyframes wave{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
     .logo img{transition:filter .35s, transform .35s}
-    .logo.liquid-active img{filter:url(#liquid-filter);transform:translateY(-2px) scale(1.02)}
+    .logo.liquid-active img{filter:url(#liquid-filter);transform:translateY(-4px) scale(1.08);box-shadow:0 12px 30px rgba(0,0,0,0.4)}
   </style>
 </head>
 <body>
   <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;" xmlns="http://www.w3.org/2000/svg">
     <filter id="liquid-filter">
-      <feTurbulence type="fractalNoise" baseFrequency="0.001" numOctaves="2" seed="2" result="turb" />
+      <!-- stronger turbulence for a more visible liquid effect -->
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="5" result="turb" />
       <feDisplacementMap in="SourceGraphic" in2="turb" scale="0" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
   </svg>
@@ -174,18 +175,18 @@
         if(!idle) return;
         idle = false;
         logoWrap.classList.add('liquid-active');
-        // animate displacement scale
-        let start = 0, end = 36, dur = 800; // ms
+        // animate displacement scale (bigger, more visible)
+        let start = 0, end = 90, dur = 900; // ms
         const t0 = performance.now();
         function frame(t){
           const p = Math.min(1, (t - t0)/dur);
           const eased = Math.sin(p * Math.PI);
           filt.setAttribute('scale', Math.floor(start + (end-start)*eased));
           if(p < 1) requestAnimationFrame(frame);
-          else {
-            // reverse
+            else {
+            // reverse with a slightly longer decay
             let r0 = performance.now();
-            let revDur=650;
+            let revDur=900;
             function rev(t2){
               const q = Math.min(1, (t2 - r0)/revDur);
               const e2 = Math.cos(q * Math.PI/2);
@@ -202,9 +203,9 @@
         }
         requestAnimationFrame(frame);
       }
-      // Trigger occasionally: every 8-18s randomly
+      // Trigger occasionally: every 6-12s randomly for more visibility
       function schedule(){
-        const wait = 8000 + Math.random()*10000;
+        const wait = 6000 + Math.random()*6000;
         setTimeout(()=>{ animateOnce(); schedule(); }, wait);
       }
       schedule();
