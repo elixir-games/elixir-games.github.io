@@ -1,1 +1,167 @@
-TEST
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Elixir Games — Playful, performant games</title>
+  <meta name="description" content="Elixir Games — indie studio building playful, performant games and interactive experiences.">
+  <style>
+    :root{
+      --bg:#070707;
+      --panel:#0f0f0f;
+      --muted:#9aa0a6;
+      --accent:#39FF14; /* radioactive green */
+      --glass: rgba(255,255,255,0.03);
+      --radius:12px;
+      --max:1100px;
+      --gap:24px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,#050505 0%, #0b0b0b 100%); color:#e9eef1; -webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--max);margin:40px auto;padding:40px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:54px;height:54px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(57,255,20,0.06), rgba(57,255,20,0.01));border-radius:10px;box-shadow:0 6px 18px rgba(57,255,20,0.06);}
+    .logo svg{width:34px;height:34px}
+    h1{font-size:28px;margin:0;color:#fff}
+    nav{display:flex;gap:14px}
+    a.btn{background:var(--glass);color:var(--accent);padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:600;border:1px solid rgba(57,255,20,0.08)}
+    a.ghost{color:var(--muted);background:transparent;border:1px solid transparent}
+
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:var(--gap);align-items:center;margin-top:48px}
+    .hero-left{padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);}
+    .kicker{display:inline-block;padding:6px 10px;background:rgba(57,255,20,0.08);color:var(--accent);border-radius:999px;font-weight:700;font-size:12px}
+    .lead{font-size:44px;line-height:1.02;margin:18px 0;color:#fff}
+    .desc{color:var(--muted);margin-bottom:20px}
+    .ctas{display:flex;gap:12px}
+    .card{background:linear-gradient(90deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+
+    .hero-right{display:flex;flex-direction:column;gap:16px}
+    .preview{height:320px;background:linear-gradient(180deg, rgba(57,255,20,0.04), rgba(0,0,0,0.2));border-radius:12px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(57,255,20,0.06)}
+    .preview .device{width:85%;height:85%;background:linear-gradient(180deg,#020202,#0b0b0b);border-radius:10px;border:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;color:var(--muted)}
+
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+    .feature{padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+    .feature h3{margin:0 0 6px 0;color:#fff;font-size:16px}
+    .feature p{margin:0;color:var(--muted);font-size:13px}
+
+    footer{margin-top:48px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+
+    /* small screens */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .brand h1{font-size:18px}
+      .lead{font-size:32px}
+      .preview{height:220px}
+      .features{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:520px){
+      .wrap{padding:20px;margin:20px}
+      .features{grid-template-columns:1fr}
+    }
+
+    /* small animation for liquid */
+    .liquid{animation:wave 2.6s linear infinite}
+    @keyframes wave{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- Test tube logo -->
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0" y="0" width="64" height="64" rx="12" fill="transparent" />
+            <g transform="translate(10,6)">
+              <path d="M12 0c1.1 0 2 .9 2 2v6.6l8.3 8.3c3.1 3.1 3.1 8.2 0 11.3L20.6 40c-2.9 2.9-7.6 2.9-10.6 0L1.8 31.1c-3.1-3.1-3.1-8.2 0-11.3L10.1 11.6V2c0-1.1.9-2 2-2z" fill="#111"/>
+              <path d="M21 18c1.7 1.7 1.7 4.5 0 6.2L17 28.2c-.9.9-2.4.9-3.3 0l-8.4-8.4c-1.7-1.7-1.7-4.5 0-6.2L9.3 6H11V18h10z" fill="url(#g)" opacity="0.98"/>
+              <defs>
+                <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#39FF14" stop-opacity="1"/>
+                  <stop offset="100%" stop-color="#00b33c" stop-opacity="1"/>
+                </linearGradient>
+              </defs>
+              <circle cx="22" cy="8" r="2" fill="#1d1d1d" opacity="0.6" />
+            </g>
+          </svg>
+        </div>
+        <div>
+          <h1>Elixir Games</h1>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">Indie studio — playful, performant games</div>
+        </div>
+      </div>
+      <nav>
+        <a class="ghost" href="#">Games</a>
+        <a class="ghost" href="#">About</a>
+        <a class="btn" href="#play">Play Now</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <section class="hero-left card">
+        <div class="kicker">New</div>
+        <h2 class="lead">We craft small games with big heart.</h2>
+        <p class="desc">Elixir Games builds lightweight, polished experiences that run everywhere. We focus on fast, delightful gameplay and clean technical foundations.</p>
+        <div class="ctas">
+          <a class="btn" href="#games">Explore Games</a>
+          <a class="ghost" href="#contact">Contact Us</a>
+        </div>
+        <div class="features" style="margin-top:20px">
+          <div class="feature">
+            <h3>Performant</h3>
+            <p>Small binaries, smooth frame rates, careful optimization.</p>
+          </div>
+          <div class="feature">
+            <h3>Cross-platform</h3>
+            <p>HTML5, native builds, and everything in between.</p>
+          </div>
+          <div class="feature">
+            <h3>Tiny Teams</h3>
+            <p>Focused teams ship meaningful features quickly.</p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="hero-right">
+        <div class="card preview">
+          <div class="device">
+            <div style="text-align:center">
+              <div style="font-weight:700;color:#fff;margin-bottom:8px">Featured: Reactor Rush</div>
+              <div style="color:var(--muted);font-size:13px">A short arcade puzzler — tap to mix the elixir</div>
+              <div style="margin-top:18px;background:linear-gradient(90deg,#081010,#0f0f0f);padding:12px;border-radius:10px;color:var(--muted);width:240px;margin-left:auto;margin-right:auto">
+                <div style="height:60px;background:linear-gradient(180deg, rgba(57,255,20,0.08), rgba(57,255,20,0.02));border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700">Play Demo</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-weight:700">Join our newsletter</div>
+            <div style="font-size:13px;color:var(--muted)">Get early builds and dev updates</div>
+          </div>
+          <a class="btn" href="#subscribe">Subscribe</a>
+        </div>
+
+        <div class="card" style="display:flex;gap:12px;align-items:center">
+          <div style="width:48px;height:48px;border-radius:8px;background:linear-gradient(180deg, rgba(57,255,20,0.06), rgba(57,255,20,0.01));display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700">EG</div>
+          <div>
+            <div style="font-weight:700">Open Source</div>
+            <div style="font-size:13px;color:var(--muted)">We publish tools and small prototypes on GitHub.</div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div>© Elixir Games — built with care</div>
+      <div style="display:flex;gap:12px">
+        <a class="ghost" href="#privacy">Privacy</a>
+        <a class="ghost" href="#contact">Contact</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
