@@ -137,7 +137,22 @@
       .contact-grid{grid-template-columns:1fr}
       /* Ensure inline grid containers collapse to single column on small screens */
       [style*="grid-template-columns"]{grid-template-columns:1fr !important}
-      nav{width:100%;justify-content:flex-end}
+
+      /* Header should span full width on mobile */
+      header{width:100%;padding-left:0;padding-right:0;box-sizing:border-box;z-index:40;position:relative}
+      header .brand, header .nav-toggle, header nav{padding-left:16px;padding-right:16px}
+
+      /* keep nav hidden in-flow when collapsed */
+      nav{width:100%;justify-content:flex-end;position:relative;max-height:0;overflow:hidden;opacity:0}
+
+      /* full-screen popup menu when open */
+      nav.open{position:fixed;inset:0;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,#070707,#0b0b0b);padding:72px 20px 20px;display:flex;flex-direction:column;gap:18px;align-items:flex-start;justify-content:flex-start;opacity:1;max-height:none;z-index:60}
+      nav.open a{transform:none;opacity:1;font-size:18px;padding:10px 0}
+      nav a{transform:translateY(-6px);opacity:0;padding:8px 0;font-size:16px}
+
+      /* backdrop layering: between content and nav (nav on top) */
+      .nav-backdrop{z-index:50}
+
       .logo{margin-right:auto}
       footer{flex-direction:column;gap:12px;align-items:start}
       /* make cards stretch full width inside wrap */
@@ -534,12 +549,19 @@
         btn.setAttribute('aria-expanded','true');
         backdrop.hidden = false; backdrop.classList.add('show'); backdrop.setAttribute('aria-hidden','false');
         document.body.classList.add('nav-open');
+        // hide main content from screen readers while menu is open
+        document.querySelector('main').setAttribute('aria-hidden','true');
+        // move focus into the nav for accessibility
+        const first = nav.querySelector('a, button'); if(first) first.focus();
       }
       function close(){
         nav.classList.remove('open');
         btn.setAttribute('aria-expanded','false');
         backdrop.classList.remove('show'); backdrop.hidden = true; backdrop.setAttribute('aria-hidden','true');
         document.body.classList.remove('nav-open');
+        document.querySelector('main').removeAttribute('aria-hidden');
+        // return focus to the toggle
+        btn.focus();
       }
       btn.addEventListener('click', (e)=>{
         if(nav.classList.contains('open')) close(); else open();
