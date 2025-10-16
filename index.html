@@ -51,7 +51,7 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,#050505 0%, #0b0b0b 100%); color:#e9eef1; -webkit-font-smoothing:antialiased}
-    .wrap{max-width:var(--max);margin:40px auto;padding:40px;}
+    .wrap{max-width:var(--max);margin:40px auto;padding:40px;overflow-x:hidden}
     header{display:flex;align-items:center;justify-content:space-between;gap:20px}
     .brand{display:flex;align-items:center;gap:14px}
     .logo{width:54px;height:54px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(57,255,20,0.06), rgba(57,255,20,0.01));border-radius:10px;box-shadow:0 6px 18px rgba(57,255,20,0.06);}
@@ -80,7 +80,8 @@
 
     .hero-right{display:flex;flex-direction:column;gap:16px}
     .preview{height:320px;background:linear-gradient(180deg, rgba(57,255,20,0.04), rgba(0,0,0,0.2));border-radius:12px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(57,255,20,0.06)}
-    .preview .device{width:85%;height:85%;background:linear-gradient(180deg,#020202,#0b0b0b);border-radius:10px;border:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;color:var(--muted)}
+    .preview .device{width:85%;height:85%;background:linear-gradient(180deg,#020202,#0b0b0b);border-radius:10px;border:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;color:var(--muted);max-width:100%}
+    img, .preview, .card, .game-thumb, .game-thumb img{max-width:100%;height:auto}
 
     .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
     .feature{padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
@@ -98,6 +99,7 @@
 
     /* small screens */
     @media (max-width:900px){
+      html,body{overflow-x:hidden}
       .hero{grid-template-columns:1fr;grid-auto-rows:auto}
       .brand h1{font-size:20px}
       .lead{font-size:34px}
@@ -106,7 +108,7 @@
       .wrap{padding:28px}
       /* show hamburger, hide nav by default */
       .nav-toggle{display:inline-flex}
-      nav{display:flex;flex-direction:column;gap:8px;margin-top:12px;max-height:0;overflow:hidden;opacity:0}
+      nav{display:flex;flex-direction:column;gap:8px;margin-top:12px;max-height:0;overflow:hidden;opacity:0;width:100%}
       nav.open{max-height:400px;opacity:1}
       nav.open a{transform:none;opacity:1}
       nav a{transform:translateY(-6px);opacity:0}
@@ -215,9 +217,9 @@
             <div style="text-align:center">
               <div style="font-weight:700;color:#fff;margin-bottom:8px">Featured: Reactor Rush</div>
               <div style="color:var(--muted);font-size:13px">A short arcade puzzler — tap to mix the elixir</div>
-              <div style="margin-top:18px;background:linear-gradient(90deg,#081010,#0f0f0f);padding:12px;border-radius:10px;color:var(--muted);width:240px;margin-left:auto;margin-right:auto">
-                <a class="btn" href="#play" style="display:block;text-align:center">Play Demo</a>
-              </div>
+                <div style="margin-top:18px;background:linear-gradient(90deg,#081010,#0f0f0f);padding:12px;border-radius:10px;color:var(--muted);width:100%;max-width:240px;margin-left:auto;margin-right:auto">
+                  <a class="btn" href="#play" style="display:block;text-align:center">Play Demo</a>
+                </div>
             </div>
           </div>
         </div>
