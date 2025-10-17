@@ -137,6 +137,10 @@
       .contact-grid{grid-template-columns:1fr}
       /* Ensure inline grid containers collapse to single column on small screens */
       [style*="grid-template-columns"]{grid-template-columns:1fr !important}
+      /* make sure Office aside appears below the form on mobile */
+      .contact-grid{grid-auto-flow:row}
+      .contact-grid > div:first-child{grid-column:1;grid-row:1}
+      .contact-grid > aside{grid-column:1;grid-row:2;margin-top:8px}
 
       /* Header should span full width on mobile */
       header{width:100%;padding-left:0;padding-right:0;box-sizing:border-box;z-index:40;position:relative}
