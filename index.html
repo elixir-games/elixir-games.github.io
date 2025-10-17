@@ -355,13 +355,19 @@
                 </linearGradient>
               </defs>
               <rect width="72" height="72" rx="10" fill="url(#g-yatzy)" />
-              <g transform="translate(14 14)" fill="#fff" opacity="0.9">
-                <rect x="6" y="6" width="12" height="12" rx="2" fill="#fff" />
-                <rect x="24" y="6" width="12" height="12" rx="2" fill="#fff" />
-                <rect x="6" y="24" width="12" height="12" rx="2" fill="#fff" />
-                <rect x="24" y="24" width="12" height="12" rx="2" fill="#fff" />
-                <text x="34" y="44" font-size="6" fill="rgba(0,0,0,0.5)" text-anchor="end">Yatzy</text>
-              </g>
+               <g transform="translate(10 10)" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                 <!-- tilted die face -->
+                 <g transform="translate(8 6) rotate(-18 18 18)">
+                   <rect x="0" y="0" width="36" height="36" rx="6" fill="#fff" fill-opacity="0.06" />
+                   <!-- pips -->
+                   <circle cx="9" cy="9" r="3" fill="#fff" />
+                   <circle cx="27" cy="27" r="3" fill="#fff" />
+                   <circle cx="9" cy="27" r="3" fill="#fff" />
+                 </g>
+                 <!-- motion lines to imply throw -->
+                 <path d="M46 12c4-2 8-3 12-2" stroke-opacity="0.9" />
+                 <path d="M46 18c6-1 10-1 14 2" stroke-opacity="0.65" />
+               </g>
             </svg>
           </div>
           <div style="flex:1">
