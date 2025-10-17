@@ -732,12 +732,27 @@
         if(anyScrolled()) btn.classList.add('show'); else btn.classList.remove('show');
       }
 
-      // Smooth scroll to top (use the document's scrolling element when available)
-      btn.addEventListener('click', ()=>{
+      // Smooth scroll to top — handle document and any inner scrollable containers
+      function scrollAllToTop(){
         const topEl = document.scrollingElement || document.documentElement || document.body;
-        try{ topEl.scrollTo({top:0,behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); }
+        try{ topEl.scrollTo({top:0,behavior:'smooth'}); }catch(e){ try{ window.scrollTo(0,0); }catch(e2){}
+        }
+        // also scroll any scrollable elements to top (covers nested/overflow containers)
+        try{
+          const nodes = document.querySelectorAll('*');
+          for(let i=0;i<nodes.length;i++){
+            const el = nodes[i];
+            const style = window.getComputedStyle(el);
+            if(!style) continue;
+            const oy = style.overflowY;
+            if((oy === 'auto' || oy === 'scroll' || oy === 'overlay') && el.scrollHeight > el.clientHeight){
+              try{ el.scrollTo ? el.scrollTo({top:0,behavior:'smooth'}) : (el.scrollTop = 0); }catch(_e){ try{ el.scrollTop = 0; }catch(_e2){} }
+            }
+          }
+        }catch(e){}
         btn.blur();
-      });
+      }
+      btn.addEventListener('click', scrollAllToTop);
 
       const passiveOpts = {passive:true};
       // primary events that indicate scroll/interaction
