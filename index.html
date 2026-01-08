@@ -204,11 +204,11 @@
     form .form-actions{display:flex;gap:8px;align-items:center}
 
     /* back-to-top button */
-    .back-to-top{position:fixed;right:18px;bottom:18px;width:44px;height:44px;padding:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;z-index:80;opacity:0;transform:translateY(8px);transition:opacity .18s ease, transform .18s ease}
+    .back-to-top{position:fixed;right:18px;bottom:24px;width:44px;height:44px;padding:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;z-index:999;opacity:0;transform:translateY(8px);transition:opacity .18s ease, transform .18s ease}
     .back-to-top.show{opacity:1;transform:none}
     .back-to-top:focus{outline:2px solid var(--accent);outline-offset:2px}
     @media (max-width:640px){
-      .back-to-top{left:50%;right:auto;transform:translateX(-50%) translateY(8px)}
+      .back-to-top{left:50%;right:auto;bottom:24px;transform:translateX(-50%) translateY(8px)}
       .back-to-top.show{transform:translateX(-50%) translateY(0)}
     }
 
@@ -678,18 +678,25 @@
       });
     })();
   </script>
-  <button class="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+  <button class="back-to-top" aria-label="Back to top" title="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <path d="M12 4l-8 8h5v8h6v-8h5l-8-8z" fill="currentColor" />
+    </svg>
+  </button>
   <script>
     (function(){
       const btn = document.querySelector('.back-to-top');
       if(!btn) return;
-      // Show button after user scrolls down one viewport height
+      // Show button after user scrolls down a small threshold (more reliable on mobile)
       function toggle(){
-        if(window.scrollY > window.innerHeight * 0.5) btn.classList.add('show'); else btn.classList.remove('show');
+        if(window.scrollY > 100) btn.classList.add('show'); else btn.classList.remove('show');
       }
       // Smooth scroll to top
       btn.addEventListener('click', ()=>{ window.scrollTo({top:0,behavior:'smooth'}); btn.blur(); });
       window.addEventListener('scroll', toggle);
+      // also re-evaluate when the page loads or the hash changes (anchor navigation)
+      window.addEventListener('load', toggle);
+      window.addEventListener('hashchange', ()=>{ setTimeout(toggle, 80); });
       // initialize
       toggle();
       // also show the button when navigating to an in-page anchor (so users can return quickly)
