@@ -67,9 +67,17 @@
     /* small animation for liquid */
     .liquid{animation:wave 2.6s linear infinite}
     @keyframes wave{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+    .logo img{transition:filter .35s, transform .35s}
+    .logo.liquid-active img{filter:url(#liquid-filter);transform:translateY(-2px) scale(1.02)}
   </style>
 </head>
 <body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;" xmlns="http://www.w3.org/2000/svg">
+    <filter id="liquid-filter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.001" numOctaves="2" seed="2" result="turb" />
+      <feDisplacementMap in="SourceGraphic" in2="turb" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
   <div class="wrap">
     <header>
       <div class="brand">
@@ -156,5 +164,53 @@
       </div>
     </footer>
   </div>
+  <script>
+    (function(){
+      const logoWrap = document.querySelector('.logo');
+      const filt = document.querySelector('#liquid-filter feDisplacementMap');
+      if(!logoWrap || !filt) return;
+      let idle = true;
+      function animateOnce(){
+        if(!idle) return;
+        idle = false;
+        logoWrap.classList.add('liquid-active');
+        // animate displacement scale
+        let start = 0, end = 36, dur = 800; // ms
+        const t0 = performance.now();
+        function frame(t){
+          const p = Math.min(1, (t - t0)/dur);
+          const eased = Math.sin(p * Math.PI);
+          filt.setAttribute('scale', Math.floor(start + (end-start)*eased));
+          if(p < 1) requestAnimationFrame(frame);
+          else {
+            // reverse
+            let r0 = performance.now();
+            let revDur=650;
+            function rev(t2){
+              const q = Math.min(1, (t2 - r0)/revDur);
+              const e2 = Math.cos(q * Math.PI/2);
+              filt.setAttribute('scale', Math.floor(start + (end-start)*e2));
+              if(q < 1) requestAnimationFrame(rev);
+              else {
+                logoWrap.classList.remove('liquid-active');
+                filt.setAttribute('scale', 0);
+                idle = true;
+              }
+            }
+            requestAnimationFrame(rev);
+          }
+        }
+        requestAnimationFrame(frame);
+      }
+      // Trigger occasionally: every 8-18s randomly
+      function schedule(){
+        const wait = 8000 + Math.random()*10000;
+        setTimeout(()=>{ animateOnce(); schedule(); }, wait);
+      }
+      schedule();
+      // also trigger on hover
+      logoWrap.addEventListener('mouseenter', ()=>{ animateOnce(); });
+    })();
+  </script>
 </body>
 </html>
