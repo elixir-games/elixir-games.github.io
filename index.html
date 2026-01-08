@@ -145,10 +145,11 @@
       /* keep nav hidden in-flow when collapsed */
       nav{width:100%;justify-content:flex-end;position:relative;max-height:0;overflow:hidden;opacity:0}
 
-      /* full-screen popup menu when open */
-      nav.open{position:fixed;inset:0;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,#070707,#0b0b0b);padding:72px 20px 20px;display:flex;flex-direction:column;gap:18px;align-items:flex-start;justify-content:flex-start;opacity:1;max-height:none;z-index:60}
-      nav.open a{transform:none;opacity:1;font-size:18px;padding:10px 0}
-      nav a{transform:translateY(-6px);opacity:0;padding:8px 0;font-size:16px}
+      /* popup-style menu when open: smaller, centered, and elevated */
+      nav.open{position:fixed;left:50%;top:8vh;transform:translateX(-50%);width:calc(100% - 32px);max-width:720px;max-height:84vh;background:linear-gradient(180deg,#070707,#0b0b0b);padding:20px 18px;display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:flex-start;opacity:1;z-index:60;border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,0.6)}
+      /* center and enlarge the section buttons */
+      nav.open a{transform:none;opacity:1;font-size:18px;padding:12px 0;text-align:center;width:100%;display:block}
+      nav a{transform:translateY(-6px);opacity:0;padding:8px 0;font-size:16px;text-align:center}
 
       /* backdrop layering: between content and nav (nav on top) */
       .nav-backdrop{z-index:50}
