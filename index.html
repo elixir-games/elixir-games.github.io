@@ -308,9 +308,25 @@
                 </linearGradient>
               </defs>
               <rect width="72" height="72" rx="10" fill="url(#g-mills)" />
-              <g transform="translate(18 18)" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="rgba(255,255,255,0.06)">
-                <circle cx="18" cy="18" r="8" fill="rgba(0,0,0,0.08)" />
-                <path d="M18 0 L22 10 L28 12 L22 18 L18 28 L14 18 L8 12 L14 10 Z" fill="rgba(255,255,255,0.06)"/>
+              <g transform="translate(8 8)" stroke="#fff" stroke-width="1.8" fill="none">
+                <!-- Outer square -->
+                <rect x="0" y="0" width="56" height="56" rx="4" stroke-opacity="0.85" />
+                <!-- Middle square -->
+                <rect x="8" y="8" width="40" height="40" rx="3" stroke-opacity="0.75" />
+                <!-- Inner square -->
+                <rect x="16" y="16" width="24" height="24" rx="2" stroke-opacity="0.65" />
+                <!-- Connecting lines (mills board) -->
+                <line x1="28" y1="0" x2="28" y2="16" stroke-opacity="0.7" />
+                <line x1="28" y1="40" x2="28" y2="56" stroke-opacity="0.7" />
+                <line x1="0" y1="28" x2="16" y2="28" stroke-opacity="0.7" />
+                <line x1="40" y1="28" x2="56" y2="28" stroke-opacity="0.7" />
+                <!-- tokens (small circles) -->
+                <circle cx="28" cy="8" r="3.2" fill="#fff" />
+                <circle cx="8" cy="28" r="3.2" fill="#fff" />
+                <circle cx="28" cy="48" r="3.2" fill="#fff" />
+                <circle cx="48" cy="28" r="3.2" fill="#fff" />
+                <!-- highlighted token to show character -->
+                <circle cx="28" cy="28" r="5.2" fill="#2b2b2b" stroke="#fff" stroke-width="1" />
               </g>
             </svg>
           </div>
