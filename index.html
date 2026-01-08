@@ -215,12 +215,16 @@
     .back-to-top{position:fixed;right:18px;bottom:24px;width:44px;height:44px;padding:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;z-index:999;opacity:0;transform:translateY(8px);transition:opacity .18s ease, transform .18s ease;backface-visibility:hidden;will-change:opacity,transform}
     .back-to-top.show{opacity:1;transform:none}
     .back-to-top:focus{outline:2px solid var(--accent);outline-offset:2px}
+    /* Ensure the SVG icon is consistent across breakpoints */
+    .back-to-top svg{width:18px;height:18px;display:block;fill:currentColor;color:inherit}
     @media (max-width:640px){
       .back-to-top{left:50%;right:auto;bottom:64px; /* fallback for older browsers */
         bottom:calc(64px + constant(safe-area-inset-bottom));
         bottom:calc(64px + env(safe-area-inset-bottom));
         transform:translateX(-50%) translateY(8px); pointer-events:auto; -webkit-tap-highlight-color:transparent}
       .back-to-top.show{transform:translateX(-50%) translateY(0)}
+      /* on small screens explicitly keep the same arrow icon sizing/color */
+      @media (max-width:640px){ .back-to-top svg{width:18px;height:18px;fill:currentColor} }
     }
 
   </style>
