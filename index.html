@@ -216,7 +216,10 @@
     .back-to-top.show{opacity:1;transform:none}
     .back-to-top:focus{outline:2px solid var(--accent);outline-offset:2px}
     @media (max-width:640px){
-      .back-to-top{left:50%;right:auto;bottom:calc(64px + constant(safe-area-inset-bottom));bottom:calc(64px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(8px)}
+      .back-to-top{left:50%;right:auto;bottom:64px; /* fallback for older browsers */
+        bottom:calc(64px + constant(safe-area-inset-bottom));
+        bottom:calc(64px + env(safe-area-inset-bottom));
+        transform:translateX(-50%) translateY(8px); pointer-events:auto; -webkit-tap-highlight-color:transparent}
       .back-to-top.show{transform:translateX(-50%) translateY(0)}
     }
 
@@ -699,38 +702,83 @@
       if(!btn) return;
       // cross-browser page offset helper
       function pageY(){ return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop; }
-      // Show button when page is scrolled at all (works across responsive layouts)
-      function toggle(){
-        if(pageY() > 0) btn.classList.add('show'); else btn.classList.remove('show');
+
+      // Detect scroll in document or any likely scrollable container
+      function anyScrolled(){
+        // global/page-level
+        if(pageY() > 0) return true;
+        const scrollingEl = document.scrollingElement || document.documentElement || document.body;
+        if(scrollingEl && scrollingEl.scrollTop > 0) return true;
+        // common wrapper
+        const wrap = document.querySelector('.wrap');
+        if(wrap && wrap.scrollTop > 0) return true;
+        // detect other scrollable elements (overflow auto/scroll + scrollHeight > clientHeight)
+        try{
+          const nodes = document.querySelectorAll('*');
+          for(let i=0;i<nodes.length;i++){
+            const el = nodes[i];
+            const style = window.getComputedStyle(el);
+            if(!style) continue;
+            const oy = style.overflowY;
+            if((oy === 'auto' || oy === 'scroll' || oy === 'overlay') && el.scrollHeight > el.clientHeight){
+              if(el.scrollTop > 0) return true;
+            }
+          }
+        }catch(e){}
+        return false;
       }
-      // Smooth scroll to top
-      btn.addEventListener('click', ()=>{ window.scrollTo({top:0,behavior:'smooth'}); btn.blur(); });
+
+      function toggle(){
+        if(anyScrolled()) btn.classList.add('show'); else btn.classList.remove('show');
+      }
+
+      // Smooth scroll to top (use the document's scrolling element when available)
+      btn.addEventListener('click', ()=>{
+        const topEl = document.scrollingElement || document.documentElement || document.body;
+        try{ topEl.scrollTo({top:0,behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); }
+        btn.blur();
+      });
+
+      const passiveOpts = {passive:true};
       // primary events that indicate scroll/interaction
-      window.addEventListener('scroll', toggle, {passive:true});
-      window.addEventListener('touchmove', toggle, {passive:true});
-      window.addEventListener('pointermove', toggle, {passive:true});
+      window.addEventListener('scroll', toggle, passiveOpts);
+      window.addEventListener('touchmove', toggle, passiveOpts);
+      window.addEventListener('pointermove', toggle, passiveOpts);
       window.addEventListener('resize', toggle);
       window.addEventListener('focusin', toggle);
       // also re-evaluate when the page loads or the hash changes (anchor navigation)
       window.addEventListener('load', toggle);
       window.addEventListener('hashchange', ()=>{ setTimeout(toggle, 80); });
+
+      // ensure the button becomes briefly visible after layout/navigation changes
+      function ensureVisibleBriefly(duration=900){
+        if(anyScrolled()){
+          btn.classList.add('show');
+          setTimeout(toggle, duration);
+        }
+      }
+
       // listen for our custom event when the mobile nav closes
-      document.addEventListener('eg:navclosed', ()=>{ setTimeout(toggle, 120); });
+      document.addEventListener('eg:navclosed', ()=>{ setTimeout(toggle, 120); ensureVisibleBriefly(900); });
+
       // Some iOS/Safari cases need a short polling after layout changes
       function shortPoll(){ let checks=0; const id = setInterval(()=>{ checks++; toggle(); if(checks>6) clearInterval(id); }, 120); }
       document.addEventListener('eg:navclosed', shortPoll);
       window.addEventListener('orientationchange', ()=>{ setTimeout(()=>{ toggle(); shortPoll(); }, 180); });
+
       // observe body class changes (e.g., nav-open) to re-evaluate visibility
       try{
         const mo = new MutationObserver((mutations)=>{ mutations.forEach(m=>{ if(m.attributeName==='class') { toggle(); shortPoll(); } }); });
         mo.observe(document.body, { attributes: true, attributeFilter: ['class'] });
       }catch(e){}
+
       // initialize
       toggle();
+
       // also show the button when navigating to an in-page anchor (so users can return quickly)
       document.addEventListener('click', (e)=>{
         const a = e.target.closest && e.target.closest('a[href^="#"]');
-        if(a && a.getAttribute('href')!="#") setTimeout(()=>{ toggle(); shortPoll(); }, 300);
+        if(a && a.getAttribute('href')!="#") setTimeout(()=>{ toggle(); shortPoll(); ensureVisibleBriefly(900); }, 300);
       });
     })();
   </script>
