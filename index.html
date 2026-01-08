@@ -699,15 +699,18 @@
       if(!btn) return;
       // cross-browser page offset helper
       function pageY(){ return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop; }
-      // Show button after user scrolls down a small threshold (more reliable on mobile)
+      // Show button when page is scrolled at all (works across responsive layouts)
       function toggle(){
-        if(pageY() > 100) btn.classList.add('show'); else btn.classList.remove('show');
+        if(pageY() > 0) btn.classList.add('show'); else btn.classList.remove('show');
       }
       // Smooth scroll to top
       btn.addEventListener('click', ()=>{ window.scrollTo({top:0,behavior:'smooth'}); btn.blur(); });
-      window.addEventListener('scroll', toggle);
-      window.addEventListener('touchmove', toggle);
+      // primary events that indicate scroll/interaction
+      window.addEventListener('scroll', toggle, {passive:true});
+      window.addEventListener('touchmove', toggle, {passive:true});
+      window.addEventListener('pointermove', toggle, {passive:true});
       window.addEventListener('resize', toggle);
+      window.addEventListener('focusin', toggle);
       // also re-evaluate when the page loads or the hash changes (anchor navigation)
       window.addEventListener('load', toggle);
       window.addEventListener('hashchange', ()=>{ setTimeout(toggle, 80); });
@@ -717,6 +720,11 @@
       function shortPoll(){ let checks=0; const id = setInterval(()=>{ checks++; toggle(); if(checks>6) clearInterval(id); }, 120); }
       document.addEventListener('eg:navclosed', shortPoll);
       window.addEventListener('orientationchange', ()=>{ setTimeout(()=>{ toggle(); shortPoll(); }, 180); });
+      // observe body class changes (e.g., nav-open) to re-evaluate visibility
+      try{
+        const mo = new MutationObserver((mutations)=>{ mutations.forEach(m=>{ if(m.attributeName==='class') { toggle(); shortPoll(); } }); });
+        mo.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+      }catch(e){}
       // initialize
       toggle();
       // also show the button when navigating to an in-page anchor (so users can return quickly)
