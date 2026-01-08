@@ -555,7 +555,7 @@
             <div class="form-actions">
               <button class="btn" type="submit">Send Message</button>
               <button class="ghost" type="button" onclick="document.querySelector('form').reset()">Reset</button>
-              <a class="ghost" href="#privacy">Privacy</a>
+              <a class="ghost" href="/privacy.html">Privacy</a>
             </div>
           </form>
 
@@ -595,11 +595,19 @@
     <footer>
       <div>© Elixir Games — built with care</div>
       <div style="display:flex;gap:12px">
-        <a class="ghost" href="#privacy">Privacy</a>
+        <a class="ghost" href="/privacy.html">Privacy</a>
         <a class="ghost" href="#contact">Contact</a>
       </div>
     </footer>
   </div>
+  <script>
+    // Handle #privacy hash - redirect to privacy page
+    (function(){
+      if(window.location.hash === '#privacy') {
+        window.location.replace('/privacy.html');
+      }
+    })();
+  </script>
   <script>
     (function(){
       const logoWrap = document.querySelector('.logo');
