@@ -68,14 +68,14 @@
     .liquid{animation:wave 2.6s linear infinite}
     @keyframes wave{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
     .logo img{transition:filter .35s, transform .35s}
-    .logo.liquid-active img{filter:url(#liquid-filter);transform:translateY(-4px) scale(1.08);box-shadow:0 12px 30px rgba(0,0,0,0.4)}
+    .logo.liquid-active img{filter:url(#liquid-filter);transform:translateY(-3px) scale(1.04);box-shadow:0 10px 24px rgba(0,0,0,0.35)}
   </style>
 </head>
 <body>
   <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;" xmlns="http://www.w3.org/2000/svg">
     <filter id="liquid-filter">
       <!-- stronger turbulence for a more visible liquid effect -->
-      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="5" result="turb" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="5" result="turb" />
       <feDisplacementMap in="SourceGraphic" in2="turb" scale="0" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
   </svg>
@@ -176,7 +176,7 @@
         idle = false;
         logoWrap.classList.add('liquid-active');
         // animate displacement scale (bigger, more visible)
-        let start = 0, end = 90, dur = 900; // ms
+        let start = 0, end = 48, dur = 700; // ms
         const t0 = performance.now();
         function frame(t){
           const p = Math.min(1, (t - t0)/dur);
@@ -203,9 +203,9 @@
         }
         requestAnimationFrame(frame);
       }
-      // Trigger occasionally: every 6-12s randomly for more visibility
+      // Trigger occasionally: every 10-22s randomly
       function schedule(){
-        const wait = 6000 + Math.random()*6000;
+        const wait = 10000 + Math.random()*12000;
         setTimeout(()=>{ animateOnce(); schedule(); }, wait);
       }
       schedule();
