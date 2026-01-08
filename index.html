@@ -164,6 +164,12 @@
       .card, section.card{width:100%;max-width:100%;margin:0;border-radius:10px}
       /* allow small max-width elements to scale down on narrow screens */
       [style*="max-width:240px"]{max-width:100% !important}
+
+      /* make contact form fields extend to full available page width */
+      #contact .card{padding-left:0;padding-right:0}
+      .contact-grid > div:first-child{padding-left:0;padding-right:0}
+      .contact-grid > div:first-child form{padding:12px 16px}
+      .contact-grid input, .contact-grid select, .contact-grid textarea{width:100%;box-sizing:border-box}
     }
 
     /* small animation for liquid */
