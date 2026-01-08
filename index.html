@@ -180,6 +180,14 @@
       }
     }
 
+    @media (min-width:641px) and (max-width:900px){
+      /* center header content on medium screens while keeping the menu toggle accessible */
+      header{justify-content:center}
+      header .brand{margin:0}
+      .nav-toggle{position:absolute;right:16px;top:18px;z-index:70}
+      nav{position:relative}
+    }
+
     /* small animation for liquid */
     .liquid{animation:wave 2.6s linear infinite}
     @keyframes wave{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
