@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Elixir Games — Playful, performant games</title>
   <meta name="description" content="Elixir Games — indie studio building playful, performant games and interactive experiences.">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <style>
     :root{
@@ -75,14 +79,14 @@
   <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;" xmlns="http://www.w3.org/2000/svg">
     <filter id="liquid-filter">
       <!-- stronger turbulence for a more visible liquid effect -->
-      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="5" result="turb" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="1" seed="5" result="turb" />
       <feDisplacementMap in="SourceGraphic" in2="turb" scale="0" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
   </svg>
   <div class="wrap">
     <header>
       <div class="brand">
-        <div class="logo" aria-hidden="true">
+        <div class="logo" tabindex="0" aria-label="Elixir Games logo" role="img">
           <img src="/avatar.png" alt="Elixir Games logo" style="width:44px;height:44px;border-radius:8px;object-fit:cover;"/>
         </div>
         <div>
@@ -102,10 +106,10 @@
     </header>
 
     <main class="hero">
-      <section class="hero-left card">
+      <section id="home" class="hero-left card">
         <div class="kicker">New</div>
         <h2 class="lead">We craft small games with big heart.</h2>
-        <p class="desc">Elixir Games builds lightweight, polished experiences that run everywhere. We focus on fast, delightful gameplay and clean technical foundations.</p>
+        <p class="desc">Elixir Games builds lightweight, polished experiences that run everywhere — web, mobile, and native. We focus on fast, delightful gameplay and clean technical foundations.</p>
         <div class="ctas">
           <a class="btn" href="#games">Explore Games</a>
           <a class="ghost" href="#contact">Contact Us</a>
@@ -133,7 +137,7 @@
               <div style="font-weight:700;color:#fff;margin-bottom:8px">Featured: Reactor Rush</div>
               <div style="color:var(--muted);font-size:13px">A short arcade puzzler — tap to mix the elixir</div>
               <div style="margin-top:18px;background:linear-gradient(90deg,#081010,#0f0f0f);padding:12px;border-radius:10px;color:var(--muted);width:240px;margin-left:auto;margin-right:auto">
-                <div style="height:60px;background:linear-gradient(180deg, rgba(57,255,20,0.08), rgba(57,255,20,0.02));border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700">Play Demo</div>
+                <a class="btn" href="#play" style="display:block;text-align:center">Play Demo</a>
               </div>
             </div>
           </div>
@@ -157,6 +161,136 @@
       </aside>
     </main>
 
+    <section id="games" class="card" style="margin-top:28px">
+      <h2 style="margin-top:0">Games</h2>
+      <p class="desc">A catalog of small, focused games—each designed for short, repeatable sessions and smooth performance.</p>
+      <div class="features" style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+        <div class="feature">
+          <h3>Reactor Rush</h3>
+          <p>Arcade elixir-mixing puzzler; tap to combine reactions.</p>
+          <div style="margin-top:10px;color:var(--muted);font-size:13px">Platforms: Web, Mobile · Tech: HTML5, Canvas</div>
+          <div style="margin-top:8px"><a class="btn" href="#play">Play Demo</a></div>
+        </div>
+        <div class="feature">
+          <h3>Emberbound</h3>
+          <p>Minimal roguelite with quick run loops and expressive controls.</p>
+          <div style="margin-top:10px;color:var(--muted);font-size:13px">Platforms: Desktop, Web · Tech: Native, OpenGL</div>
+          <div style="margin-top:8px"><a class="btn" href="#contact">Wishlist / Download</a></div>
+        </div>
+        <div class="feature">
+          <h3>Pocket Orchard</h3>
+          <p>Relaxing harvest puzzler with procedural levels.</p>
+          <div style="margin-top:10px;color:var(--muted);font-size:13px">Platforms: Mobile · Tech: Unity / Lightweight</div>
+          <div style="margin-top:8px"><a class="btn" href="#play">Play Mobile Demo</a></div>
+        </div>
+      </div>
+      <div style="margin-top:14px;color:var(--muted);font-size:13px">See developer notes and prototypes on our <a href="https://github.com/elixirgames" style="color:var(--accent)">GitHub</a>.</div>
+    </section>
+
+    <section id="careers" class="card" style="margin-top:28px">
+      <h2 style="margin-top:0">Careers</h2>
+      <p class="desc">Join a tiny team shipping meaningful moments — we value craft, curiosity, and code that runs well.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px">
+        <div class="feature">
+          <h3>Gameplay Engineer</h3>
+          <p>Ship tight, performant gameplay systems; comfortable with low-level optimization.</p>
+          <div style="margin-top:8px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Gameplay%20Engineer%20Application">Apply</a></div>
+        </div>
+        <div class="feature">
+          <h3>Technical Artist</h3>
+          <p>Polish visuals while keeping memory & draw calls lean.</p>
+          <div style="margin-top:8px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Technical%20Artist%20Application">Apply</a></div>
+        </div>
+        <div class="feature">
+          <h3>Community Manager (part-time)</h3>
+          <p>Grow our player base and keep devs & players connected.</p>
+          <div style="margin-top:8px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Community%20Manager%20Application">Apply</a></div>
+        </div>
+      </div>
+      <div style="margin-top:12px;color:var(--muted);font-size:13px">Hiring process: Apply → Short playbook task → Pair interview → Offer.</div>
+    </section>
+
+    <section id="support" class="card" style="margin-top:28px">
+      <h2 style="margin-top:0">Support</h2>
+      <p class="desc">Fast help for players and partners — bugs, refunds, accessibility, and modding guidance.</p>
+      <div style="margin-top:12px">
+        <h3 style="margin:8px 0">FAQ</h3>
+        <div style="color:var(--muted);font-size:13px">How do I improve performance? Try closing other tabs, enable hardware acceleration, or use the native build.</div>
+        <div style="color:var(--muted);font-size:13px;margin-top:8px">Controller support? Most games support touch and keyboard; controller mapping is listed per game.</div>
+        <div style="margin-top:12px"><a class="btn" href="#contact">Report a bug</a> <a class="ghost" href="#contact">Contact Support</a></div>
+      </div>
+    </section>
+
+    <section id="about" class="card" style="margin-top:28px">
+      <h2 style="margin-top:0">About</h2>
+      <p class="desc">Make small games that delight and scale — craft over scope, performance over bloat.</p>
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 240px;gap:12px;align-items:start">
+        <div>
+          <h3 style="margin-bottom:6px">Our story</h3>
+          <p style="color:var(--muted);font-size:13px">Founded in 2020 by a few ex-tooling and gameplay engineers, Elixir Games ships compact experiences and open-source prototypes. Milestones: first release (2021), open-source toolkit (2023).</p>
+          <h3 style="margin-top:12px">Values</h3>
+          <ul style="color:var(--muted);font-size:13px">
+            <li>Player-first design</li>
+            <li>Measurable performance</li>
+            <li>Open tooling</li>
+            <li>Empathy in design</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin-bottom:6px">Team</h3>
+          <div style="display:flex;gap:8px;flex-direction:column">
+            <div style="font-weight:700">Ava — Founder / Gameplay Engineer</div>
+            <div style="font-weight:700">Noah — Tech Lead / DevOps</div>
+            <div style="font-weight:700">Maya — Artist / UI</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="card" style="margin-top:28px">
+      <h2 style="margin-top:0">Contact</h2>
+      <p class="desc">Talk to us — feedback, press, partnership, or just say hi. We typically respond within 3–5 business days.</p>
+      <form action="mailto:contact@elixirgames.io" method="post" enctype="text/plain" style="margin-top:12px;display:grid;gap:8px;max-width:640px">
+        <label style="font-size:13px;color:var(--muted)">Name
+          <input name="name" type="text" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+        </label>
+        <label style="font-size:13px;color:var(--muted)">Email
+          <input name="email" type="email" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+        </label>
+        <label style="font-size:13px;color:var(--muted)">Topic
+          <select name="topic" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit">
+            <option>Feedback</option>
+            <option>Press</option>
+            <option>Partnership</option>
+            <option>Bug</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label style="font-size:13px;color:var(--muted)">Message
+          <textarea name="message" rows="4" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></textarea>
+        </label>
+        <div style="display:flex;gap:8px">
+          <button class="btn" type="submit">Send</button>
+          <a class="ghost" href="#privacy">Privacy</a>
+        </div>
+      </form>
+      <div style="margin-top:12px;color:var(--muted);font-size:13px">Or email us directly at <a href="mailto:contact@elixirgames.io" style="color:var(--accent)">hello@elixirgames.example</a></div>
+    </section>
+
+    <section id="play" class="card" style="margin-top:28px">
+      <h2 style="margin-top:0">Play Now — Reactor Rush</h2>
+      <p class="desc">Jump into a 5-minute demo that shows what we do best. Recommended: modern browser with WebGL enabled.</p>
+      <div style="margin-top:14px;display:flex;gap:12px;flex-direction:column">
+        <div style="background:#020202;border-radius:8px;padding:12px;border:1px solid rgba(255,255,255,0.02);color:var(--muted)">[Embedded demo placeholder — replace with game's iframe or WASM build]</div>
+        <div style="display:flex;gap:8px">
+          <a class="btn" href="#" onclick="alert('Play demo placeholder')">Play in Browser</a>
+          <a class="btn" href="#" onclick="alert('Download placeholder')">Download Builds</a>
+          <a class="ghost" href="https://github.com/elixirgames" target="_blank">Source & Tools</a>
+        </div>
+        <div style="margin-top:10px;color:var(--muted);font-size:13px">Feedback: <a href="#contact" style="color:var(--accent)">Tell us what you think</a> — 30 seconds.</div>
+      </div>
+    </section>
+
     <footer>
       <div>© Elixir Games — built with care</div>
       <div style="display:flex;gap:12px">
@@ -176,7 +310,7 @@
         idle = false;
         logoWrap.classList.add('liquid-active');
         // animate displacement scale (bigger, more visible)
-        let start = 0, end = 48, dur = 700; // ms
+        let start = 0, end = 22, dur = 520; // ms
         const t0 = performance.now();
         function frame(t){
           const p = Math.min(1, (t - t0)/dur);
@@ -203,14 +337,11 @@
         }
         requestAnimationFrame(frame);
       }
-      // Trigger occasionally: every 10-22s randomly
-      function schedule(){
-        const wait = 10000 + Math.random()*12000;
-        setTimeout(()=>{ animateOnce(); schedule(); }, wait);
-      }
-      schedule();
-      // also trigger on hover
+      // Only trigger on hover or keyboard focus — remove periodic auto-trigger
+      // also trigger on hover or focus
       logoWrap.addEventListener('mouseenter', ()=>{ animateOnce(); });
+      logoWrap.addEventListener('focus', ()=>{ animateOnce(); });
+      // remove periodic schedule to make animation less intrusive
     })();
   </script>
 </body>
