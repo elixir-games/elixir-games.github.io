@@ -203,6 +203,15 @@
     /* form actions alignment */
     form .form-actions{display:flex;gap:8px;align-items:center}
 
+    /* back-to-top button */
+    .back-to-top{position:fixed;right:18px;bottom:18px;width:44px;height:44px;padding:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;z-index:80;opacity:0;transform:translateY(8px);transition:opacity .18s ease, transform .18s ease}
+    .back-to-top.show{opacity:1;transform:none}
+    .back-to-top:focus{outline:2px solid var(--accent);outline-offset:2px}
+    @media (max-width:640px){
+      .back-to-top{left:50%;right:auto;transform:translateX(-50%) translateY(8px)}
+      .back-to-top.show{transform:translateX(-50%) translateY(0)}
+    }
+
   </style>
 </head>
 <body>
@@ -666,6 +675,27 @@
             close();
           }
         });
+      });
+    })();
+  </script>
+  <button class="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+  <script>
+    (function(){
+      const btn = document.querySelector('.back-to-top');
+      if(!btn) return;
+      // Show button after user scrolls down one viewport height
+      function toggle(){
+        if(window.scrollY > window.innerHeight * 0.5) btn.classList.add('show'); else btn.classList.remove('show');
+      }
+      // Smooth scroll to top
+      btn.addEventListener('click', ()=>{ window.scrollTo({top:0,behavior:'smooth'}); btn.blur(); });
+      window.addEventListener('scroll', toggle);
+      // initialize
+      toggle();
+      // also show the button when navigating to an in-page anchor (so users can return quickly)
+      document.addEventListener('click', (e)=>{
+        const a = e.target.closest && e.target.closest('a[href^="#"]');
+        if(a && a.getAttribute('href')!="#") setTimeout(toggle, 300);
       });
     })();
   </script>
