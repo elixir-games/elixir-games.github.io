@@ -204,7 +204,7 @@
     form .form-actions{display:flex;gap:8px;align-items:center}
 
     /* back-to-top button */
-    .back-to-top{position:fixed;right:18px;bottom:24px;width:44px;height:44px;padding:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;z-index:999;opacity:0;transform:translateY(8px);transition:opacity .18s ease, transform .18s ease}
+    .back-to-top{position:fixed;right:18px;bottom:24px;width:44px;height:44px;padding:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;z-index:999;opacity:0;transform:translateY(8px);transition:opacity .18s ease, transform .18s ease;backface-visibility:hidden;will-change:opacity,transform}
     .back-to-top.show{opacity:1;transform:none}
     .back-to-top:focus{outline:2px solid var(--accent);outline-offset:2px}
     @media (max-width:640px){
@@ -652,6 +652,8 @@
         backdrop.classList.remove('show'); backdrop.hidden = true; backdrop.setAttribute('aria-hidden','true');
         document.body.classList.remove('nav-open');
         document.querySelector('main').removeAttribute('aria-hidden');
+        // notify other scripts that nav has closed (useful on mobile)
+        try{ document.dispatchEvent(new Event('eg:navclosed')); }catch(e){}
         // return focus to the toggle
         btn.focus();
       }
@@ -687,22 +689,32 @@
     (function(){
       const btn = document.querySelector('.back-to-top');
       if(!btn) return;
+      // cross-browser page offset helper
+      function pageY(){ return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop; }
       // Show button after user scrolls down a small threshold (more reliable on mobile)
       function toggle(){
-        if(window.scrollY > 100) btn.classList.add('show'); else btn.classList.remove('show');
+        if(pageY() > 100) btn.classList.add('show'); else btn.classList.remove('show');
       }
       // Smooth scroll to top
       btn.addEventListener('click', ()=>{ window.scrollTo({top:0,behavior:'smooth'}); btn.blur(); });
       window.addEventListener('scroll', toggle);
+      window.addEventListener('touchmove', toggle);
+      window.addEventListener('resize', toggle);
       // also re-evaluate when the page loads or the hash changes (anchor navigation)
       window.addEventListener('load', toggle);
       window.addEventListener('hashchange', ()=>{ setTimeout(toggle, 80); });
+      // listen for our custom event when the mobile nav closes
+      document.addEventListener('eg:navclosed', ()=>{ setTimeout(toggle, 120); });
+      // Some iOS/Safari cases need a short polling after layout changes
+      function shortPoll(){ let checks=0; const id = setInterval(()=>{ checks++; toggle(); if(checks>6) clearInterval(id); }, 120); }
+      document.addEventListener('eg:navclosed', shortPoll);
+      window.addEventListener('orientationchange', ()=>{ setTimeout(()=>{ toggle(); shortPoll(); }, 180); });
       // initialize
       toggle();
       // also show the button when navigating to an in-page anchor (so users can return quickly)
       document.addEventListener('click', (e)=>{
         const a = e.target.closest && e.target.closest('a[href^="#"]');
-        if(a && a.getAttribute('href')!="#") setTimeout(toggle, 300);
+        if(a && a.getAttribute('href')!="#") setTimeout(()=>{ toggle(); shortPoll(); }, 300);
       });
     })();
   </script>
