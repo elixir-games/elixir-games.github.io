@@ -119,6 +119,24 @@
     @keyframes wave{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
     .logo img{transition:filter .35s, transform .35s}
     .logo.liquid-active img{filter:url(#liquid-filter);transform:translateY(-3px) scale(1.04);box-shadow:0 10px 24px rgba(0,0,0,0.35)}
+
+    /* contact & form styles */
+    .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:12px;align-items:start}
+    .contact-card{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));border:1px solid rgba(255,255,255,0.02)}
+    form{display:grid;gap:10px}
+    form label{font-size:13px;color:var(--muted);display:block}
+    form input, form select, form textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:inherit;font-size:14px;outline:none;transition:box-shadow .12s, border-color .12s}
+    form input::placeholder, form textarea::placeholder{color:rgba(255,255,255,0.35)}
+    form input:focus, form select:focus, form textarea:focus{border-color:var(--accent);box-shadow:0 8px 20px rgba(96,156,102,0.06);background:rgba(255,255,255,0.03)}
+
+    /* buttons (anchor and button parity) */
+    .btn, button.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:var(--glass);color:var(--accent);font-weight:600;text-decoration:none;border:1px solid rgba(57,255,20,0.08);cursor:pointer}
+    .btn:hover, button.btn:hover{box-shadow:0 10px 28px rgba(57,255,20,0.04);transform:translateY(-1px)}
+    .ghost, button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.02);color:var(--muted);padding:8px 12px;border-radius:10px;text-decoration:none}
+
+    /* form actions alignment */
+    form .form-actions{display:flex;gap:8px;align-items:center}
+
   </style>
 </head>
 <body>
@@ -357,14 +375,14 @@
 
       <div class="contact-grid" style="margin-top:12px">
         <div>
-          <form action="mailto:contact@elixirgames.io" method="post" enctype="text/plain" style="display:grid;gap:8px">
-            <label style="font-size:13px;color:var(--muted)">Name
-              <input name="name" type="text" />
+          <form action="mailto:contact@elixirgames.io" method="post" enctype="text/plain">
+            <label>Name
+              <input name="name" type="text" placeholder="Your name" />
             </label>
-            <label style="font-size:13px;color:var(--muted)">Email
-              <input name="email" type="email" />
+            <label>Email
+              <input name="email" type="email" placeholder="you@domain.com" />
             </label>
-            <label style="font-size:13px;color:var(--muted)">Topic
+            <label>Topic
               <select name="topic">
                 <option>Feedback</option>
                 <option>Press</option>
@@ -373,19 +391,22 @@
                 <option>Other</option>
               </select>
             </label>
-            <label style="font-size:13px;color:var(--muted)">Message
-              <textarea name="message" rows="4"></textarea>
+            <label>Message
+              <textarea name="message" rows="5" placeholder="Write a brief message"></textarea>
             </label>
-            <div style="display:flex;gap:8px">
-              <button class="btn" type="submit">Send</button>
+            <div class="form-actions">
+              <button class="btn" type="submit">Send Message</button>
+              <button class="ghost" type="button" onclick="document.querySelector('form').reset()">Reset</button>
               <a class="ghost" href="#privacy">Privacy</a>
             </div>
           </form>
+
           <div style="margin-top:12px;color:var(--muted);font-size:13px">Or email us directly at <a href="mailto:contact@elixirgames.io" style="color:var(--accent)">contact@elixirgames.io</a></div>
         </div>
         <aside class="contact-card">
           <div style="font-weight:700">Office</div>
           <div style="margin-top:8px;color:var(--muted);font-size:13px">Remote-first · Open to contractors and remote hires.</div>
+          <div style="margin-top:12px;color:var(--muted);font-size:13px">Support: <a href="#contact" style="color:var(--accent)">Help Center</a> · <a href="https://github.com/elixirgames" style="color:var(--accent)">GitHub</a></div>
         </aside>
       </div>
     </section>
