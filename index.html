@@ -57,11 +57,18 @@
     .logo{width:54px;height:54px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(57,255,20,0.06), rgba(57,255,20,0.01));border-radius:10px;box-shadow:0 6px 18px rgba(57,255,20,0.06);}
     .logo svg{width:34px;height:34px}
     h1{font-size:28px;margin:0;color:#fff}
+    /* navigation */
+    .nav-toggle{display:none;background:transparent;border:0;color:var(--muted);padding:8px;border-radius:8px;cursor:pointer}
+    .nav-toggle svg{display:block}
     nav{display:flex;gap:12px;align-items:center}
-    a.nav-btn{background:transparent;color:var(--muted);padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:600;border:1px solid rgba(255,255,255,0.04);transition:all .16s}
+    a.nav-btn{background:transparent;color:var(--muted);padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:600;border:1px solid rgba(255,255,255,0.04);transition:all .16s;display:inline-block}
     a.nav-btn:hover{background:rgba(57,255,20,0.06);color:var(--accent);border-color:rgba(57,255,20,0.12);box-shadow:0 8px 22px rgba(57,255,20,0.04)}
     a.btn{background:var(--glass);color:var(--accent);padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:600;border:1px solid rgba(57,255,20,0.08)}
     a.ghost{color:var(--muted);background:transparent;border:1px solid transparent}
+
+    /* desktop -> mobile nav animation helpers */
+    nav{transition: max-height .28s cubic-bezier(.2,.9,.3,1), opacity .18s ease;}
+    nav a{transition:transform .26s cubic-bezier(.2,.9,.3,1), opacity .22s ease}
 
     .hero{display:grid;grid-template-columns:1fr 420px;gap:var(--gap);align-items:center;margin-top:48px}
     .hero-left{padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);}    
@@ -99,8 +106,10 @@
       .wrap{padding:28px}
       /* show hamburger, hide nav by default */
       .nav-toggle{display:inline-flex}
-      nav{display:none}
-      nav.open{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+      nav{display:flex;flex-direction:column;gap:8px;margin-top:12px;max-height:0;overflow:hidden;opacity:0}
+      nav.open{max-height:400px;opacity:1}
+      nav.open a{transform:none;opacity:1}
+      nav a{transform:translateY(-6px);opacity:0}
     }
     @media (max-width:640px){
       .hero{grid-template-columns:1fr;}
