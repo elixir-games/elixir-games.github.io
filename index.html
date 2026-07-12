@@ -39,81 +39,141 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <style>
     :root{
-      --bg:#070707;
-      --panel:#0f0f0f;
-      --muted:#9aa0a6;
-      --accent:#609C66; /* sampled from avatar */
-      --glass: rgba(255,255,255,0.03);
+      --bg:#f8f9fa;
+      --panel:#ffffff;
+      --muted:#5f666d;
+      --accent:#8bd94f;
+      --accent-dark:#4a9e2d;
+      --text-primary:#1a1f26;
+      --glass: rgba(0,0,0,0.02);
       --radius:12px;
       --max:1100px;
       --gap:24px;
+      --border: rgba(0,0,0,0.08);
+      --shadow: rgba(28,31,35,0.05);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,#050505 0%, #0b0b0b 100%); color:#e9eef1; -webkit-font-smoothing:antialiased}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,#ffffff 0%, #f4f6f8 100%); color:var(--text-primary); -webkit-font-smoothing:antialiased}
     .wrap{max-width:var(--max);margin:40px auto;padding:40px;overflow-x:hidden}
-    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 16px 40px;
+      margin: -40px -40px 24px -40px;
+      border-bottom: 1px solid var(--border);
+    }
     .brand{display:flex;align-items:center;gap:14px}
-    .logo{width:54px;height:54px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(57,255,20,0.06), rgba(57,255,20,0.01));border-radius:10px;box-shadow:0 6px 18px rgba(57,255,20,0.06);}
-    .logo svg{width:34px;height:34px}
-    h1{font-size:28px;margin:0;color:#fff}
+    .logo{width:54px;height:54px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(139,217,79,0.08), rgba(139,217,79,0.02));border-radius:12px;border: 1px solid rgba(139,217,79,0.2);box-shadow:0 6px 18px rgba(139,217,79,0.06);cursor:pointer;}
+    .logo svg{width:36px;height:36px}
+    h1{font-size:28px;margin:0;color:var(--text-primary)}
+    h2{color:var(--text-primary)}
+    h3{color:var(--text-primary)}
     /* navigation */
     .nav-toggle{display:none;background:transparent;border:0;color:var(--muted);padding:8px;border-radius:8px;cursor:pointer}
     .nav-toggle svg{display:block}
-    nav{display:flex;gap:12px;align-items:center}
-    a.nav-btn{background:transparent;color:var(--muted);padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:600;border:1px solid rgba(255,255,255,0.04);transition:all .16s;display:inline-block}
-    a.nav-btn:hover{background:rgba(57,255,20,0.06);color:var(--accent);border-color:rgba(57,255,20,0.12);box-shadow:0 8px 22px rgba(57,255,20,0.04)}
-    a.btn{background:var(--glass);color:var(--accent);padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:600;border:1px solid rgba(57,255,20,0.08)}
-    a.ghost{color:var(--muted);background:transparent;border:1px solid transparent}
+    nav{display:flex;gap:24px;align-items:center}
+    a.nav-btn{background:transparent;color:var(--text-primary);padding:6px 0;text-decoration:none;font-weight:600;font-size:15px;border:none;transition:color .16s ease;display:inline-block}
+    a.nav-btn:hover{color:var(--accent-dark)}
+    a.btn, button.btn{background:var(--accent);color:#1c3d0b;padding:8px 18px;border-radius:999px;text-decoration:none;font-weight:600;border:1px solid rgba(139,217,79,0.3);box-shadow:0 2px 6px rgba(139,217,79,0.15);transition:all .16s}
+    a.btn:hover, button.btn:hover{background:var(--accent);opacity:0.9;box-shadow:0 6px 18px rgba(139,217,79,0.25);transform:translateY(-1px)}
+    a.ghost{color:var(--muted);background:transparent;border:1px solid var(--border);padding:8px 12px;border-radius:10px;text-decoration:none}
+    a.ghost:hover{background:rgba(0,0,0,0.02);color:var(--text-primary);border-color:var(--muted)}
 
     /* desktop -> mobile nav animation helpers */
     nav{transition: max-height .28s cubic-bezier(.2,.9,.3,1), opacity .18s ease;}
     nav a{transition:transform .26s cubic-bezier(.2,.9,.3,1), opacity .22s ease}
 
     .hero{display:grid;grid-template-columns:1fr 420px;gap:var(--gap);align-items:center;margin-top:48px}
-    .hero-left{padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);}    
-    .kicker{display:inline-block;padding:6px 10px;background:rgba(57,255,20,0.08);color:var(--accent);border-radius:999px;font-weight:700;font-size:12px}
-    .lead{font-size:44px;line-height:1.02;margin:18px 0;color:#fff}
+    .hero-left{padding:28px;background:var(--panel);border:1px solid var(--border);box-shadow:0 4px 20px var(--shadow);border-radius:var(--radius);}    
+    .kicker{display:inline-block;padding:6px 10px;background:rgba(139,217,79,0.1);color:var(--accent-dark);border-radius:999px;font-weight:700;font-size:12px}
+    .lead{font-size:44px;line-height:1.02;margin:18px 0;color:var(--text-primary)}
     .desc{color:var(--muted);margin-bottom:20px}
     .ctas{display:flex;gap:12px}
-    .card{background:linear-gradient(90deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .card{background:var(--panel);padding:18px;border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 20px var(--shadow)}
 
     .hero-right{display:flex;flex-direction:column;gap:16px}
-    .preview{height:320px;background:linear-gradient(180deg, rgba(57,255,20,0.04), rgba(0,0,0,0.2));border-radius:12px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(57,255,20,0.06)}
-    .preview .device{width:85%;height:85%;background:linear-gradient(180deg,#020202,#0b0b0b);border-radius:10px;border:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;color:var(--muted);max-width:100%}
+    .preview{height:320px;background:linear-gradient(180deg, rgba(139,217,79,0.08), rgba(0,0,0,0.02));border-radius:12px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(139,217,79,0.15)}
+    .preview .device{width:85%;height:85%;background:var(--panel);border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-primary);max-width:100%}
     img, .preview, .card, .game-thumb, .game-thumb img{max-width:100%;height:auto}
 
     .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
     /* team/job cards - visually separated */
-    .team-card{padding:16px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));border-radius:10px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 6px 18px rgba(0,0,0,0.35)}
+    .team-card{padding:16px;background:var(--panel);border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 14px var(--shadow)}
     .team-card h3{margin:0 0 8px 0}
-    .feature{padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
-    .feature h3{margin:0 0 6px 0;color:#fff;font-size:16px}
+    .feature{padding:16px;background:rgba(139,217,79,0.02);border-radius:10px;border:1px solid var(--border)}
+    .feature h3{margin:0 0 6px 0;color:var(--text-primary);font-size:16px}
     .feature p{margin:0;color:var(--muted);font-size:13px}
 
     /* games list */
-    .game-card{display:flex;gap:12px;align-items:center;padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));border:1px solid rgba(255,255,255,0.02);box-shadow:0 6px 18px rgba(0,0,0,0.35)}
-    .game-thumb{width:72px;height:72px;border-radius:10px;overflow:hidden;flex:0 0 auto}
+    .section-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px}
+    .game-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px;border-radius:16px;background:var(--panel);border:1px solid var(--border);box-shadow:0 4px 14px var(--shadow);box-sizing:border-box}
+    .game-thumb{width:64px;height:64px;border-radius:12px;overflow:hidden;flex:0 0 auto;border:1px solid var(--border);margin:0 auto 16px auto}
     .game-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .game-meta{font-size:13px;color:var(--muted);margin-top:6px}
-    .actions{margin-top:12px;display:flex;gap:8px}
+    .game-details{display:flex;flex-direction:column;align-items:center;width:100%;flex:1}
+    .game-title{font-weight:800;color:var(--text-primary);font-size:18px}
+    .game-meta{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4;flex:1}
+    .actions{margin-top:20px;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
+    .actions a{display:inline-flex;justify-content:center;align-items:center}
+    .desktop-downloads{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);display:flex;gap:12px;align-items:center;justify-content:center;font-size:12px;color:var(--muted);width:100%}
+    .desktop-downloads span{font-weight:700;color:var(--text-primary)}
+    .download-link{color:var(--accent-dark);text-decoration:none;font-weight:600;transition:opacity .15s ease;display:inline-flex;align-items:center;gap:4px}
+    .download-link:hover{opacity:0.8;text-decoration:underline}
+
+    /* store badges */
+    .store-btn{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text-primary);
+    }
+    .store-btn svg{
+      width: 14px;
+      height: 14px;
+      display: block;
+    }
+    .store-btn:hover{
+      background: var(--bg);
+      border-color: var(--accent-dark);
+      color: var(--accent-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px var(--shadow);
+    }
 
     footer{margin-top:48px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
 
     /* small screens */
     @media (max-width:900px){
       html,body{overflow-x:hidden}
+      header{padding:16px 28px;margin:-28px -28px 24px -28px}
       .hero{grid-template-columns:1fr;grid-auto-rows:auto}
       .brand h1{font-size:20px}
       .lead{font-size:34px}
       .preview{height:260px}
       .features{grid-template-columns:1fr 1fr}
       .wrap{padding:28px}
+      .section-grid{grid-template-columns:repeat(2,1fr);gap:20px}
       /* show hamburger, hide nav by default */
       .nav-toggle{display:inline-flex}
 
       /* backdrop to dim content and catch clicks when nav is open */
-      .nav-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.45);backdrop-filter:blur(2px);z-index:20;opacity:0;transition:opacity .18s ease}
+      .nav-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.25);backdrop-filter:blur(2px);z-index:20;opacity:0;transition:opacity .18s ease}
       .nav-backdrop[aria-hidden="false"], .nav-backdrop[hidden="false"], .nav-backdrop.show{opacity:1}
 
       /* nav sits above content but below backdrop's clickable layer */
@@ -126,6 +186,7 @@
       body.nav-open{overflow:hidden}
     }
     @media (max-width:640px){
+      header{padding:16px;margin:0 0 16px 0;position:static}
       .hero{grid-template-columns:1fr;}
       .hero-right{order:2}
       .hero-left{order:1}
@@ -155,7 +216,7 @@
 
 
       /* popup-style menu when open: smaller, centered, and elevated */
-      nav.open{position:fixed;left:50%;top:8vh;transform:translateX(-50%);width:calc(100% - 32px);max-width:720px;max-height:84vh;background:linear-gradient(180deg,#070707,#0b0b0b);padding:20px 18px;display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:flex-start;opacity:1;z-index:60;border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,0.6)}
+      nav.open{position:fixed;left:50%;top:8vh;transform:translateX(-50%);width:calc(100% - 32px);max-width:720px;max-height:84vh;background:var(--panel);border:1px solid var(--border);padding:20px 18px;display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:flex-start;opacity:1;z-index:60;border-radius:12px;box-shadow:0 20px 40px var(--shadow)}
       /* center and enlarge the section buttons */
       nav.open a{transform:none;opacity:1;font-size:18px;padding:12px 0;text-align:center;width:100%;display:block}
       nav a{transform:translateY(-6px);opacity:0;padding:8px 0;font-size:16px;text-align:center}
@@ -196,25 +257,25 @@
 
     /* contact & form styles */
     .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:12px;align-items:start}
-    .contact-card{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));border:1px solid rgba(255,255,255,0.02)}
+    .contact-card{padding:14px;border-radius:10px;background:var(--panel);border:1px solid var(--border);box-shadow:0 4px 14px var(--shadow)}
     form{display:grid;gap:10px}
     form label{font-size:13px;color:var(--muted);display:block}
-    form input, form select, form textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:inherit;font-size:14px;outline:none;transition:box-shadow .12s, border-color .12s}
-    form input::placeholder, form textarea::placeholder{color:rgba(255,255,255,0.35)}
-    form input:focus, form select:focus, form textarea:focus{border-color:var(--accent);box-shadow:0 8px 20px rgba(96,156,102,0.06);background:rgba(255,255,255,0.03)}
+    form input, form select, form textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:var(--panel);color:inherit;font-size:14px;outline:none;transition:box-shadow .12s, border-color .12s}
+    form input::placeholder, form textarea::placeholder{color:var(--muted);opacity:0.6}
+    form input:focus, form select:focus, form textarea:focus{border-color:var(--accent-dark);box-shadow:0 8px 20px rgba(139,217,79,0.1);background:var(--panel)}
 
     /* buttons (anchor and button parity) */
-    .btn, button.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:var(--glass);color:var(--accent);font-weight:600;text-decoration:none;border:1px solid rgba(57,255,20,0.08);cursor:pointer}
-    .btn:hover, button.btn:hover{box-shadow:0 10px 28px rgba(57,255,20,0.04);transform:translateY(-1px)}
-    .ghost, button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.02);color:var(--muted);padding:8px 12px;border-radius:10px;text-decoration:none}
+    .btn:hover, button.btn:hover{box-shadow:0 10px 28px rgba(139,217,79,0.15);transform:translateY(-1px)}
+    .ghost, button.ghost{background:transparent;border:1px solid var(--border);color:var(--muted);padding:8px 12px;border-radius:10px;text-decoration:none}
+    .ghost:hover{background:rgba(0,0,0,0.02);color:var(--text-primary)}
 
     /* form actions alignment */
     form .form-actions{display:flex;gap:8px;align-items:center}
 
     /* back-to-top button */
-    .back-to-top{position:fixed;right:18px;bottom:24px;width:44px;height:44px;padding:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;z-index:999;opacity:0;transform:translateY(8px);transition:opacity .18s ease, transform .18s ease;backface-visibility:hidden;will-change:opacity,transform}
+    .back-to-top{position:fixed;right:18px;bottom:24px;width:44px;height:44px;padding:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;z-index:999;opacity:0;transform:translateY(8px);transition:opacity .18s ease, transform .18s ease;backface-visibility:hidden;will-change:opacity,transform;background:var(--accent);color:#1c3d0b;border:1px solid rgba(139,217,79,0.3);box-shadow:0 4px 12px rgba(139,217,79,0.2)}
     .back-to-top.show{opacity:1;transform:none}
-    .back-to-top:focus{outline:2px solid var(--accent);outline-offset:2px}
+    .back-to-top:focus{outline:2px solid var(--accent-dark);outline-offset:2px}
     /* Ensure the SVG icon is consistent across breakpoints */
     .back-to-top svg{width:18px;height:18px;display:block;fill:currentColor;color:inherit}
     @media (max-width:640px){
@@ -226,7 +287,6 @@
       /* on small screens explicitly keep the same arrow icon sizing/color */
       @media (max-width:640px){ .back-to-top svg{width:18px;height:18px;fill:currentColor} }
     }
-
   </style>
 </head>
 <body>
@@ -240,12 +300,11 @@
   <div class="wrap">
     <header>
       <div class="brand">
-          <div class="logo" tabindex="0" aria-label="Elixir Games logo" role="img">
+        <div class="logo" tabindex="0" aria-label="Elixir Games logo" role="img">
           <img src="/avatar.png" alt="Elixir Games logo" style="width:100%;height:100%;border-radius:8px;object-fit:cover;max-width:44px;max-height:44px"/>
         </div>
         <div>
-          <h1>Elixir Games</h1>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px">Indie studio — playful, performant games</div>
+          <h1 style="font-weight:800">Elixir Games</h1>
         </div>
       </div>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
@@ -257,215 +316,187 @@
         <a class="nav-btn" href="#careers">Careers</a>
         <a class="nav-btn" href="#support">Support</a>
         <a class="nav-btn" href="#about">About</a>
-        <a class="nav-btn" href="#contact">Contact</a>
-        <a class="btn" href="#play">Play Now</a>
+        <a class="nav-btn" href="/contact.html">Contact</a>
       </nav>
       <div id="nav-backdrop" class="nav-backdrop" hidden></div>
     </header>
 
-    <main class="hero">
-      <section id="home" class="hero-left card">
-        <div class="kicker">New</div>
-        <h2 class="lead">We craft small games with big heart.</h2>
-        <p class="desc">Elixir Games builds lightweight, polished experiences that run everywhere — web, mobile, and native. We focus on fast, delightful gameplay and clean technical foundations.</p>
-        <div class="ctas">
-          <a class="btn" href="#games">Explore Games</a>
-          <a class="ghost" href="#contact">Contact Us</a>
-        </div>
-        <div class="features" style="margin-top:20px">
-          <div class="feature">
-            <h3>Performant</h3>
-            <p>Small binaries, smooth frame rates, careful optimization.</p>
-          </div>
-          <div class="feature">
-            <h3>Cross-platform</h3>
-            <p>HTML5, native builds, and everything in between.</p>
-          </div>
-          <div class="feature">
-            <h3>Tiny Teams</h3>
-            <p>Focused teams ship meaningful features quickly.</p>
-          </div>
-        </div>
-      </section>
-
-      <aside class="hero-right">
-        <div class="card preview">
-          <div class="device">
-            <div style="text-align:center">
-              <div style="font-weight:700;color:#fff;margin-bottom:8px">Featured: Reactor Rush</div>
-              <div style="color:var(--muted);font-size:13px">A short arcade puzzler — tap to mix the elixir</div>
-                <div style="margin-top:18px;background:linear-gradient(90deg,#081010,#0f0f0f);padding:12px;border-radius:10px;color:var(--muted);width:100%;max-width:240px;margin-left:auto;margin-right:auto">
-                  <a class="btn" href="#play" style="display:block;text-align:center">Play Demo</a>
-                </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="display:flex;align-items:center;justify-content:space-between">
-          <div>
-            <div style="font-weight:700">Join our newsletter</div>
-            <div style="font-size:13px;color:var(--muted)">Get early builds and dev updates</div>
-          </div>
-          <a class="btn" href="#subscribe">Subscribe</a>
-        </div>
-
-        <div class="card" style="display:flex;gap:12px;align-items:center">
-          <div style="width:48px;height:48px;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;"><img src="/avatar.png" alt="EG" style="width:100%;height:100%;object-fit:cover;"/></div>
-          <div>
-            <div style="font-weight:700">Open Source</div>
-            <div style="font-size:13px;color:var(--muted)">We publish tools and small prototypes on GitHub.</div>
-          </div>
-        </div>
-      </aside>
+    <main id="home" class="hero-clean" style="text-align:center;padding:48px 20px 32px 20px;max-width:800px;margin:0 auto">
+      <h2 style="font-size:42px;font-weight:800;letter-spacing:-1px;margin-top:0;margin-bottom:12px;color:var(--text-primary)">Handcrafted games for everyone.</h2>
+      <p style="font-size:15px;color:var(--muted);line-height:1.5;margin-bottom:0">Explore our collection of polished, minimalist board and puzzle games designed for mobile and web.</p>
     </main>
 
     <section id="games" class="card">
-      <div class="section-header">
-        <h2>Games</h2>
-        <div class="pill">Play & Demos</div>
+      <div class="section-grid">
+        <!-- Yatzy -->
+        <div class="game-card">
+          <div class="game-thumb">
+            <img src="/images/yatzy.png" alt="Yatzy Icon" />
+          </div>
+          <div class="game-details">
+            <div class="game-title">Yatzy</div>
+            <div class="game-meta">Classic dice game — strategy and chance in every roll.</div>
+            <div class="actions">
+              <a href="https://yatzy.elixirgames.io" target="_blank" rel="noopener" class="btn" style="padding: 0 16px; width: 135px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; box-sizing: border-box;">Play Now</a>
+              <a href="https://apps.apple.com/pl/app/yatzy-2-0/id6758081832" target="_blank" rel="noopener">
+                <img src="/images/app_store.svg" alt="Download on the App Store" style="height: 40px; display: block;" />
+              </a>
+            </div>
+            <div class="desktop-downloads">
+              <span>Download:</span>
+              <a href="https://yatzy.elixirgames.io/download/windows" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M0 3.449L9.75 2.1v9.451H0zM0 12.549h9.75v9.451L0 20.651zM10.875 1.95L24 0v11.55H10.875zM10.875 12.549H24v11.55l-13.125-1.95z"/></svg>Windows</a>
+              <a href="https://yatzy.elixirgames.io/download/macos" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-.96.04-2.13.64-2.82 1.45-.6.69-1.12 1.83-.98 2.94.1.08.21.12.31.12.87 0 1.94-.53 2.5-1.45z"/></svg>macOS</a>
+              <a href="https://yatzy.elixirgames.io/download/linux" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12 2c-.67 0-1.33.08-2 .23C7.4 2.8 5.76 4.3 5.16 6.57c-.24.91-.25 1.87-.04 2.82.16.73.45 1.43.86 2.05-.12.4-.23.8-.32 1.21-.33 1.54-.2 3.12.36 4.58.4 1.03.97 1.98 1.69 2.8l-.13.3c-.43 1-.76 2.04-.98 3.1-.09.43-.09.87.01 1.3.1.4.31.76.62 1.03.3.26.7.41 1.1.43H18.7c.4-.02.8-.17 1.1-.43.31-.27.52-.63.62-1.03.1-.43.1-.87.01-1.3-.22-1.06-.55-2.1-.98-3.1l-.13-.3c.72-.82 1.29-1.77 1.69-2.8.56-1.46.69-3.04.36-4.58-.09-.41-.2-.81-.32-1.21.41-.62.7-1.32.86-2.05.21-.95.2-1.91-.04-2.82C21.24 4.3 19.6 2.8 17 2.23c-.67-.15-1.33-.23-2-.23zm-.5 2.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm5 0c.28 0 .5 0 .5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/></svg>Linux</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mills -->
+        <div class="game-card">
+          <div class="game-thumb">
+            <img src="/images/mills.png" alt="Mills Icon" />
+          </div>
+          <div class="game-details">
+            <div class="game-title">Mills</div>
+            <div class="game-meta">The traditional nine men's morris strategy board game.</div>
+            <div class="actions">
+              <a href="https://mills.elixirgames.io" target="_blank" rel="noopener" class="btn" style="padding: 0 16px; width: 135px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; box-sizing: border-box;">Play Now</a>
+              <a href="https://apps.apple.com/pl/app/mills-2-0/id6758081595" target="_blank" rel="noopener">
+                <img src="/images/app_store.svg" alt="Download on the App Store" style="height: 40px; display: block;" />
+              </a>
+            </div>
+            <div class="desktop-downloads">
+              <span>Download:</span>
+              <a href="https://mills.elixirgames.io/download/windows" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M0 3.449L9.75 2.1v9.451H0zM0 12.549h9.75v9.451L0 20.651zM10.875 1.95L24 0v11.55H10.875zM10.875 12.549H24v11.55l-13.125-1.95z"/></svg>Windows</a>
+              <a href="https://mills.elixirgames.io/download/macos" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-.96.04-2.13.64-2.82 1.45-.6.69-1.12 1.83-.98 2.94.1.08.21.12.31.12.87 0 1.94-.53 2.5-1.45z"/></svg>macOS</a>
+              <a href="https://mills.elixirgames.io/download/linux" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12 2c-.67 0-1.33.08-2 .23C7.4 2.8 5.76 4.3 5.16 6.57c-.24.91-.25 1.87-.04 2.82.16.73.45 1.43.86 2.05-.12.4-.23.8-.32 1.21-.33 1.54-.2 3.12.36 4.58.4 1.03.97 1.98 1.69 2.8l-.13.3c-.43 1-.76 2.04-.98 3.1-.09.43-.09.87.01 1.3.1.4.31.76.62 1.03.3.26.7.41 1.1.43H18.7c.4-.02.8-.17 1.1-.43.31-.27.52-.63.62-1.03.1-.43.1-.87.01-1.3-.22-1.06-.55-2.1-.98-3.1l-.13-.3c.72-.82 1.29-1.77 1.69-2.8.56-1.46.69-3.04.36-4.58-.09-.41-.2-.81-.32-1.21.41-.62.7-1.32.86-2.05.21-.95.2-1.91-.04-2.82C21.24 4.3 19.6 2.8 17 2.23c-.67-.15-1.33-.23-2-.23zm-.5 2.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm5 0c.28 0 .5 0 .5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/></svg>Linux</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blocks -->
+        <div class="game-card">
+          <div class="game-thumb">
+            <img src="/images/blocks.png" alt="Blocks Icon" />
+          </div>
+          <div class="game-details">
+            <div class="game-title">Blocks</div>
+            <div class="game-meta">Challenging physics and logic falling block puzzle game.</div>
+            <div class="actions">
+              <a href="https://blocks.elixirgames.io" target="_blank" rel="noopener" class="btn" style="padding: 0 16px; width: 135px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; box-sizing: border-box;">Play Now</a>
+              <a href="https://apps.apple.com/pl/app/blocks-2-0/id6760268812" target="_blank" rel="noopener">
+                <img src="/images/app_store.svg" alt="Download on the App Store" style="height: 40px; display: block;" />
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=io.elixirgames.blocks" target="_blank" rel="noopener">
+                <img src="/images/google_play.svg" alt="Get it on Google Play" style="height: 40px; display: block;" />
+              </a>
+            </div>
+            <div class="desktop-downloads">
+              <span>Download:</span>
+              <a href="https://blocks.elixirgames.io/download/windows" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M0 3.449L9.75 2.1v9.451H0zM0 12.549h9.75v9.451L0 20.651zM10.875 1.95L24 0v11.55H10.875zM10.875 12.549H24v11.55l-13.125-1.95z"/></svg>Windows</a>
+              <a href="https://blocks.elixirgames.io/download/macos" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-.96.04-2.13.64-2.82 1.45-.6.69-1.12 1.83-.98 2.94.1.08.21.12.31.12.87 0 1.94-.53 2.5-1.45z"/></svg>macOS</a>
+              <a href="https://blocks.elixirgames.io/download/linux" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12 2c-.67 0-1.33.08-2 .23C7.4 2.8 5.76 4.3 5.16 6.57c-.24.91-.25 1.87-.04 2.82.16.73.45 1.43.86 2.05-.12.4-.23.8-.32 1.21-.33 1.54-.2 3.12.36 4.58.4 1.03.97 1.98 1.69 2.8l-.13.3c-.43 1-.76 2.04-.98 3.1-.09.43-.09.87.01 1.3.1.4.31.76.62 1.03.3.26.7.41 1.1.43H18.7c.4-.02.8-.17 1.1-.43.31-.27.52-.63.62-1.03.1-.43.1-.87.01-1.3-.22-1.06-.55-2.1-.98-3.1l-.13-.3c.72-.82 1.29-1.77 1.69-2.8.56-1.46.69-3.04.36-4.58-.09-.41-.2-.81-.32-1.21.41-.62.7-1.32.86-2.05.21-.95.2-1.91-.04-2.82C21.24 4.3 19.6 2.8 17 2.23c-.67-.15-1.33-.23-2-.23zm-.5 2.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm5 0c.28 0 .5 0 .5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/></svg>Linux</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper Soccer -->
+        <div class="game-card">
+          <div class="game-thumb">
+            <img src="/images/paper_soccer.png" alt="Paper Soccer Icon" />
+          </div>
+          <div class="game-details">
+            <div class="game-title">Paper Soccer</div>
+            <div class="game-meta">Turn-based tactical strategy simulating soccer on a paper grid.</div>
+            <div class="actions">
+              <a href="https://paper-soccer.elixirgames.io" target="_blank" rel="noopener" class="btn" style="padding: 0 16px; width: 135px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; box-sizing: border-box;">Play Now</a>
+              <a href="https://apps.apple.com/pl/app/paper-soccer-2-0/id6758081931" target="_blank" rel="noopener">
+                <img src="/images/app_store.svg" alt="Download on the App Store" style="height: 40px; display: block;" />
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=io.elixirgames.papersoccer" target="_blank" rel="noopener">
+                <img src="/images/google_play.svg" alt="Get it on Google Play" style="height: 40px; display: block;" />
+              </a>
+            </div>
+            <div class="desktop-downloads">
+              <span>Download:</span>
+              <a href="https://paper-soccer.elixirgames.io/download/windows" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M0 3.449L9.75 2.1v9.451H0zM0 12.549h9.75v9.451L0 20.651zM10.875 1.95L24 0v11.55H10.875zM10.875 12.549H24v11.55l-13.125-1.95z"/></svg>Windows</a>
+              <a href="https://paper-soccer.elixirgames.io/download/macos" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-.96.04-2.13.64-2.82 1.45-.6.69-1.12 1.83-.98 2.94.1.08.21.12.31.12.87 0 1.94-.53 2.5-1.45z"/></svg>macOS</a>
+              <a href="https://paper-soccer.elixirgames.io/download/linux" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12 2c-.67 0-1.33.08-2 .23C7.4 2.8 5.76 4.3 5.16 6.57c-.24.91-.25 1.87-.04 2.82.16.73.45 1.43.86 2.05-.12.4-.23.8-.32 1.21-.33 1.54-.2 3.12.36 4.58.4 1.03.97 1.98 1.69 2.8l-.13.3c-.43 1-.76 2.04-.98 3.1-.09.43-.09.87.01 1.3.1.4.31.76.62 1.03.3.26.7.41 1.1.43H18.7c.4-.02.8-.17 1.1-.43.31-.27.52-.63.62-1.03.1-.43.1-.87.01-1.3-.22-1.06-.55-2.1-.98-3.1l-.13-.3c.72-.82 1.29-1.77 1.69-2.8.56-1.46.69-3.04.36-4.58-.09-.41-.2-.81-.32-1.21.41-.62.7-1.32.86-2.05.21-.95.2-1.91-.04-2.82C21.24 4.3 19.6 2.8 17 2.23c-.67-.15-1.33-.23-2-.23zm-.5 2.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm5 0c.28 0 .5 0 .5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/></svg>Linux</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ships -->
+        <div class="game-card">
+          <div class="game-thumb">
+            <img src="/images/ships.png" alt="Ships Icon" />
+          </div>
+          <div class="game-details">
+            <div class="game-title">Ships</div>
+            <div class="game-meta">Battleship tactics — grid logic and strategic naval combat.</div>
+            <div class="actions">
+              <a href="https://ships.elixirgames.io" target="_blank" rel="noopener" class="btn" style="padding: 0 16px; width: 135px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; box-sizing: border-box;">Play Now</a>
+              <a href="https://apps.apple.com/pl/app/ships-2-0/id6758081929" target="_blank" rel="noopener">
+                <img src="/images/app_store.svg" alt="Download on the App Store" style="height: 40px; display: block;" />
+              </a>
+            </div>
+            <div class="desktop-downloads">
+              <span>Download:</span>
+              <a href="https://ships.elixirgames.io/download/windows" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M0 3.449L9.75 2.1v9.451H0zM0 12.549h9.75v9.451L0 20.651zM10.875 1.95L24 0v11.55H10.875zM10.875 12.549H24v11.55l-13.125-1.95z"/></svg>Windows</a>
+              <a href="https://ships.elixirgames.io/download/macos" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-.96.04-2.13.64-2.82 1.45-.6.69-1.12 1.83-.98 2.94.1.08.21.12.31.12.87 0 1.94-.53 2.5-1.45z"/></svg>macOS</a>
+              <a href="https://ships.elixirgames.io/download/linux" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12 2c-.67 0-1.33.08-2 .23C7.4 2.8 5.76 4.3 5.16 6.57c-.24.91-.25 1.87-.04 2.82.16.73.45 1.43.86 2.05-.12.4-.23.8-.32 1.21-.33 1.54-.2 3.12.36 4.58.4 1.03.97 1.98 1.69 2.8l-.13.3c-.43 1-.76 2.04-.98 3.1-.09.43-.09.87.01 1.3.1.4.31.76.62 1.03.3.26.7.41 1.1.43H18.7c.4-.02.8-.17 1.1-.43.31-.27.52-.63.62-1.03.1-.43.1-.87.01-1.3-.22-1.06-.55-2.1-.98-3.1l-.13-.3c.72-.82 1.29-1.77 1.69-2.8.56-1.46.69-3.04.36-4.58-.09-.41-.2-.81-.32-1.21.41-.62.7-1.32.86-2.05.21-.95.2-1.91-.04-2.82C21.24 4.3 19.6 2.8 17 2.23c-.67-.15-1.33-.23-2-.23zm-.5 2.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm5 0c.28 0 .5 0 .5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/></svg>Linux</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Puzzle -->
+        <div class="game-card">
+          <div class="game-thumb">
+            <img src="/images/puzzle.png" alt="Puzzle Icon" />
+          </div>
+          <div class="game-details">
+            <div class="game-title">Puzzle</div>
+            <div class="game-meta">Thoughtful spatial block fit and grid board puzzle.</div>
+            <div class="actions">
+              <a href="https://puzzle.elixirgames.io" target="_blank" rel="noopener" class="btn" style="padding: 0 16px; width: 135px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; box-sizing: border-box;">Play Now</a>
+              <a href="https://apps.apple.com/pl/app/puzzle-2-0/id6757918654" target="_blank" rel="noopener">
+                <img src="/images/app_store.svg" alt="Download on the App Store" style="height: 40px; display: block;" />
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=io.elixirgames.puzzle" target="_blank" rel="noopener">
+                <img src="/images/google_play.svg" alt="Get it on Google Play" style="height: 40px; display: block;" />
+              </a>
+            </div>
+            <div class="desktop-downloads">
+              <span>Download:</span>
+              <a href="https://puzzle.elixirgames.io/download/windows" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M0 3.449L9.75 2.1v9.451H0zM0 12.549h9.75v9.451L0 20.651zM10.875 1.95L24 0v11.55H10.875zM10.875 12.549H24v11.55l-13.125-1.95z"/></svg>Windows</a>
+              <a href="https://puzzle.elixirgames.io/download/macos" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-.96.04-2.13.64-2.82 1.45-.6.69-1.12 1.83-.98 2.94.1.08.21.12.31.12.87 0 1.94-.53 2.5-1.45z"/></svg>macOS</a>
+              <a href="https://puzzle.elixirgames.io/download/linux" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12 2c-.67 0-1.33.08-2 .23C7.4 2.8 5.76 4.3 5.16 6.57c-.24.91-.25 1.87-.04 2.82.16.73.45 1.43.86 2.05-.12.4-.23.8-.32 1.21-.33 1.54-.2 3.12.36 4.58.4 1.03.97 1.98 1.69 2.8l-.13.3c-.43 1-.76 2.04-.98 3.1-.09.43-.09.87.01 1.3.1.4.31.76.62 1.03.3.26.7.41 1.1.43H18.7c.4-.02.8-.17 1.1-.43.31-.27.52-.63.62-1.03.1-.43.1-.87.01-1.3-.22-1.06-.55-2.1-.98-3.1l-.13-.3c.72-.82 1.29-1.77 1.69-2.8.56-1.46.69-3.04.36-4.58-.09-.41-.2-.81-.32-1.21.41-.62.7-1.32.86-2.05.21-.95.2-1.91-.04-2.82C21.24 4.3 19.6 2.8 17 2.23c-.67-.15-1.33-.23-2-.23zm-.5 2.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm5 0c.28 0 .5 0 .5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/></svg>Linux</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="desc">A catalog of small, focused games—each designed for short, repeatable sessions and smooth performance.</p>
 
-      <div class="section-grid" style="margin-top:16px">
-        <div class="game-card">
-          <div class="game-thumb">
-            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
-              <defs>
-                <linearGradient id="g-mills" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0" stop-color="#f6d365" />
-                  <stop offset="1" stop-color="#fda085" />
-                </linearGradient>
-              </defs>
-              <rect width="72" height="72" rx="10" fill="url(#g-mills)" />
-              <g transform="translate(8 8)" stroke="#fff" stroke-width="1.8" fill="none">
-                <!-- Outer square -->
-                <rect x="0" y="0" width="56" height="56" rx="4" stroke-opacity="0.85" />
-                <!-- Middle square -->
-                <rect x="8" y="8" width="40" height="40" rx="3" stroke-opacity="0.75" />
-                <!-- Inner square -->
-                <rect x="16" y="16" width="24" height="24" rx="2" stroke-opacity="0.65" />
-                <!-- Connecting lines (mills board) -->
-                <line x1="28" y1="0" x2="28" y2="16" stroke-opacity="0.7" />
-                <line x1="28" y1="40" x2="28" y2="56" stroke-opacity="0.7" />
-                <line x1="0" y1="28" x2="16" y2="28" stroke-opacity="0.7" />
-                <line x1="40" y1="28" x2="56" y2="28" stroke-opacity="0.7" />
-                <!-- tokens (small circles) -->
-                <circle cx="28" cy="8" r="3.2" fill="#fff" />
-                <circle cx="8" cy="28" r="3.2" fill="#fff" />
-                <circle cx="28" cy="48" r="3.2" fill="#fff" />
-                <circle cx="48" cy="28" r="3.2" fill="#fff" />
-                <!-- highlighted token to show character -->
-                <circle cx="28" cy="28" r="5.2" fill="#2b2b2b" stroke="#fff" stroke-width="1" />
-              </g>
-            </svg>
-          </div>
-          <div style="flex:1">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div>
-                <div style="font-weight:800;color:#fff">Mills</div>
-                <div class="game-meta">A quick strategy board game — simple rules, deep play.</div>
-              </div>
-               <div style="text-align:right">
-                 <div class="game-meta">Web · Mobile · Desktop</div>
-               </div>
-            </div>
-            <div class="actions"><a class="btn" href="#play">Play Demo</a></div>
-          </div>
-        </div>
-
-        <div class="game-card">
-          <div class="game-thumb">
-            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
-              <defs>
-                <linearGradient id="g-yatzy" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0" stop-color="#b8ffd0" />
-                  <stop offset="1" stop-color="#5ee7df" />
-                </linearGradient>
-              </defs>
-              <rect width="72" height="72" rx="10" fill="url(#g-yatzy)" />
-               <g transform="translate(10 10)" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                 <!-- tilted die face -->
-                 <g transform="translate(8 6) rotate(-18 18 18)">
-                   <rect x="0" y="0" width="36" height="36" rx="6" fill="#fff" fill-opacity="0.06" />
-                   <!-- pips -->
-                   <circle cx="9" cy="9" r="3" fill="#fff" />
-                   <circle cx="27" cy="27" r="3" fill="#fff" />
-                   <circle cx="9" cy="27" r="3" fill="#fff" />
-                 </g>
-                 <!-- motion lines to imply throw -->
-                 <path d="M46 12c4-2 8-3 12-2" stroke-opacity="0.9" />
-                 <path d="M46 18c6-1 10-1 14 2" stroke-opacity="0.65" />
-               </g>
-            </svg>
-          </div>
-          <div style="flex:1">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div>
-                <div style="font-weight:800;color:#fff">Yatzy</div>
-                <div class="game-meta">Classic dice game — risk and reward in every roll.</div>
-              </div>
-              <div style="text-align:right">
-                <div class="game-meta">Web · Mobile · Desktop</div>
-              </div>
-            </div>
-            <div class="actions"><a class="btn" href="#contact">Play / Download</a></div>
-          </div>
-        </div>
-
-        <div class="game-card">
-          <div class="game-thumb">
-            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
-              <defs>
-                <linearGradient id="g-puzzle" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0" stop-color="#c3c0ff" />
-                  <stop offset="1" stop-color="#9bd3ff" />
-                </linearGradient>
-              </defs>
-              <rect width="72" height="72" rx="10" fill="url(#g-puzzle)" />
-              <g transform="translate(14 14)" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
-                <path d="M6 6h8v8H6zM18 6h8v8h-8zM6 18h8v8H6zM18 18h8v8h-8z" stroke="#ffffff"/>
-                <path d="M12 0v8M26 0v8M0 12h8M34 12h8" stroke-opacity="0.14" stroke="#000"/>
-              </g>
-            </svg>
-          </div>
-          <div style="flex:1">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div>
-                <div style="font-weight:800;color:#fff">Puzzle</div>
-                <div class="game-meta">Thoughtful spatial puzzles — short sessions, clever hooks.</div>
-              </div>
-              <div style="text-align:right">
-                <div class="game-meta">Web · Mobile · Desktop</div>
-              </div>
-            </div>
-            <div class="actions"><a class="btn" href="#play">Try Demo</a></div>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-top:14px;color:var(--muted);font-size:13px">See developer notes and prototypes on our <a href="https://github.com/elixir-games" style="color:var(--accent)">GitHub</a>.</div>
+      <div style="margin-top:16px;color:var(--muted);font-size:13px">See developer notes and prototypes on our <a href="https://github.com/elixir-games" style="color:var(--accent-dark);font-weight:600;display:inline-flex;align-items:center;gap:4px;vertical-align:bottom"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>GitHub</a>.</div>
     </section>
 
     <section id="careers" class="card">
       <div class="section-header">
         <h2>Careers</h2>
-        <div class="pill">We're hiring</div>
       </div>
-      <p class="desc">Join a tiny team shipping meaningful moments — we value craft, curiosity, and code that runs well.</p>
 
       <div class="section-grid" style="margin-top:12px">
         <div class="team-card">
-          <div style="font-weight:800;color:#fff">Gameplay Engineer</div>
+          <div style="font-weight:800;color:var(--text-primary)">Gameplay Engineer</div>
           <div class="game-meta">Ship tight, performant gameplay systems; comfortable with low-level optimization.</div>
           <div class="actions" style="margin-top:10px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Gameplay%20Engineer%20Application">Apply</a></div>
         </div>
         <div class="team-card">
-          <div style="font-weight:800;color:#fff">Technical Artist</div>
+          <div style="font-weight:800;color:var(--text-primary)">Technical Artist</div>
           <div class="game-meta">Polish visuals while keeping memory & draw calls lean.</div>
           <div class="actions" style="margin-top:10px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Technical%20Artist%20Application">Apply</a></div>
         </div>
         <div class="team-card">
-          <div style="font-weight:800;color:#fff">Community Manager (part-time)</div>
+          <div style="font-weight:800;color:var(--text-primary)">Community Manager (part-time)</div>
           <div class="game-meta">Grow our player base and keep devs & players connected.</div>
           <div class="actions" style="margin-top:10px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Community%20Manager%20Application">Apply</a></div>
         </div>
@@ -474,121 +505,55 @@
       <div style="margin-top:12px;color:var(--muted);font-size:13px">Hiring process: Apply → Short playbook task → Pair interview → Offer.</div>
     </section>
 
-    <section id="support" class="card">
-      <div class="section-header">
+    <section id="support" class="card" style="padding:32px">
+      <div class="section-header" style="margin-bottom:20px">
         <h2>Support</h2>
         <div class="pill">Help</div>
       </div>
-      <p class="desc">Fast help for players and partners — bugs, refunds, accessibility, and modding guidance.</p>
+      <p class="desc" style="font-size:15px;line-height:1.6;margin-bottom:24px">Fast help for players and partners — bugs, refunds, accessibility, and modding guidance.</p>
 
-      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 260px;gap:12px;align-items:start">
+      <div style="display:grid;grid-template-columns:1fr 280px;gap:32px;align-items:start">
         <div>
-          <h3 style="margin:8px 0">FAQ</h3>
-          <div style="color:var(--muted);font-size:13px">How do I improve performance? Try closing other tabs, enable hardware acceleration, or use the native build.</div>
-          <div style="color:var(--muted);font-size:13px;margin-top:8px">Controller support? Most games support touch and keyboard; controller mapping is listed per game.</div>
-          <div style="margin-top:12px"><a class="btn" href="#contact">Report a bug</a> <a class="ghost" href="#contact">Contact Support</a></div>
+          <h3 style="margin:0 0 16px 0;font-size:18px">Frequently Asked Questions</h3>
+          
+          <div style="margin-bottom:20px">
+            <div style="font-weight:700;color:var(--text-primary);font-size:14px;margin-bottom:6px">How do I improve game performance?</div>
+            <div style="color:var(--muted);font-size:14px;line-height:1.5">Try closing other browser tabs, enabling hardware acceleration in your browser settings, or download our native desktop builds for the best performance.</div>
+          </div>
+          
+          <div style="margin-bottom:24px">
+            <div style="font-weight:700;color:var(--text-primary);font-size:14px;margin-bottom:6px">Do these games support controllers?</div>
+            <div style="color:var(--muted);font-size:14px;line-height:1.5">Most of our games support intuitive touch controls and keyboard layouts. Specific controller mapping info is listed on each game's play page.</div>
+          </div>
+
+          <div style="margin-top:12px"><a class="btn" href="/contact.html">Report a bug</a> <a class="ghost" href="/contact.html">Contact Support</a></div>
         </div>
-        <div class="contact-card">
-          <div style="font-weight:700">Quick links</div>
-          <div style="margin-top:8px;color:var(--muted);font-size:13px">Discord · GitHub Issues · Modding Docs</div>
+        <div class="contact-card" style="padding:24px">
+          <div style="font-weight:800;font-size:15px;color:var(--text-primary);margin-bottom:12px">Quick Links</div>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:13px">
+            <a href="https://discord.gg/elixir-games" target="_blank" rel="noopener" style="color:var(--accent-dark);text-decoration:none;font-weight:600">Join our Discord →</a>
+            <a href="https://github.com/elixir-games" target="_blank" rel="noopener" style="color:var(--accent-dark);text-decoration:none;font-weight:600">GitHub Issues →</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="about" class="card">
-      <div class="section-header">
+    <section id="about" class="card" style="padding:32px">
+      <div class="section-header" style="margin-bottom:20px">
         <h2>About</h2>
         <div class="pill">Our Story</div>
       </div>
-      <p class="desc">Make small games that delight and scale — craft over scope, performance over bloat.</p>
-      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 240px;gap:12px;align-items:start">
-        <div>
-          <h3 style="margin-bottom:6px">Our story</h3>
-          <p style="color:var(--muted);font-size:13px">Founded in 2020 by a few ex-tooling and gameplay engineers, Elixir Games ships compact experiences and open-source prototypes. Milestones: first release (2021), open-source toolkit (2023).</p>
-          <h3 style="margin-top:12px">Values</h3>
-          <ul style="color:var(--muted);font-size:13px">
-            <li>Player-first design</li>
-            <li>Measurable performance</li>
-            <li>Open tooling</li>
-            <li>Empathy in design</li>
-          </ul>
-        </div>
-        <div>
-          <h3 style="margin-bottom:6px">Team</h3>
-          <div style="display:flex;gap:8px;flex-direction:column">
-            <div style="font-weight:700">Ava — Founder / Gameplay Engineer</div>
-            <div style="font-weight:700">Noah — Tech Lead / DevOps</div>
-            <div style="font-weight:700">Maya — Artist / UI</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="card">
-      <div class="section-header">
-        <h2>Contact</h2>
-        <div class="pill">Say Hi</div>
-      </div>
-      <p class="desc">Talk to us — feedback, press, partnership, or just say hi. We typically respond within 3–5 business days.</p>
-
-      <div class="contact-grid" style="margin-top:12px">
-        <div>
-          <form action="mailto:contact@elixirgames.io" method="post" enctype="text/plain">
-            <label>Name
-              <input name="name" type="text" placeholder="Your name" />
-            </label>
-            <label>Email
-              <input name="email" type="email" placeholder="you@domain.com" />
-            </label>
-            <label>Topic
-              <select name="topic">
-                <option>Feedback</option>
-                <option>Press</option>
-                <option>Partnership</option>
-                <option>Bug</option>
-                <option>Other</option>
-              </select>
-            </label>
-            <label>Message
-              <textarea name="message" rows="5" placeholder="Write a brief message"></textarea>
-            </label>
-            <div class="form-actions">
-              <button class="btn" type="submit">Send Message</button>
-              <button class="ghost" type="button" onclick="document.querySelector('form').reset()">Reset</button>
-              <a class="ghost" href="/privacy.html">Privacy</a>
-            </div>
-          </form>
-
-          <div style="margin-top:12px;color:var(--muted);font-size:13px">Or email us directly at <a href="mailto:contact@elixirgames.io" style="color:var(--accent)">contact@elixirgames.io</a></div>
-        </div>
-        <aside class="contact-card">
-          <div style="font-weight:700">Office</div>
-          <div style="margin-top:8px;color:var(--muted);font-size:13px">Remote-first · Open to contractors and remote hires.</div>
-          <div style="margin-top:12px;color:var(--muted);font-size:13px">Support: <a href="#contact" style="color:var(--accent)">Help Center</a> · <a href="https://github.com/elixir-games" style="color:var(--accent)">GitHub</a></div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="play" class="card">
-      <div class="section-header">
-        <h2>Play Now</h2>
-        <div class="pill">Reactor Rush</div>
-      </div>
-      <p class="desc">Jump into a short demo that shows our approach: quick to learn, fun to repeat, and well optimized for web.</p>
-      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 320px;gap:12px;align-items:start">
-        <div style="background:#020202;border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.02);min-height:220px;color:var(--muted)">[Embedded demo placeholder — replace with game's iframe or WASM build]</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="card" style="padding:12px">
-            <div style="font-weight:700">Play in browser</div>
-            <div style="color:var(--muted);font-size:13px;margin-top:6px">Recommended: modern browser with WebGL enabled.</div>
-            <div class="actions"><a class="btn" href="#" onclick="alert('Play demo placeholder')">Play</a> <a class="ghost" href="#contact">Report Issue</a></div>
-          </div>
-          <div class="card" style="padding:12px">
-            <div style="font-weight:700">Downloads</div>
-            <div style="color:var(--muted);font-size:13px;margin-top:6px">Native builds and mobile links will appear here when available.</div>
-            <div class="actions"><a class="btn" href="#" onclick="alert('Download placeholder')">Download Builds</a></div>
-          </div>
-        </div>
+      <p class="desc" style="font-size:15px;line-height:1.6;margin-bottom:24px">Make small games that delight and scale — craft over scope, performance over bloat.</p>
+      <div style="margin-top:12px">
+        <h3 style="margin:0 0 8px 0;font-size:18px">Our Story</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:24px">Founded in 2020 by a team of tooling and gameplay engineers, Elixir Games builds compact, high-performance gaming experiences and open-source developer prototypes. We believe in keeping games performant, accessible, and fun.</p>
+        <h3 style="margin:0 0 12px 0;font-size:18px">Core Values</h3>
+        <ul style="color:var(--muted);font-size:14px;line-height:1.7;margin:0;padding-left:20px;display:grid;gap:10px">
+          <li><strong>Player-First Design:</strong> We focus on immediate accessibility and deep, satisfying mechanics.</li>
+          <li><strong>Measurable Performance:</strong> Rock-solid frame rates and instant loads, optimized for any device.</li>
+          <li><strong>Open Tooling:</strong> We regularly release our underlying engines and libraries back to the community.</li>
+          <li><strong>Respectful Experiences:</strong> Zero tracking bloat, zero attention-hogging loops — just great gameplay.</li>
+        </ul>
       </div>
     </section>
 
@@ -596,7 +561,7 @@
       <div>© Elixir Games — built with care</div>
       <div style="display:flex;gap:12px">
         <a class="ghost" href="/privacy.html">Privacy</a>
-        <a class="ghost" href="#contact">Contact</a>
+        <a class="ghost" href="/contact.html">Contact</a>
       </div>
     </footer>
   </div>
