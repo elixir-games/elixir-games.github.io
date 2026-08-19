@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Yatzy - Wooden Dice Game | Elixir Games</title>
+  <meta name="description" content="Classic Yatzy on a warm wooden table. Play solo, challenge smart AI, or pass one device around for 1-4 local players.">
+  <link rel="canonical" href="https://elixirgames.io/yatzy/">
+  <meta name="theme-color" content="#2a170d">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Yatzy - Wooden Dice Game">
+  <meta property="og:description" content="Roll into a cozy wooden-table take on Yatzy with solo play, AI rivals, local multiplayer, and offline rounds.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elixirgames.io/yatzy/">
+  <meta property="og:image" content="https://elixirgames.io/yatzy/images/yatzy_ad_landscape_16to9.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Yatzy - Wooden Dice Game">
+  <meta name="twitter:description" content="Classic Yatzy with warm visuals, local pass-and-play, smart AI, and offline-ready rounds.">
+  <meta name="twitter:image" content="https://elixirgames.io/yatzy/images/yatzy_ad_landscape_16to9.jpg">
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Yatzy",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "iOS, Android",
+    "url": "https://elixirgames.io/yatzy/",
+    "image": "https://elixirgames.io/yatzy/images/yatzy_ad_square_1to1.jpg",
+    "screenshot": [
+      "https://elixirgames.io/yatzy/images/yatzy_ad_landscape_16to9.jpg",
+      "https://elixirgames.io/yatzy/images/yatzy_ad_vertical_9to16.jpg"
+    ],
+    "description": "Classic Yatzy with warm wooden visuals, smart AI opponents, offline play, and local 1-4 player pass-and-play rounds.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Elixir Games"
+    }
+  }</script>
+
+  <style>
+    :root {
+      --bg: #1a100a;
+      --bg-soft: #24140d;
+      --panel: rgba(42, 24, 14, 0.82);
+      --panel-strong: rgba(56, 32, 18, 0.94);
+      --gold: #f4c67b;
+      --gold-strong: #ffdfa7;
+      --gold-soft: rgba(244, 198, 123, 0.15);
+      --cream: #fff5e6;
+      --muted: #d8b996;
+      --line: rgba(255, 221, 167, 0.16);
+      --shadow: rgba(0, 0, 0, 0.35);
+      --shadow-strong: rgba(0, 0, 0, 0.6);
+      --max: 1220px;
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      color: var(--cream);
+      background:
+        radial-gradient(circle at top, rgba(187, 112, 44, 0.18), transparent 34%),
+        radial-gradient(circle at 80% 22%, rgba(255, 214, 146, 0.14), transparent 18%),
+        linear-gradient(180deg, #140c08 0%, #22130c 42%, #100906 100%);
+      font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.02), transparent 48%),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 233, 196, 0.015) 0,
+          rgba(255, 233, 196, 0.015) 1px,
+          transparent 1px,
+          transparent 78px
+        );
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: inherit; }
+
+    .page-shell {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 120px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 22px;
+      margin-top: 8px;
+      background: rgba(37, 22, 13, 0.66);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      position: sticky;
+      top: 16px;
+      z-index: 20;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+      flex: 0 0 auto;
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-kicker,
+    .eyebrow,
+    .panel-label,
+    .proof-overline,
+    .gallery-tag {
+      display: inline-block;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .brand-title {
+      display: block;
+      font-family: "Cinzel", "Times New Roman", serif;
+      font-size: 24px;
+      letter-spacing: 0.04em;
+      color: var(--gold-strong);
+      margin-top: 2px;
+    }
+
+    .home-link,
+    .ghost-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 243, 224, 0.05);
+      text-decoration: none;
+      color: var(--cream);
+      font-weight: 700;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .home-link:hover,
+    .ghost-link:hover,
+    .store-pill:hover,
+    .store-badge:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 223, 167, 0.42);
+      background: rgba(255, 243, 224, 0.1);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+      gap: 34px;
+      align-items: center;
+      padding: 52px 0 36px;
+    }
+
+    .hero-copy {
+      padding: 42px;
+      background:
+        linear-gradient(155deg, rgba(80, 47, 26, 0.95), rgba(37, 21, 13, 0.96)),
+        radial-gradient(circle at top right, rgba(255, 219, 156, 0.18), transparent 32%);
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -100px auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 213, 147, 0.28), transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 223, 167, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 223, 167, 0.08);
+      margin-bottom: 18px;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      font-family: "Cinzel", "Times New Roman", serif;
+      line-height: 0.96;
+      color: var(--gold-strong);
+      text-wrap: balance;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.6rem);
+      margin-bottom: 20px;
+      max-width: 12ch;
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      margin-bottom: 14px;
+    }
+
+    .lede,
+    .section-copy,
+    .cta-panel p,
+    .feature-card p,
+    .detail-item p,
+    figcaption p,
+    .proof-card li,
+    .install-dock-copy,
+    footer p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 28px 0 18px;
+    }
+
+    .store-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 223, 167, 0.18);
+      background: rgba(255, 245, 230, 0.06);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .store-badge img {
+      height: 52px;
+      width: auto;
+    }
+
+    .micro-copy {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+      color: var(--gold-strong);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .micro-copy span {
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255, 223, 167, 0.08);
+      border: 1px solid rgba(255, 223, 167, 0.14);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card,
+    .feature-card,
+    .detail-item,
+    .gallery-card,
+    .proof-card,
+    .board-card,
+    .cta-panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    .stat-card {
+      padding: 18px 16px;
+      text-align: center;
+      background: rgba(255, 245, 230, 0.05);
+    }
+
+    .stat-value {
+      display: block;
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      font-weight: 800;
+      color: var(--gold-strong);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-media {
+      min-width: 0;
+    }
+
+    .hero-stage {
+      display: grid;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .shot {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 223, 167, 0.22);
+      box-shadow: 0 28px 60px var(--shadow-strong);
+      background: var(--panel-strong);
+    }
+
+    .shot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 38%, rgba(0, 0, 0, 0.18));
+      pointer-events: none;
+    }
+
+    .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .shot-landscape {
+      min-height: 340px;
+    }
+
+    .shot-square {
+      aspect-ratio: 1 / 1;
+      align-self: start;
+      animation: floatSmall 7s ease-in-out infinite;
+    }
+
+    .shot-vertical {
+      align-self: stretch;
+      min-height: 520px;
+      transform: translateY(-46px);
+      animation: floatTall 9s ease-in-out infinite;
+    }
+
+    .proof-card {
+      padding: 22px;
+      background: rgba(50, 30, 19, 0.95);
+    }
+
+    .proof-overline {
+      margin-bottom: 12px;
+    }
+
+    .proof-card ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .feature-grid,
+    .details,
+    .gallery {
+      margin-top: 26px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .compact-copy {
+      max-width: 64ch;
+    }
+
+    .feature-card {
+      padding: 28px;
+      background: rgba(53, 31, 18, 0.78);
+    }
+
+    .feature-card h3,
+    .board-card h3,
+    figcaption strong {
+      margin: 0 0 10px;
+      color: var(--gold-strong);
+      font-size: 22px;
+      font-family: "Cinzel", "Times New Roman", serif;
+      line-height: 1.1;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 26px;
+      align-items: start;
+      padding-top: 28px;
+    }
+
+    .details-copy {
+      padding: 14px 4px 0;
+    }
+
+    .section-copy {
+      max-width: 62ch;
+      margin-bottom: 24px;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .detail-item {
+      padding: 24px;
+      background: rgba(255, 245, 230, 0.05);
+    }
+
+    .detail-item strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--gold-strong);
+      font-size: 18px;
+    }
+
+    .board-card {
+      padding: 30px;
+      background:
+        linear-gradient(180deg, rgba(88, 54, 29, 0.96), rgba(44, 26, 17, 0.96)),
+        radial-gradient(circle at top, rgba(255, 223, 167, 0.14), transparent 34%);
+      position: sticky;
+      top: 108px;
+    }
+
+    .board-card h3 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .board-grid div {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 248, 236, 0.07);
+      border: 1px solid rgba(255, 223, 167, 0.12);
+      color: var(--cream);
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .gallery-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 48px;
+      margin-bottom: 18px;
+    }
+
+    .gallery-header p {
+      max-width: 54ch;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .gallery-stack {
+      display: grid;
+      gap: 20px;
+    }
+
+    .gallery-card {
+      overflow: hidden;
+      background: rgba(50, 29, 17, 0.92);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-card figcaption {
+      padding: 22px;
+      border-top: 1px solid rgba(255, 223, 167, 0.12);
+    }
+
+    .gallery-card.landscape img {
+      aspect-ratio: 16 / 9;
+    }
+
+    .gallery-card.square img {
+      aspect-ratio: 1 / 1;
+    }
+
+    .gallery-card.vertical img {
+      aspect-ratio: 9 / 16;
+    }
+
+    .gallery-tag {
+      margin-bottom: 10px;
+    }
+
+    .cta-panel {
+      margin-top: 32px;
+      padding: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 26px;
+      background:
+        linear-gradient(135deg, rgba(87, 53, 28, 0.95), rgba(36, 21, 13, 0.96)),
+        radial-gradient(circle at top right, rgba(255, 223, 167, 0.16), transparent 30%);
+    }
+
+    .cta-panel h2 {
+      max-width: 12ch;
+    }
+
+    .cta-visual {
+      flex: 0 0 220px;
+      max-width: 220px;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .cta-content {
+      display: grid;
+      gap: 14px;
+      justify-items: start;
+    }
+
+    .cta-content .store-pill-row {
+      justify-content: flex-start;
+    }
+
+    .cta-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      flex: 0 0 auto;
+    }
+
+    .store-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .store-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--cream);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(255, 223, 167, 0.2);
+      background: rgba(255, 247, 233, 0.08);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 30px 4px 0;
+    }
+
+    .install-dock {
+      position: fixed;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px;
+      background: rgba(34, 19, 11, 0.94);
+      border: 1px solid rgba(255, 223, 167, 0.18);
+      border-radius: 22px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 30;
+    }
+
+    .install-dock-copy {
+      max-width: 24ch;
+      font-size: 14px;
+    }
+
+    .install-dock-actions {
+      display: flex;
+      gap: 10px;
+      flex: 0 0 auto;
+    }
+
+    @keyframes floatLarge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes floatTall {
+      0%, 100% { transform: translateY(-46px); }
+      50% { transform: translateY(-60px); }
+    }
+
+    @keyframes floatSmall {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-8px) rotate(1deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    @media (max-width: 1100px) {
+      .details,
+      .gallery,
+      .cta-panel {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .board-card {
+        position: static;
+      }
+
+      .cta-panel {
+        justify-items: start;
+      }
+
+      .cta-stack,
+      .store-pill-row {
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+
+      .gallery-stack {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .page-shell {
+        width: min(var(--max), calc(100% - 28px));
+        padding-bottom: 140px;
+      }
+
+      .topbar {
+        position: static;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 28px;
+      }
+
+      .hero-copy {
+        padding: 28px;
+      }
+
+      .stats,
+      .feature-grid,
+      .gallery-stack,
+      .board-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-stage {
+        grid-template-columns: 1fr;
+      }
+
+      .shot-landscape,
+      .shot-vertical,
+      .shot-square,
+      .proof-card {
+        grid-column: auto;
+        min-height: auto;
+        transform: none;
+        margin-top: 0;
+      }
+
+      .shot-vertical img {
+        aspect-ratio: 9 / 16;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-shell {
+        width: calc(100% - 20px);
+        padding-top: 10px;
+      }
+
+      .topbar,
+      .hero-copy,
+      .feature-card,
+      .detail-item,
+      .board-card,
+      .gallery-card,
+      .cta-panel {
+        border-radius: 20px;
+      }
+
+      .topbar,
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .home-link,
+      .ghost-link,
+      .store-pill {
+        width: 100%;
+      }
+
+      .cta-row {
+        gap: 10px;
+      }
+
+      .store-badge {
+        width: 100%;
+      }
+
+      .store-badge img {
+        height: 48px;
+      }
+
+      .stats,
+      .feature-grid,
+      .gallery-stack,
+      .board-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-header {
+        padding-top: 36px;
+      }
+
+      .cta-panel {
+        padding: 26px 20px;
+      }
+
+      .install-dock {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .install-dock-copy {
+        max-width: none;
+      }
+
+      .install-dock-actions {
+        width: 100%;
+      }
+
+      .install-dock-actions .store-pill {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/">
+        <img src="/images/yatzy.png" alt="Yatzy app icon">
+        <div class="brand-copy">
+          <span class="brand-kicker">Elixir Games</span>
+          <strong class="brand-title">Yatzy</strong>
+        </div>
+      </a>
+      <a class="home-link" href="/">Back to all games</a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <span class="eyebrow">Classic wooden dice strategy</span>
+          <h1 id="hero-title">Yatzy</h1>
+          <p class="lede">Play solo, face smart AI, or share one device with up to four local players. Three rolls, real score-sheet decisions, and offline play from the first turn.</p>
+
+          <div class="cta-row">
+            <a class="store-badge" href="https://apps.apple.com/pl/app/yatzy-2-0/id6758081832" target="_blank" rel="noopener" aria-label="Download Yatzy on the App Store">
+              <img src="/images/app_store.svg" alt="Download on the App Store">
+            </a>
+            <a class="store-badge" href="https://play.google.com/store/apps/details?id=io.elixirgames.yatzy" target="_blank" rel="noopener" aria-label="Get Yatzy on Google Play">
+              <img src="/images/google_play.svg" alt="Get it on Google Play">
+            </a>
+          </div>
+
+          <div class="micro-copy" aria-label="Yatzy highlights">
+            <span>3 rolls per turn</span>
+            <span>13 scoring categories</span>
+            <span>Offline ready</span>
+          </div>
+
+          <div class="stats">
+            <article class="stat-card">
+              <span class="stat-value">1-4</span>
+              <span class="stat-label">local players</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value">AI</span>
+              <span class="stat-label">rivals on demand</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value">50</span>
+              <span class="stat-label">point Yatzy chase</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value">0</span>
+              <span class="stat-label">wifi required</span>
+            </article>
+          </div>
+
+          <div class="cta-row">
+            <a class="ghost-link" href="/">See all Elixir Games</a>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <div class="hero-stage">
+            <figure class="shot shot-landscape">
+              <img src="/yatzy/images/yatzy_ad_landscape_16to9.jpg" alt="Yatzy wooden dice and score pad on a warm tabletop scene">
+            </figure>
+            <aside class="proof-card">
+              <span class="proof-overline">Why players stay</span>
+              <ul>
+                <li>Lock dice between rolls and shape each turn your way.</li>
+                <li>Push for safe points or gamble on a big Yatzy finish.</li>
+                <li>Enjoy a cleaner, calmer tabletop feel on mobile.</li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Yatzy by Elixir Games. Classic dice strategy, refined for mobile.</p>
+      <a class="ghost-link" href="/privacy.html">Privacy</a>
+    </footer>
+  </div>
+
+</body>
+</html>
