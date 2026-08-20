@@ -13,12 +13,12 @@
   <meta property="og:description" content="Stack smart, rescue awkward boards, and enjoy a puzzle flow that rewards clean shape reading.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://elixirgames.io/blocks-landing/">
-  <meta property="og:image" content="https://elixirgames.io/images/blocks.png">
+  <meta property="og:image" content="https://elixirgames.io/blocks-landing/images/ad_square_1x1.jpg">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Blocks - Falling Logic Puzzle">
   <meta name="twitter:description" content="A compact puzzle challenge about stacking well, recovering fast, and keeping the board under control.">
-  <meta name="twitter:image" content="https://elixirgames.io/images/blocks.png">
+  <meta name="twitter:image" content="https://elixirgames.io/blocks-landing/images/ad_square_1x1.jpg">
 
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -45,6 +45,51 @@
       --muted: #b9cfdd;
       --line: rgba(216, 255, 245, 0.16);
     }
+
+    .blocks-hero-visual {
+      min-height: auto;
+      align-content: start;
+      justify-items: center;
+    }
+
+    .blocks-hero-shot {
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.28);
+      background: rgba(255, 255, 255, 0.05);
+      width: min(100%, 520px);
+    }
+
+    .blocks-hero-shot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 30%, rgba(0, 0, 0, 0.18));
+      pointer-events: none;
+    }
+
+    .blocks-hero-shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 1 / 1;
+      object-position: center;
+    }
+
+    .blocks-stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 640px) {
+      .blocks-stats {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 
   <script type="application/ld+json">{
@@ -54,7 +99,8 @@
     "applicationCategory": "GameApplication",
     "operatingSystem": "iOS, Android",
     "url": "https://elixirgames.io/blocks-landing/",
-    "image": "https://elixirgames.io/images/blocks.png",
+    "image": "https://elixirgames.io/blocks-landing/images/ad_square_1x1.jpg",
+    "screenshot": "https://elixirgames.io/blocks-landing/images/ad_square_1x1.jpg",
     "description": "A falling-block puzzle with physics flavor, compact retries, and satisfying board recovery.",
     "offers": {
       "@type": "Offer",
@@ -102,7 +148,7 @@
             <span>clean recovery</span>
           </div>
 
-          <div class="stats">
+          <div class="stats blocks-stats">
             <article class="stat-card">
               <span class="stat-value">Fluid</span>
               <span class="stat-label">stack rhythm</span>
@@ -126,25 +172,10 @@
           </div>
         </div>
 
-        <div class="hero-visual">
-          <div class="orb">
-            <img src="/images/blocks.png" alt="Blocks icon artwork">
-          </div>
-
-          <div class="visual-meter" aria-label="Blocks highlights">
-            <article class="meter-card">
-              <strong>Read fast</strong>
-              <span>See the stable landing spot early.</span>
-            </article>
-            <article class="meter-card">
-              <strong>Recover</strong>
-              <span>Turn awkward stacks back into usable space.</span>
-            </article>
-            <article class="meter-card">
-              <strong>Extend</strong>
-              <span>Keep one clean lane open for the next shape.</span>
-            </article>
-          </div>
+        <div class="hero-visual blocks-hero-visual">
+          <figure class="blocks-hero-shot">
+            <img src="/blocks-landing/images/ad_square_1x1.jpg" alt="Blocks square promotional artwork showing the wooden board and a line-clearing explosion">
+          </figure>
         </div>
       </section>
     </main>
