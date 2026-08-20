@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ships - Grid Tactics at Sea | Elixir Games</title>
+  <meta name="description" content="A clean battleship-style duel about hidden setups, careful scouting, and landing the right strike at the right time.">
+  <link rel="canonical" href="https://elixirgames.io/ships-landing/">
+  <meta name="theme-color" content="#081722">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Ships - Grid Tactics at Sea">
+  <meta property="og:description" content="Place your fleet, read the grid, and turn small clues into confident strikes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elixirgames.io/ships-landing/">
+  <meta property="og:image" content="https://elixirgames.io/images/ships.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ships - Grid Tactics at Sea">
+  <meta name="twitter:description" content="A focused fleet duel about hidden information, pattern reads, and the thrill of a perfect hit.">
+  <meta name="twitter:image" content="https://elixirgames.io/images/ships.png">
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/game-landing.css">
+
+  <style>
+    :root {
+      --bg: #07141d;
+      --bg-soft: #0d2230;
+      --panel: rgba(13, 29, 40, 0.78);
+      --panel-strong: rgba(18, 39, 54, 0.95);
+      --accent: #6fd9ff;
+      --accent-strong: #d9f5ff;
+      --accent-soft: rgba(111, 217, 255, 0.18);
+      --accent-glow: rgba(111, 217, 255, 0.22);
+      --text: #f1fbff;
+      --muted: #b9d2de;
+      --line: rgba(217, 245, 255, 0.16);
+    }
+  </style>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Ships",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "iOS, Android",
+    "url": "https://elixirgames.io/ships-landing/",
+    "image": "https://elixirgames.io/images/ships.png",
+    "description": "A clean battleship-style duel about hidden setups, careful scouting, and landing the right strike at the right time.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Elixir Games"
+    }
+  }</script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/">
+        <img src="/images/ships.png" alt="Ships app icon">
+        <div class="brand-copy">
+          <span class="brand-kicker">Elixir Games</span>
+          <strong class="brand-title">Ships</strong>
+        </div>
+      </a>
+      <a class="home-link" href="/">Back to all games</a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <span class="eyebrow">Hidden fleets, cleaner reads</span>
+          <h1 id="hero-title">Ships</h1>
+          <p class="lede">Place your fleet, read the grid, and turn scattered clues into high-confidence strikes. Ships keeps the classic hunt-and-destroy loop crisp, tense, and satisfying on mobile.</p>
+
+          <div class="cta-row">
+            <a class="store-badge" href="https://apps.apple.com/pl/app/ships-2-0/id6758081929" target="_blank" rel="noopener" aria-label="Download Ships on the App Store">
+              <img src="/images/app_store.svg" alt="Download on the App Store">
+            </a>
+            <a class="store-badge" href="https://play.google.com/store/apps/details?id=io.elixirgames.battleships" target="_blank" rel="noopener" aria-label="Get Ships on Google Play">
+              <img src="/images/google_play.svg" alt="Get it on Google Play">
+            </a>
+          </div>
+
+          <div class="micro-copy" aria-label="Ships highlights">
+            <span>hidden fleets</span>
+            <span>grid reads</span>
+            <span>measured strikes</span>
+          </div>
+
+          <div class="stats">
+            <article class="stat-card">
+              <span class="stat-value">2</span>
+              <span class="stat-label">fleets</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value">Cold</span>
+              <span class="stat-label">pattern reads</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value">Tense</span>
+              <span class="stat-label">reveals</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value">Clean</span>
+              <span class="stat-label">turn logic</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="orb">
+            <img src="/images/ships.png" alt="Ships icon artwork">
+          </div>
+
+          <div class="visual-meter" aria-label="Ships flow">
+            <article class="meter-card">
+              <strong>Setup</strong>
+              <span>Fleet placement decides how readable your board feels when the first few probes begin.</span>
+            </article>
+            <article class="meter-card">
+              <strong>Search</strong>
+              <span>Early shots are about gathering information without wasting tempo on random guesses.</span>
+            </article>
+            <article class="meter-card">
+              <strong>Confirm</strong>
+              <span>Once a pattern appears, the best follow-up turns uncertainty into a controlled finish.</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Why it lands</span>
+            <h2>Hidden information, visible tension</h2>
+          </div>
+          <p class="section-copy">Ships stays compelling because each guess carries meaning. Even misses help narrow the map, and good reads make every reveal more satisfying.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Set a smarter spread</h3>
+            <p>Fleet placement is your first strategic decision, and it shapes how much free information the other side can collect.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Read patterns fast</h3>
+            <p>Success comes from turning incomplete information into the next best target, not just hoping the grid gives you a gift.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Finish clean</h3>
+            <p>Once you find a ship, discipline matters. The best endgames waste very few moves.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section detail-layout">
+        <div>
+          <span class="section-kicker">Command decisions</span>
+          <h2>Every shot should teach you something</h2>
+          <p class="section-copy">Ships feels best when the board becomes a logic problem rather than a lottery. Good turns reduce the number of believable enemy layouts.</p>
+
+          <div class="detail-list">
+            <article class="detail-item">
+              <strong>Opening scans</strong>
+              <p>Early fire patterns should gather clean information across different parts of the board instead of tunneling too soon.</p>
+            </article>
+            <article class="detail-item">
+              <strong>Follow-up logic</strong>
+              <p>After contact, the challenge shifts to reading orientation, extension, and the most efficient way to confirm it.</p>
+            </article>
+            <article class="detail-item">
+              <strong>Closing discipline</strong>
+              <p>Late game pressure comes from knowing when to finish a known threat and when to keep the rest of the map in view.</p>
+            </article>
+          </div>
+        </div>
+
+        <aside class="board-card">
+          <span class="section-kicker">Strategy board</span>
+          <h3>What good captains do</h3>
+          <p>Strong play in Ships comes from treating each hit or miss as part of a narrowing search tree.</p>
+
+          <div class="board-grid">
+            <div>Spread your information so the first turns reduce more than one possible layout.</div>
+            <div>Avoid duplicate guess patterns that tell you little even when they miss.</div>
+            <div>Use each hit to test orientation before committing too much follow-up fire.</div>
+            <div>Finish discovered ships efficiently so the rest of the grid stays readable.</div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Match texture</span>
+            <h2>Quiet openings, sharp reveals</h2>
+          </div>
+          <p class="section-copy">Ships moves from deliberate probing to decisive finishing turns in a way that makes each confirmed read feel earned.</p>
+        </div>
+
+        <div class="gallery">
+          <article class="gallery-card">
+            <div>
+              <span class="gallery-tag">Silent setup</span>
+              <strong>Hide your intent well</strong>
+              <p>Placement matters because a board that looks ordinary can still be hard to solve efficiently.</p>
+            </div>
+            <div class="gallery-thumb">
+              <img src="/images/ships.png" alt="Ships icon detail">
+            </div>
+          </article>
+          <article class="gallery-card">
+            <div>
+              <span class="gallery-tag">First contact</span>
+              <strong>Turn one hit into a plan</strong>
+              <p>The strongest follow-up is usually the one that confirms the most while risking the least.</p>
+            </div>
+            <div class="gallery-thumb">
+              <img src="/images/ships.png" alt="Ships icon detail">
+            </div>
+          </article>
+          <article class="gallery-card">
+            <div>
+              <span class="gallery-tag">Endgame lock</span>
+              <strong>Close the map down</strong>
+              <p>Once the grid narrows, every accurate shot feels like a conclusion rather than a guess.</p>
+            </div>
+            <div class="gallery-thumb">
+              <img src="/images/ships.png" alt="Ships icon detail">
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="cta-panel">
+        <div>
+          <span class="section-kicker">Play anywhere</span>
+          <h2>Bring a fleet duel with you</h2>
+          <p>Open Ships whenever you want a crisp grid battle built on hidden setups, calm reads, and well-earned hits.</p>
+        </div>
+
+        <div class="cta-stack">
+          <div class="cta-visual">
+            <img src="/images/ships.png" alt="Ships app icon">
+          </div>
+          <div class="store-pill-row">
+            <a class="store-pill" href="https://apps.apple.com/pl/app/ships-2-0/id6758081929" target="_blank" rel="noopener">App Store</a>
+            <a class="store-pill" href="https://play.google.com/store/apps/details?id=io.elixirgames.battleships" target="_blank" rel="noopener">Google Play</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Ships by Elixir Games. Read the grid, then strike with confidence.</p>
+      <a class="ghost-link" href="/privacy.html">Privacy</a>
+    </footer>
+  </div>
+</body>
+</html>

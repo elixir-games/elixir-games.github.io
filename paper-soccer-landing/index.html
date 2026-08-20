@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Paper Soccer - Notebook Pitch Tactics | Elixir Games</title>
+  <meta name="description" content="Turn-based paper pitch strategy built around bank shots, drawn routes, and clever traps in tight spaces.">
+  <link rel="canonical" href="https://elixirgames.io/paper-soccer-landing/">
+  <meta name="theme-color" content="#122018">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Paper Soccer - Notebook Pitch Tactics">
+  <meta property="og:description" content="Draw attacks across a paper pitch, use the walls, and win with sharper routes and smarter traps.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elixirgames.io/paper-soccer-landing/">
+  <meta property="og:image" content="https://elixirgames.io/images/paper_soccer.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Paper Soccer - Notebook Pitch Tactics">
+  <meta name="twitter:description" content="A turn-based soccer duel where simple lines become ricochets, traps, and sudden scoring lanes.">
+  <meta name="twitter:image" content="https://elixirgames.io/images/paper_soccer.png">
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/game-landing.css">
+
+  <style>
+    :root {
+      --bg: #101a14;
+      --bg-soft: #16251c;
+      --panel: rgba(23, 36, 28, 0.78);
+      --panel-strong: rgba(31, 48, 38, 0.95);
+      --accent: #9ee46f;
+      --accent-strong: #ebffd2;
+      --accent-soft: rgba(158, 228, 111, 0.18);
+      --accent-glow: rgba(158, 228, 111, 0.22);
+      --text: #f8fff2;
+      --muted: #c0d8bd;
+      --line: rgba(235, 255, 210, 0.16);
+    }
+  </style>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Paper Soccer",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "iOS, Android",
+    "url": "https://elixirgames.io/paper-soccer-landing/",
+    "image": "https://elixirgames.io/images/paper_soccer.png",
+    "description": "Turn-based paper pitch strategy built around bank shots, drawn routes, and tight tactical duels.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Elixir Games"
+    }
+  }</script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/">
+        <img src="/images/paper_soccer.png" alt="Paper Soccer app icon">
+        <div class="brand-copy">
+          <span class="brand-kicker">Elixir Games</span>
+          <strong class="brand-title">Paper Soccer</strong>
+        </div>
+      </a>
+      <a class="home-link" href="/">Back to all games</a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <span class="eyebrow">Notebook football with sharp angles</span>
+          <h1 id="hero-title">Paper Soccer</h1>
+          <p class="lede">Draw attacks across a paper pitch, bank the ball off the walls, and squeeze rivals into awkward corners. Paper Soccer turns simple lines into feints, traps, and sudden scoring routes.</p>
+
+          <div class="cta-row">
+            <a class="store-badge" href="https://apps.apple.com/pl/app/paper-soccer-2-0/id6758081931" target="_blank" rel="noopener" aria-label="Download Paper Soccer on the App Store">
+              <img src="/images/app_store.svg" alt="Download on the App Store">
+            </a>
+            <a class="store-badge" href="https://play.google.com/store/apps/details?id=io.elixirgames.paper_soccer" target="_blank" rel="noopener" aria-label="Get Paper Soccer on Google Play">
+              <img src="/images/google_play.svg" alt="Get it on Google Play">
+            </a>
+          </div>
+
+          <div class="micro-copy" aria-label="Paper Soccer highlights">
+            <span>turn-based play</span>
+            <span>bank shots</span>
+            <span>drawn paths</span>
+          </div>
+
+          <div class="stats">
+            <article class="stat-card">
+              <span class="stat-value">2</span>
+              <span class="stat-label">players</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value">Wall</span>
+              <span class="stat-label">ricochets</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value">Sharp</span>
+              <span class="stat-label">routefinding</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value">Tight</span>
+              <span class="stat-label">endgames</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="orb">
+            <img src="/images/paper_soccer.png" alt="Paper Soccer icon artwork">
+          </div>
+
+          <div class="visual-meter" aria-label="Paper Soccer flow">
+            <article class="meter-card">
+              <strong>Build-up</strong>
+              <span>Each short route matters because the next angle is often more dangerous than the current one.</span>
+            </article>
+            <article class="meter-card">
+              <strong>Pressure</strong>
+              <span>Good defense narrows the pitch. Good offense makes those narrow lanes feel usable anyway.</span>
+            </article>
+            <article class="meter-card">
+              <strong>Finish</strong>
+              <span>Goals often come from reading a ricochet one turn earlier than the other side expects.</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Why it lands</span>
+            <h2>Simple lines become real tactics</h2>
+          </div>
+          <p class="section-copy">Paper Soccer is compelling because every move is visible and readable, yet the pitch still creates surprise through rebounds, pressure, and spatial traps.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Plan the angle</h3>
+            <p>The board rewards players who can see a strong route before it fully opens up.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Turn defense into attack</h3>
+            <p>A careful block can become the first step of your own scoring pattern on the very next turn.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Shrink the pitch</h3>
+            <p>As the space gets crowded, the match becomes more tactical and every line carries more weight.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section detail-layout">
+        <div>
+          <span class="section-kicker">Pitch control</span>
+          <h2>Routes, rebounds, and forced spaces</h2>
+          <p class="section-copy">Paper Soccer works best when you treat the pitch like a living puzzle. Open routes, blocked edges, and rebound angles all keep changing the next best move.</p>
+
+          <div class="detail-list">
+            <article class="detail-item">
+              <strong>Route memory</strong>
+              <p>Remembering how the board has already been drawn helps you spot where fresh attacking angles still exist.</p>
+            </article>
+            <article class="detail-item">
+              <strong>Wall play</strong>
+              <p>The pitch edge is not just a barrier. Used well, it becomes part of your attack pattern.</p>
+            </article>
+            <article class="detail-item">
+              <strong>Goal pressure</strong>
+              <p>Near the box, even one extra line can remove safe exits and force a rushed reply.</p>
+            </article>
+          </div>
+        </div>
+
+        <aside class="board-card">
+          <span class="section-kicker">Strategy board</span>
+          <h3>What wins matches</h3>
+          <p>The strongest turns in Paper Soccer do two things at once: improve your route and reduce the other player's comfortable answers.</p>
+
+          <div class="board-grid">
+            <div>Leave escape lines so your attacks do not trap you first.</div>
+            <div>Use rebounds when straight paths look too obvious or too crowded.</div>
+            <div>Protect central lanes that can pivot into more than one attack.</div>
+            <div>Spot the forced line before the goal square comes into view.</div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Match texture</span>
+            <h2>Notebook simplicity, late-game tension</h2>
+          </div>
+          <p class="section-copy">The pitch starts open and expressive, then gradually becomes a dense tactical map full of forced choices.</p>
+        </div>
+
+        <div class="gallery">
+          <article class="gallery-card">
+            <div>
+              <span class="gallery-tag">Opening lanes</span>
+              <strong>Start with space</strong>
+              <p>Early freedom lets you shape the kind of attack you want instead of reacting immediately.</p>
+            </div>
+            <div class="gallery-thumb">
+              <img src="/images/paper_soccer.png" alt="Paper Soccer icon detail">
+            </div>
+          </article>
+          <article class="gallery-card">
+            <div>
+              <span class="gallery-tag">Ricochet threats</span>
+              <strong>Use the wall well</strong>
+              <p>The rebound route is often the move that makes a defended goal suddenly feel vulnerable.</p>
+            </div>
+            <div class="gallery-thumb">
+              <img src="/images/paper_soccer.png" alt="Paper Soccer icon detail">
+            </div>
+          </article>
+          <article class="gallery-card">
+            <div>
+              <span class="gallery-tag">Boxed-in defense</span>
+              <strong>Force the last mistake</strong>
+              <p>Late turns are about leaving just enough space for the opponent to choose the wrong exit.</p>
+            </div>
+            <div class="gallery-thumb">
+              <img src="/images/paper_soccer.png" alt="Paper Soccer icon detail">
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="cta-panel">
+        <div>
+          <span class="section-kicker">Play anywhere</span>
+          <h2>Keep a tactical pitch in your pocket</h2>
+          <p>Paper Soccer is ready whenever you want turn-based tension, sharp angles, and smart little victories.</p>
+        </div>
+
+        <div class="cta-stack">
+          <div class="cta-visual">
+            <img src="/images/paper_soccer.png" alt="Paper Soccer app icon">
+          </div>
+          <div class="store-pill-row">
+            <a class="store-pill" href="https://apps.apple.com/pl/app/paper-soccer-2-0/id6758081931" target="_blank" rel="noopener">App Store</a>
+            <a class="store-pill" href="https://play.google.com/store/apps/details?id=io.elixirgames.paper_soccer" target="_blank" rel="noopener">Google Play</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Paper Soccer by Elixir Games. Turn lines and rebounds into pressure.</p>
+      <a class="ghost-link" href="/privacy.html">Privacy</a>
+    </footer>
+  </div>
+</body>
+</html>
