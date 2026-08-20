@@ -13,12 +13,12 @@
   <meta property="og:description" content="Draw attacks across a paper pitch, use the walls, and win with sharper routes and smarter traps.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://elixirgames.io/paper-soccer-landing/">
-  <meta property="og:image" content="https://elixirgames.io/paper-soccer-landing/images/paper_soccer_candidate_feature.png">
+  <meta property="og:image" content="https://elixirgames.io/paper-soccer-landing/images/icon_512.png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Paper Soccer - Notebook Pitch Tactics">
   <meta name="twitter:description" content="A turn-based soccer duel where simple lines become ricochets, traps, and sudden scoring lanes.">
-  <meta name="twitter:image" content="https://elixirgames.io/paper-soccer-landing/images/paper_soccer_candidate_feature.png">
+  <meta name="twitter:image" content="https://elixirgames.io/paper-soccer-landing/images/icon_512.png">
 
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -54,21 +54,25 @@
 
     .paper-soccer-hero-shot {
       margin: 0;
-      width: min(100%, 520px);
+      width: min(100%, 430px);
       overflow: hidden;
       position: relative;
       z-index: 1;
-      border-radius: 24px;
+      border-radius: 32px;
       border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.28);
-      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 28px 64px rgba(0, 0, 0, 0.32);
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      padding: 18px;
     }
 
     .paper-soccer-hero-shot::after {
       content: "";
       position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 30%, rgba(0, 0, 0, 0.18));
+      inset: 18px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 36%, rgba(0, 0, 0, 0.12));
       pointer-events: none;
     }
 
@@ -76,9 +80,10 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
       aspect-ratio: 1 / 1;
+      border-radius: 22px;
     }
 
     .paper-soccer-stats {
@@ -99,8 +104,8 @@
     "applicationCategory": "GameApplication",
     "operatingSystem": "iOS, Android",
     "url": "https://elixirgames.io/paper-soccer-landing/",
-    "image": "https://elixirgames.io/paper-soccer-landing/images/paper_soccer_candidate_feature.png",
-    "screenshot": "https://elixirgames.io/paper-soccer-landing/images/paper_soccer_candidate_feature.png",
+    "image": "https://elixirgames.io/paper-soccer-landing/images/icon_512.png",
+    "screenshot": "https://elixirgames.io/paper-soccer-landing/images/icon_512.png",
     "description": "Turn-based paper pitch strategy built around bank shots, drawn routes, and tight tactical duels.",
     "offers": {
       "@type": "Offer",
@@ -174,7 +179,7 @@
 
         <div class="hero-visual paper-soccer-hero-visual">
           <figure class="paper-soccer-hero-shot">
-            <img src="/paper-soccer-landing/images/paper_soccer_candidate_feature.png" alt="Simple paper soccer field on graph paper with blue and red move paths centered on the pitch">
+            <img src="/paper-soccer-landing/images/icon_512.png" alt="Simple paper soccer field icon on a striped green pitch background">
           </figure>
         </div>
       </section>
