@@ -13,12 +13,12 @@
   <meta property="og:description" content="Line up mills, break shape at the right moment, and enjoy classic board tension in a focused mobile format.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://elixirgames.io/mills-landing/">
-  <meta property="og:image" content="https://elixirgames.io/images/mills.png">
+  <meta property="og:image" content="https://elixirgames.io/mills-landing/images/mills_ad_landscape.jpg">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mills - Timeless Board Strategy">
   <meta name="twitter:description" content="A refined Nine Men's Morris experience built around small traps, clean reads, and decisive mills.">
-  <meta name="twitter:image" content="https://elixirgames.io/images/mills.png">
+  <meta name="twitter:image" content="https://elixirgames.io/mills-landing/images/mills_ad_landscape.jpg">
 
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -45,6 +45,41 @@
       --muted: #d9c3a3;
       --line: rgba(255, 235, 191, 0.16);
     }
+
+    .mills-hero-visual {
+      min-height: auto;
+      align-content: start;
+      justify-items: center;
+    }
+
+    .mills-hero-shot {
+      margin: 0;
+      width: min(100%, 620px);
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.28);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .mills-hero-shot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 30%, rgba(0, 0, 0, 0.18));
+      pointer-events: none;
+    }
+
+    .mills-hero-shot img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      aspect-ratio: 16 / 9;
+    }
   </style>
 
   <script type="application/ld+json">{
@@ -54,7 +89,8 @@
     "applicationCategory": "GameApplication",
     "operatingSystem": "iOS, Android",
     "url": "https://elixirgames.io/mills-landing/",
-    "image": "https://elixirgames.io/images/mills.png",
+    "image": "https://elixirgames.io/mills-landing/images/mills_ad_landscape.jpg",
+    "screenshot": "https://elixirgames.io/mills-landing/images/mills_ad_landscape.jpg",
     "description": "A polished take on Nine Men's Morris with deliberate placement play, line control, and sharp two-player pressure.",
     "offers": {
       "@type": "Offer",
@@ -126,25 +162,10 @@
           </div>
         </div>
 
-        <div class="hero-visual">
-          <div class="orb">
-            <img src="/images/mills.png" alt="Mills icon artwork">
-          </div>
-
-          <div class="visual-meter" aria-label="Mills highlights">
-            <article class="meter-card">
-              <strong>Open strong</strong>
-              <span>Claim connected points early.</span>
-            </article>
-            <article class="meter-card">
-              <strong>Close mills</strong>
-              <span>Turn shape into pressure fast.</span>
-            </article>
-            <article class="meter-card">
-              <strong>Finish clean</strong>
-              <span>One accurate move can decide the board.</span>
-            </article>
-          </div>
+        <div class="hero-visual mills-hero-visual">
+          <figure class="mills-hero-shot">
+            <img src="/mills-landing/images/mills_ad_landscape.jpg" alt="Wooden Mills board on a rustic table with red and blue pieces arranged mid-match">
+          </figure>
         </div>
       </section>
     </main>
