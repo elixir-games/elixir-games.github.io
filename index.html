@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <meta name="theme-color" content="#0d1016">
+  <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="https://elixirgames.io/">
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
@@ -66,39 +66,8 @@
   </script>
   <style>
     :root{
-      --bg:#0d1016;
-      --bg-soft:#151b24;
-      --bg-deep:#05070c;
-      --card-bg:linear-gradient(155deg,rgba(26,32,45,.96),rgba(12,15,22,.96));
-      --accent:#8fd0ff;
-      --accent-strong:#d8efff;
-      --accent-soft:rgba(var(--accent-rgb),.18);
-      --accent-glow:rgba(var(--accent-rgb),.22);
-      --text:#f6fbff;
-      --muted:#b5c6d5;
-      --line:rgba(216,239,255,.16);
-      --max:1180px;
-      --radius:28px;
-      --display:"Cinzel","Times New Roman",serif;
-      --sans:"Manrope","Avenir Next","Segoe UI",sans-serif;
-      --ease:cubic-bezier(.2,.9,.3,1);
-      --accent-rgb:143,208,255;
-      --accent-text:#8fd0ff;
-      --tint:255,255,255;
-      --shadow-rgb:0,0,0;
-      --fade-rgb:13,16,22;
-      --media-bg:#0f1520;
-      --topbar-bg:rgba(15,18,25,.72);
-      --on-accent:#07131d;
-      --btn-from:#d8efff;
-      --btn-to:#8fd0ff;
-      --grid-blend:screen;
-      --glow-2:rgba(255,255,255,.08);
-    }
-
-    /* Light theme: white with the Elixir Games logo green (#8BD94F).
-       Enabled with ?theme=light (script in <head>). Dark stays the default. */
-    [data-theme="light"]{
+      /* Default theme: white with the Elixir Games logo green (#8BD94F).
+         Dark theme: add ?theme=dark to the URL (see [data-theme="dark"] below). */
       --bg:#ffffff;
       --bg-soft:#fbfef9;
       --bg-deep:#f3f9ec;
@@ -107,22 +76,54 @@
       --accent-text:#2F7A12;
       --accent-strong:#2C2A3D;
       --accent-rgb:139,217,79;
+      --accent-soft:rgba(var(--accent-rgb),.18);
+      --accent-glow:rgba(var(--accent-rgb),.10);
       --text:#2C2A3D;
       --muted:#5A5F72;
       --line:rgba(44,42,61,.12);
       --tint:44,42,61;
       --shadow-rgb:44,42,61;
       --fade-rgb:255,255,255;
+      --glow-2:rgba(139,217,79,.07);
       --media-bg:#eef5e6;
       --topbar-bg:rgba(255,255,255,.84);
       --on-accent:#2C2A3D;
       --btn-from:#BFF0A0;
       --btn-to:#8BD94F;
       --grid-blend:multiply;
-      --accent-glow:rgba(139,217,79,.10);
-      --glow-2:rgba(139,217,79,.07);
+      --color-scheme:light;
+      --max:1180px;
+      --radius:28px;
+      --display:"Cinzel","Times New Roman",serif;
+      --sans:"Manrope","Avenir Next","Segoe UI",sans-serif;
+      --ease:cubic-bezier(.2,.9,.3,1);
     }
 
+    [data-theme="dark"]{
+      --bg:#0d1016;
+      --bg-soft:#151b24;
+      --bg-deep:#05070c;
+      --card-bg:linear-gradient(155deg,rgba(26,32,45,.96),rgba(12,15,22,.96));
+      --accent:#8fd0ff;
+      --accent-text:#8fd0ff;
+      --accent-strong:#d8efff;
+      --accent-rgb:143,208,255;
+      --accent-glow:rgba(var(--accent-rgb),.22);
+      --text:#f6fbff;
+      --muted:#b5c6d5;
+      --line:rgba(216,239,255,.16);
+      --tint:255,255,255;
+      --shadow-rgb:0,0,0;
+      --fade-rgb:13,16,22;
+      --glow-2:rgba(255,255,255,.08);
+      --media-bg:#0f1520;
+      --topbar-bg:rgba(15,18,25,.72);
+      --on-accent:#07131d;
+      --btn-from:#d8efff;
+      --btn-to:#8fd0ff;
+      --grid-blend:screen;
+      --color-scheme:dark;
+    }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth;scroll-padding-top:110px;background:var(--bg-deep)}
     body{
