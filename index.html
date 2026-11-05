@@ -9,10 +9,13 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <meta name="theme-color" content="#070707">
+  <meta name="theme-color" content="#0d1016">
   <link rel="canonical" href="https://elixirgames.io/">
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Meta Pixel Code -->
   <script>
@@ -57,566 +60,732 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <style>
     :root{
-      --bg:#f8f9fa;
-      --panel:#ffffff;
-      --muted:#5f666d;
-      --accent:#8bd94f;
-      --accent-dark:#4a9e2d;
-      --text-primary:#1a1f26;
-      --glass: rgba(0,0,0,0.02);
-      --radius:12px;
-      --max:1100px;
-      --gap:24px;
-      --border: rgba(0,0,0,0.08);
-      --shadow: rgba(28,31,35,0.05);
+      --bg:#0d1016;
+      --bg-soft:#151b24;
+      --bg-deep:#05070c;
+      --card-bg:linear-gradient(155deg,rgba(26,32,45,.96),rgba(12,15,22,.96));
+      --accent:#8fd0ff;
+      --accent-strong:#d8efff;
+      --accent-soft:rgba(143,208,255,.18);
+      --accent-glow:rgba(143,208,255,.22);
+      --text:#f6fbff;
+      --muted:#b5c6d5;
+      --line:rgba(216,239,255,.16);
+      --max:1180px;
+      --radius:28px;
+      --display:"Cinzel","Times New Roman",serif;
+      --sans:"Manrope","Avenir Next","Segoe UI",sans-serif;
+      --ease:cubic-bezier(.2,.9,.3,1);
     }
+
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,#ffffff 0%, #f4f6f8 100%); color:var(--text-primary); -webkit-font-smoothing:antialiased}
-    .wrap{max-width:var(--max);margin:40px auto;padding:40px;overflow-x:hidden}
-    header{
+    html{scroll-behavior:smooth;scroll-padding-top:110px;background:var(--bg-deep)}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--text);
+      font-family:var(--sans);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      overflow-x:hidden;
+      background:
+        radial-gradient(circle at 12% 12%,var(--accent-glow),transparent 32%),
+        radial-gradient(circle at 88% 18%,rgba(255,255,255,.08),transparent 20%),
+        linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 52%,var(--bg-deep) 100%);
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(135deg,rgba(255,255,255,.03),transparent 46%),
+        repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0,rgba(255,255,255,.018) 1px,transparent 1px,transparent 76px);
+      mix-blend-mode:screen;
+    }
+    img{display:block;max-width:100%}
+    a{color:inherit}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+    h1,h2,h3{margin:0;color:var(--text);text-wrap:balance}
+    h1,h2{font-family:var(--display);color:var(--accent-strong);line-height:1.05}
+    h1{font-size:clamp(2.5rem,4.6vw,4.1rem);letter-spacing:.01em}
+    h2{font-size:clamp(2.1rem,4vw,3.2rem)}
+    h3{font-family:var(--sans);font-size:19px;font-weight:800;line-height:1.3}
+
+    .page{position:relative;z-index:1;width:min(var(--max),calc(100% - 40px));margin:0 auto;padding-bottom:24px}
+
+    /* ---------- header ---------- */
+    .topbar{
+      position:sticky;
+      top:14px;
+      z-index:50;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:20px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 16px 40px;
-      margin: -40px -40px 24px -40px;
-      border-bottom: 1px solid var(--border);
+      gap:16px;
+      margin-top:14px;
+      padding:12px 14px 12px 16px;
+      background:rgba(15,18,25,.72);
+      border:1px solid var(--line);
+      border-radius:22px;
+      box-shadow:0 18px 48px rgba(0,0,0,.25);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
     }
-    .brand{display:flex;align-items:center;gap:14px}
-    .logo{width:54px;height:54px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(139,217,79,0.08), rgba(139,217,79,0.02));border-radius:12px;border: 1px solid rgba(139,217,79,0.2);box-shadow:0 6px 18px rgba(139,217,79,0.06);cursor:pointer;}
-    .logo svg{width:36px;height:36px}
-    h1{font-size:28px;margin:0;color:var(--text-primary)}
-    h2{color:var(--text-primary)}
-    h3{color:var(--text-primary)}
-    /* navigation */
-    .nav-toggle{display:none;background:transparent;border:0;color:var(--muted);padding:8px;border-radius:8px;cursor:pointer}
-    .nav-toggle svg{display:block}
-    nav{display:flex;gap:24px;align-items:center}
-    a.nav-btn{background:transparent;color:var(--text-primary);padding:6px 0;text-decoration:none;font-weight:600;font-size:15px;border:none;transition:color .16s ease;display:inline-block}
-    a.nav-btn:hover{color:var(--accent-dark)}
-    a.btn, button.btn{background:var(--accent);color:#1c3d0b;padding:8px 18px;border-radius:999px;text-decoration:none;font-weight:600;border:1px solid rgba(139,217,79,0.3);box-shadow:0 2px 6px rgba(139,217,79,0.15);transition:all .16s}
-    a.btn:hover, button.btn:hover{background:var(--accent);opacity:0.9;box-shadow:0 6px 18px rgba(139,217,79,0.25);transform:translateY(-1px)}
-    a.ghost{color:var(--muted);background:transparent;border:1px solid var(--border);padding:8px 12px;border-radius:10px;text-decoration:none}
-    a.ghost:hover{background:rgba(0,0,0,0.02);color:var(--text-primary);border-color:var(--muted)}
+    .brand{display:inline-flex;align-items:center;gap:14px;text-decoration:none;min-width:0}
+    .brand img{width:46px;height:46px;border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.3);transition:transform .3s var(--ease)}
+    .brand:hover img{transform:translateY(-2px) rotate(-4deg)}
+    .brand-kicker{display:block;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .brand-title{display:block;margin-top:2px;font-family:var(--display);font-size:20px;letter-spacing:.04em;color:var(--accent-strong)}
+    .site-nav{display:flex;align-items:center;gap:4px}
+    .site-nav a{padding:9px 14px;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px;color:var(--muted);transition:color .2s ease,background .2s ease}
+    .site-nav a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+    .site-nav a.active{color:var(--accent-strong);background:var(--accent-soft)}
+    .nav-toggle{display:none;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer}
 
-    /* desktop -> mobile nav animation helpers */
-    nav{transition: max-height .28s cubic-bezier(.2,.9,.3,1), opacity .18s ease;}
-    nav a{transition:transform .26s cubic-bezier(.2,.9,.3,1), opacity .22s ease}
-
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:var(--gap);align-items:center;margin-top:48px}
-    .hero-left{padding:28px;background:var(--panel);border:1px solid var(--border);box-shadow:0 4px 20px var(--shadow);border-radius:var(--radius);}    
-    .kicker{display:inline-block;padding:6px 10px;background:rgba(139,217,79,0.1);color:var(--accent-dark);border-radius:999px;font-weight:700;font-size:12px}
-    .lead{font-size:44px;line-height:1.02;margin:18px 0;color:var(--text-primary)}
-    .desc{color:var(--muted);margin-bottom:20px}
-    .ctas{display:flex;gap:12px}
-    .card{background:var(--panel);padding:18px;border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 20px var(--shadow)}
-
-    .hero-right{display:flex;flex-direction:column;gap:16px}
-    .preview{height:320px;background:linear-gradient(180deg, rgba(139,217,79,0.08), rgba(0,0,0,0.02));border-radius:12px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(139,217,79,0.15)}
-    .preview .device{width:85%;height:85%;background:var(--panel);border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-primary);max-width:100%}
-    img, .preview, .card, .game-thumb, .game-thumb img{max-width:100%;height:auto}
-
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
-    /* team/job cards - visually separated */
-    .team-card{padding:16px;background:var(--panel);border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 14px var(--shadow)}
-    .team-card h3{margin:0 0 8px 0}
-    .feature{padding:16px;background:rgba(139,217,79,0.02);border-radius:10px;border:1px solid var(--border)}
-    .feature h3{margin:0 0 6px 0;color:var(--text-primary);font-size:16px}
-    .feature p{margin:0;color:var(--muted);font-size:13px}
-
-    /* games list */
-    .section-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px}
-    .game-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px;border-radius:16px;background:var(--panel);border:1px solid var(--border);box-shadow:0 4px 14px var(--shadow);box-sizing:border-box}
-    .game-thumb{width:64px;height:64px;border-radius:12px;overflow:hidden;flex:0 0 auto;border:1px solid var(--border);margin:0 auto 16px auto}
-    .game-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .game-details{display:flex;flex-direction:column;align-items:center;width:100%;flex:1}
-    .game-title{font-weight:800;color:var(--text-primary);font-size:18px}
-    .game-meta{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4;flex:1}
-    .actions{margin-top:20px;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
-    .actions a{display:inline-flex;justify-content:center;align-items:center}
-    .desktop-downloads{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);display:flex;gap:12px;align-items:center;justify-content:center;font-size:12px;color:var(--muted);width:100%}
-    .desktop-downloads span{font-weight:700;color:var(--text-primary)}
-    .download-link{color:var(--accent-dark);text-decoration:none;font-weight:600;transition:opacity .15s ease;display:inline-flex;align-items:center;gap:4px}
-    .download-link:hover{opacity:0.8;text-decoration:underline}
-
-    /* store badges */
-    .store-btn{
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.15s ease;
-      border: 1px solid var(--border);
-      background: var(--panel);
-      color: var(--text-primary);
+    /* ---------- shared bits ---------- */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:50px;
+      padding:0 24px;
+      border-radius:999px;
+      font-family:var(--sans);
+      font-size:15px;
+      font-weight:800;
+      text-decoration:none;
+      cursor:pointer;
+      transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;
     }
-    .store-btn svg{
-      width: 14px;
-      height: 14px;
-      display: block;
-    }
-    .store-btn:hover{
-      background: var(--bg);
-      border-color: var(--accent-dark);
-      color: var(--accent-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px var(--shadow);
-    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{color:#07131d;background:linear-gradient(180deg,var(--accent-strong),var(--accent));box-shadow:0 12px 28px rgba(143,208,255,.25)}
+    .btn-primary:hover{box-shadow:0 16px 36px rgba(143,208,255,.38)}
+    .btn-ghost{color:var(--text);background:rgba(255,255,255,.05);border:1px solid var(--line)}
+    .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.38)}
+    .btn-sm{min-height:40px;padding:0 18px;font-size:14px}
 
-    /* disabled state for inactive links */
-    a.disabled, button.disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      pointer-events: none;
-      text-decoration: none !important;
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--accent-strong);
+      background:var(--accent-soft);
+      border:1px solid rgba(143,208,255,.28);
     }
-    a.disabled:hover, button.disabled:hover {
-      opacity: 0.5;
-      transform: none;
-      box-shadow: none;
+    .kicker{display:inline-block;margin:0 0 12px;font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .lede{margin:0;max-width:52ch;font-size:18px;line-height:1.7;color:var(--muted)}
+
+    /* ---------- hero ---------- */
+    .hero{padding-top:56px}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:44px;align-items:center}
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--accent);
     }
+    .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+    .hero-copy h1{margin:22px 0 20px}
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 36px}
+    .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .stat{padding:16px 18px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+    .stat strong{display:block;font-family:var(--display);font-size:1.7rem;line-height:1.1;color:var(--accent-strong)}
+    .stat span{font-size:13px;color:var(--muted)}
 
-    footer{margin-top:48px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+    .hero-feature{
+      position:relative;
+      display:block;
+      min-height:520px;
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid var(--line);
+      box-shadow:0 30px 70px rgba(0,0,0,.4);
+      text-decoration:none;
+      isolation:isolate;
+    }
+    .hero-feature > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+    .hero-feature:hover > img{transform:scale(1.05)}
+    .hero-feature::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(5,7,12,0) 35%,rgba(5,7,12,.92) 100%)}
+    .hero-feature-body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:30px}
+    .hero-feature .chip{color:#fff;background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22)}
+    .feature-title{margin:14px 0 6px;font-size:clamp(2.4rem,4vw,3.2rem)}
+    .hero-feature-body p{margin:0 0 14px;font-size:16px;line-height:1.6;color:var(--muted)}
+    .feature-link{display:inline-flex;gap:6px;font-weight:800;color:var(--accent)}
 
-    /* small screens */
+    .shelf{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:44px}
+    .shelf a{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      padding:18px 10px 16px;
+      border-radius:22px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+      text-align:center;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .25s ease,border-color .25s ease,background .25s ease;
+    }
+    .shelf img{width:60px;height:60px;border-radius:18px;box-shadow:0 12px 24px rgba(0,0,0,.3)}
+    .shelf a:hover{transform:translateY(-4px);border-color:rgba(143,208,255,.4);background:rgba(143,208,255,.08)}
+
+    /* ---------- sections ---------- */
+    .section{padding-top:88px}
+    .section-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 32px;margin-bottom:32px}
+    .section-copy{margin:0;max-width:44ch;font-size:16px;line-height:1.7;color:var(--muted)}
+
+    /* ---------- games ---------- */
+    .game-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+    .game-card{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      border-radius:var(--radius);
+      background:var(--card-bg);
+      border:1px solid var(--line);
+      box-shadow:0 20px 50px rgba(0,0,0,.18);
+      transition:transform .3s var(--ease),border-color .3s ease,box-shadow .3s ease;
+    }
+    .game-card:hover{transform:translateY(-6px);border-color:rgba(143,208,255,.38);box-shadow:0 32px 64px rgba(0,0,0,.4)}
+    .game-art{position:relative;aspect-ratio:16/10}
+    .game-media{position:absolute;inset:0;overflow:hidden;background:#0f1520}
+    .game-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+    .game-media .art-bg{filter:blur(24px) saturate(1.25) brightness(.55);transform:scale(1.25)}
+    .game-media .art.contain{object-fit:contain;padding:16px}
+    .game-card:hover .game-media .art{transform:scale(1.05)}
+    .game-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,16,22,0) 60%,rgba(13,16,22,.6))}
+    .game-icon{
+      position:absolute;
+      z-index:2;
+      left:24px;
+      bottom:-30px;
+      width:60px;
+      height:60px;
+      border-radius:18px;
+      border:2px solid rgba(255,255,255,.18);
+      background:var(--bg-soft);
+      box-shadow:0 12px 26px rgba(0,0,0,.45);
+    }
+    .game-body{display:flex;flex:1;flex-direction:column;padding:44px 24px 24px}
+    .game-title{font-size:22px}
+    .game-title a{color:var(--text);text-decoration:none}
+    .game-title a::after{content:"";position:absolute;inset:0}
+    .game-meta{flex:1;margin:8px 0 0;font-size:15px;line-height:1.6;color:var(--muted)}
+    .game-foot{margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+    .avail{display:block;margin-bottom:10px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+    .store-row{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:10px}
+    .store-row a{display:inline-flex}
+    .store-row img{height:40px;width:auto}
+    .game-more{display:inline-flex;gap:6px;margin-top:18px;font-weight:800;color:var(--accent);transition:color .2s ease}
+    .game-card:hover .game-more{color:var(--accent-strong)}
+    .games-foot{margin:28px 0 0;text-align:center;font-size:14px;color:var(--muted)}
+    .gh-link{display:inline-flex;align-items:center;gap:6px;margin-left:4px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);color:var(--text);font-weight:700;text-decoration:none;vertical-align:middle;transition:background .2s ease}
+    .gh-link:hover{background:rgba(255,255,255,.08)}
+
+    /* ---------- careers ---------- */
+    .team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+    .team-card{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:14px;
+      padding:28px;
+      border-radius:var(--radius);
+      background:var(--card-bg);
+      border:1px solid var(--line);
+      box-shadow:0 20px 50px rgba(0,0,0,.18);
+    }
+    .team-card h3{font-size:21px}
+    .team-card p{flex:1;margin:0;color:var(--muted);line-height:1.65}
+    .process{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px;
+      margin:28px 0 0;
+      padding:0;
+      list-style:none;
+    }
+    .process li{padding:22px 20px;border-radius:22px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-weight:700;color:var(--text)}
+    .process li span{display:block;margin-bottom:8px;font-family:var(--display);font-size:22px;color:var(--accent)}
+
+    /* ---------- support ---------- */
+    .support-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr);gap:20px;align-items:start}
+    .faq{display:grid;gap:14px}
+    .faq-item{padding:24px 26px;border-radius:22px;background:var(--card-bg);border:1px solid var(--line)}
+    .faq-item h3{margin-bottom:8px;font-size:17px;color:var(--accent-strong)}
+    .faq-item p{margin:0;line-height:1.65;color:var(--muted)}
+    .faq .cta-row{margin:6px 0 0}
+    .link-panel{display:grid;gap:12px;padding:26px;border-radius:var(--radius);background:var(--card-bg);border:1px solid var(--line)}
+    .link-panel h3{margin-bottom:4px;font-family:var(--display);font-size:20px;color:var(--accent-strong)}
+    .link-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      font-weight:700;
+      text-decoration:none;
+      color:var(--text);
+      transition:transform .2s ease,border-color .2s ease,background .2s ease;
+    }
+    .link-row:hover{transform:translateX(3px);border-color:rgba(143,208,255,.4);background:rgba(143,208,255,.08)}
+    .link-row span:last-child{color:var(--accent)}
+
+    /* ---------- about ---------- */
+    .about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:start}
+    .about-grid .lede{margin-top:20px}
+    .story{margin:18px 0 0}
+    .values-kicker{margin-bottom:14px}
+    .values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .value{padding:24px;border-radius:22px;background:var(--card-bg);border:1px solid var(--line)}
+    .value-num{display:block;margin-bottom:10px;font-family:var(--display);font-size:14px;letter-spacing:.14em;color:var(--accent)}
+    .value h3{margin-bottom:8px;font-size:18px}
+    .value p{margin:0;font-size:15px;line-height:1.6;color:var(--muted)}
+
+    /* ---------- footer ---------- */
+    .site-footer{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      margin-top:88px;
+      padding:28px 0 40px;
+      border-top:1px solid var(--line);
+      font-size:14px;
+      color:var(--muted);
+    }
+    .footer-brand{display:flex;align-items:center;gap:12px}
+    .footer-brand img{width:32px;height:32px;border-radius:10px}
+    .footer-links{display:flex;flex-wrap:wrap;gap:8px}
+    .footer-links a{padding:8px 14px;border-radius:999px;border:1px solid var(--line);font-weight:700;text-decoration:none;color:var(--text);transition:background .2s ease}
+    .footer-links a:hover{background:rgba(255,255,255,.08)}
+
+    /* ---------- back to top ---------- */
+    .back-to-top{
+      position:fixed;
+      right:18px;
+      bottom:24px;
+      z-index:999;
+      width:46px;
+      height:46px;
+      padding:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:0;
+      border-radius:14px;
+      background:var(--accent);
+      color:#07131d;
+      box-shadow:0 12px 28px rgba(143,208,255,.3);
+      cursor:pointer;
+      opacity:0;
+      transform:translateY(8px);
+      pointer-events:none;
+      transition:opacity .2s ease,transform .2s ease;
+    }
+    .back-to-top.show{opacity:1;transform:none;pointer-events:auto}
+    .back-to-top svg{width:18px;height:18px;fill:currentColor}
+
+    /* ---------- responsive ---------- */
+    @media (max-width:1024px){
+      .game-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .shelf{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
     @media (max-width:900px){
-      html,body{overflow-x:hidden}
-      header{padding:16px 28px;margin:-28px -28px 24px -28px}
-      .hero{grid-template-columns:1fr;grid-auto-rows:auto}
-      .brand h1{font-size:20px}
-      .lead{font-size:34px}
-      .preview{height:260px}
-      .features{grid-template-columns:1fr 1fr}
-      .wrap{padding:28px}
-      .section-grid{grid-template-columns:repeat(2,1fr);gap:20px}
-      /* show hamburger, hide nav by default */
       .nav-toggle{display:inline-flex}
-
-      /* backdrop to dim content and catch clicks when nav is open */
-      .nav-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.25);backdrop-filter:blur(2px);z-index:20;opacity:0;transition:opacity .18s ease}
-      .nav-backdrop[aria-hidden="false"], .nav-backdrop[hidden="false"], .nav-backdrop.show{opacity:1}
-
-      /* nav sits above content but below backdrop's clickable layer */
-      nav{display:flex;flex-direction:column;gap:8px;margin-top:12px;max-height:0;overflow:hidden;opacity:0;width:100%;position:relative;z-index:30}
-      nav.open{max-height:400px;opacity:1}
-      nav.open a{transform:none;opacity:1}
-      nav a{transform:translateY(-6px);opacity:0}
-
-      /* when nav is open, prevent body scrolling */
-      body.nav-open{overflow:hidden}
+      .topbar{flex-wrap:wrap}
+      .site-nav{display:none;order:3;width:100%;flex-direction:column;align-items:stretch;gap:4px;margin-top:4px;padding-top:12px;border-top:1px solid var(--line)}
+      .site-nav.open{display:flex}
+      .site-nav a{padding:13px 16px;font-size:16px}
+      .hero-grid,.about-grid,.support-grid{grid-template-columns:1fr}
+      .hero-feature{min-height:440px}
+      .team-grid{grid-template-columns:1fr}
+      .process{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
     @media (max-width:640px){
-      header{padding:16px;margin:0 0 16px 0;position:static}
-      .hero{grid-template-columns:1fr;}
-      .hero-right{order:2}
-      .hero-left{order:1}
-      .lead{font-size:28px}
-      .preview{height:220px}
-      /* Make wrap full-bleed on mobile so sections use full available width */
-      .wrap{padding:0;margin:0;max-width:100%;width:100%}
-      /* Keep internal content padding so cards don't touch edges */
-      .wrap > *{padding-left:16px;padding-right:16px}
-      .features{grid-template-columns:1fr}
-      .section-grid{grid-template-columns:1fr}
-      .contact-grid{grid-template-columns:1fr}
-      /* Ensure inline grid containers collapse to single column on small screens */
-      [style*="grid-template-columns"]{grid-template-columns:1fr !important}
-      /* make sure Office aside appears below the form on mobile */
-      .contact-grid{grid-auto-flow:row}
-      .contact-grid > div:first-child{grid-column:1;grid-row:1}
-      .contact-grid > aside{grid-column:1;grid-row:2;margin-top:8px}
-
-       /* Header should span full width on mobile */
-       header{width:100%;padding-top:20px;padding-left:0;padding-right:0;box-sizing:border-box;z-index:40;position:relative}
-       header .brand, header .nav-toggle, header nav{padding-left:16px;padding-right:16px}
-
-
-       /* keep nav hidden in-flow when collapsed */
-       nav{display:none;width:100%;justify-content:flex-end;position:relative;max-height:0;overflow:hidden;opacity:0}
-
-
-      /* popup-style menu when open: smaller, centered, and elevated */
-      nav.open{position:fixed;left:50%;top:8vh;transform:translateX(-50%);width:calc(100% - 32px);max-width:720px;max-height:84vh;background:var(--panel);border:1px solid var(--border);padding:20px 18px;display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:flex-start;opacity:1;z-index:60;border-radius:12px;box-shadow:0 20px 40px var(--shadow)}
-      /* center and enlarge the section buttons */
-      nav.open a{transform:none;opacity:1;font-size:18px;padding:12px 0;text-align:center;width:100%;display:block}
-      nav a{transform:translateY(-6px);opacity:0;padding:8px 0;font-size:16px;text-align:center}
-
-      /* backdrop layering: between content and nav (nav on top) */
-      .nav-backdrop{z-index:50}
-
-      .logo{margin-right:auto}
-      footer{flex-direction:column;gap:12px;align-items:center;text-align:center}
-      /* make cards stretch full width inside wrap */
-      .card, section.card{width:100%;max-width:100%;margin:0;border-radius:10px}
-      /* allow small max-width elements to scale down on narrow screens */
-      [style*="max-width:240px"]{max-width:100% !important}
-
-      /* make Office aside (contact-card) span full width and use internal padding */
-      /* Make Office aside align with Quick Links on mobile (no full-bleed) */
-      #contact .contact-card{position:static;left:auto;transform:none;width:100%;max-width:100%;margin:0;padding:14px;border-radius:10px;box-sizing:border-box}
-      #contact .contact-card > *{width:100%;box-sizing:border-box}
-      /* iPhone specific: align Office with Quick Links (SE 375px) */
-      @media (max-width:420px){
-        #contact .contact-card{width:calc(100% - 32px);max-width:none;margin-left:16px;margin-right:16px;padding:14px;box-sizing:border-box}
-      }
+      .page{width:calc(100% - 28px)}
+      .topbar{top:10px;padding:10px 12px;border-radius:18px}
+      .brand img{width:40px;height:40px;border-radius:12px}
+      .brand-title{font-size:18px}
+      .hero{padding-top:32px}
+      .lede{font-size:16px}
+      .cta-row{margin:26px 0 30px}
+      .cta-row .btn{flex:1 1 100%}
+      .stats{gap:8px}
+      .stat{padding:14px 12px}
+      .stat strong{font-size:1.4rem}
+      .shelf{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+      .shelf img{width:52px;height:52px}
+      .game-grid{grid-template-columns:1fr}
+      .values{grid-template-columns:1fr}
+      .process{grid-template-columns:1fr 1fr}
+      .faq-item,.link-panel,.team-card{padding:22px}
+      .hero-feature{min-height:400px}
+      .hero-feature-body{padding:22px}
+      .section{padding-top:64px}
+      .site-footer{flex-direction:column;align-items:flex-start}
     }
 
-    @media (min-width:641px) and (max-width:900px){
-      /* center header content on medium screens while keeping the menu toggle accessible */
-      header{justify-content:center}
-      header .brand{margin:0}
-      .nav-toggle{position:absolute;right:16px;top:18px;z-index:70}
-      nav{position:relative}
-    }
-
-    /* small animation for liquid */
-    .liquid{animation:wave 2.6s linear infinite}
-    @keyframes wave{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
-    .logo img{transition:filter .35s, transform .35s}
-    .logo.liquid-active img{filter:url(#liquid-filter);transform:translateY(-3px) scale(1.04);box-shadow:0 10px 24px rgba(0,0,0,0.35)}
-
-    /* contact & form styles */
-    .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:12px;align-items:start}
-    .contact-card{padding:14px;border-radius:10px;background:var(--panel);border:1px solid var(--border);box-shadow:0 4px 14px var(--shadow)}
-    form{display:grid;gap:10px}
-    form label{font-size:13px;color:var(--muted);display:block}
-    form input, form select, form textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:var(--panel);color:inherit;font-size:14px;outline:none;transition:box-shadow .12s, border-color .12s}
-    form input::placeholder, form textarea::placeholder{color:var(--muted);opacity:0.6}
-    form input:focus, form select:focus, form textarea:focus{border-color:var(--accent-dark);box-shadow:0 8px 20px rgba(139,217,79,0.1);background:var(--panel)}
-
-    /* buttons (anchor and button parity) */
-    .btn:hover, button.btn:hover{box-shadow:0 10px 28px rgba(139,217,79,0.15);transform:translateY(-1px)}
-    .ghost, button.ghost{background:transparent;border:1px solid var(--border);color:var(--muted);padding:8px 12px;border-radius:10px;text-decoration:none}
-    .ghost:hover{background:rgba(0,0,0,0.02);color:var(--text-primary)}
-
-    /* form actions alignment */
-    form .form-actions{display:flex;gap:8px;align-items:center}
-
-    /* back-to-top button */
-    .back-to-top{position:fixed;right:18px;bottom:24px;width:44px;height:44px;padding:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;z-index:999;opacity:0;transform:translateY(8px);transition:opacity .18s ease, transform .18s ease;backface-visibility:hidden;will-change:opacity,transform;background:var(--accent);color:#1c3d0b;border:1px solid rgba(139,217,79,0.3);box-shadow:0 4px 12px rgba(139,217,79,0.2)}
-    .back-to-top.show{opacity:1;transform:none}
-    .back-to-top:focus{outline:2px solid var(--accent-dark);outline-offset:2px}
-    /* Ensure the SVG icon is consistent across breakpoints */
-    .back-to-top svg{width:18px;height:18px;display:block;fill:currentColor;color:inherit}
-    @media (max-width:640px){
-      .back-to-top{left:50%;right:auto;bottom:64px; /* fallback for older browsers */
-        bottom:calc(64px + constant(safe-area-inset-bottom));
-        bottom:calc(64px + env(safe-area-inset-bottom));
-        transform:translateX(-50%) translateY(8px); pointer-events:auto; -webkit-tap-highlight-color:transparent}
-      .back-to-top.show{transform:translateX(-50%) translateY(0)}
-      /* on small screens explicitly keep the same arrow icon sizing/color */
-      @media (max-width:640px){ .back-to-top svg{width:18px;height:18px;fill:currentColor} }
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{transition:none !important;animation:none !important}
     }
   </style>
 </head>
 <body>
-  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;" xmlns="http://www.w3.org/2000/svg">
-    <filter id="liquid-filter">
-      <!-- stronger turbulence for a more visible liquid effect -->
-      <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="1" seed="5" result="turb" />
-      <feDisplacementMap in="SourceGraphic" in2="turb" scale="0" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-  </svg>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo" tabindex="0" aria-label="Elixir Games logo" role="img">
-          <img src="/avatar.png" alt="Elixir Games logo" style="width:100%;height:100%;border-radius:8px;object-fit:cover;max-width:44px;max-height:44px"/>
-        </div>
-        <div>
-          <h1 style="font-weight:800">Elixir Games</h1>
-        </div>
-      </div>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="#home">
+        <img src="/avatar.png" alt="" width="46" height="46">
+        <span class="brand-copy">
+          <span class="brand-kicker">Game studio</span>
+          <span class="brand-title">Elixir Games</span>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
-      <nav id="site-nav" role="navigation">
-        <a class="nav-btn" href="#home">Home</a>
-        <a class="nav-btn" href="#games">Games</a>
-        <a class="nav-btn" href="#careers">Careers</a>
-        <a class="nav-btn" href="#support">Support</a>
-        <a class="nav-btn" href="#about">About</a>
-        <a class="nav-btn" href="/contact.html">Contact</a>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <a href="#home">Home</a>
+        <a href="#games">Games</a>
+        <a href="#careers">Careers</a>
+        <a href="#support">Support</a>
+        <a href="#about">About</a>
+        <a href="/contact.html">Contact</a>
       </nav>
-      <div id="nav-backdrop" class="nav-backdrop" hidden></div>
     </header>
 
-    <main id="home" class="hero-clean" style="text-align:center;padding:48px 20px 32px 20px;max-width:800px;margin:0 auto">
-      <h2 style="font-size:42px;font-weight:800;letter-spacing:-1px;margin-top:0;margin-bottom:12px;color:var(--text-primary)">Handcrafted games for everyone.</h2>
-      <p style="font-size:15px;color:var(--muted);line-height:1.5;margin-bottom:0">Explore our collection of polished, minimalist board and puzzle games designed for mobile and web.</p>
+    <main>
+      <section id="home" class="hero">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Indie game studio</span>
+            <h1>Handcrafted games for everyone.</h1>
+            <p class="lede">Explore our collection of polished, minimalist board and puzzle games designed for mobile and web.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#games">Explore games</a>
+              <a class="btn btn-ghost" href="#about">Our story</a>
+            </div>
+            <div class="stats">
+              <div class="stat"><strong>6</strong><span>Games</span></div>
+              <div class="stat"><strong>2020</strong><span>Founded</span></div>
+              <div class="stat"><strong>2</strong><span>Mobile stores</span></div>
+            </div>
+          </div>
+
+          <a class="hero-feature" href="/mills-landing/">
+            <img src="/mills-landing/images/mills_ad_landscape.jpg" alt="" width="1376" height="768" fetchpriority="high">
+            <div class="hero-feature-body">
+              <span class="chip">Featured game</span>
+              <h2 class="feature-title">Mills</h2>
+              <p>The traditional nine men's morris strategy board game.</p>
+              <span class="feature-link">View game <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </div>
+
+        <nav class="shelf" aria-label="Jump to a game">
+          <a href="/yatzy-landing/"><img src="/images/yatzy.png" alt="" width="60" height="60"><span>Yatzy</span></a>
+          <a href="/mills-landing/"><img src="/images/mills.png" alt="" width="60" height="60"><span>Mills</span></a>
+          <a href="/blocks-landing/"><img src="/images/blocks.png" alt="" width="60" height="60"><span>Blocks</span></a>
+          <a href="/paper-soccer-landing/"><img src="/images/paper_soccer.png" alt="" width="60" height="60"><span>Paper Soccer</span></a>
+          <a href="/ships-landing/"><img src="/images/ships.png" alt="" width="60" height="60"><span>Ships</span></a>
+          <a href="/puzzle-landing/"><img src="/images/puzzle.png" alt="" width="60" height="60"><span>Puzzle</span></a>
+        </nav>
+      </section>
+
+      <section id="games" class="section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Catalogue</span>
+            <h2>Our games</h2>
+          </div>
+          <p class="section-copy">Compact, polished games for mobile. Open a game for details and store links.</p>
+        </div>
+
+        <div class="game-grid">
+          <article class="game-card">
+            <div class="game-art">
+              <div class="game-media" aria-hidden="true">
+                <img class="art" src="/yatzy-landing/images/yatzy_ad_landscape_16to9.jpg" alt="" width="1376" height="768" loading="lazy">
+              </div>
+              <img class="game-icon" src="/images/yatzy.png" alt="" width="60" height="60" loading="lazy">
+            </div>
+            <div class="game-body">
+              <h3 class="game-title"><a href="/yatzy-landing/">Yatzy</a></h3>
+              <p class="game-meta">Classic dice game — strategy and chance in every roll.</p>
+              <div class="game-foot">
+                <span class="avail">Available on</span>
+                <div class="store-row">
+                  <a href="https://apps.apple.com/pl/app/yatzy-2-0/id6758081832" target="_blank" rel="noopener"><img src="/images/app_store.svg" alt="Download on the App Store"></a>
+                  <a href="https://play.google.com/store/apps/details?id=io.elixirgames.yatzy" target="_blank" rel="noopener"><img src="/images/google_play.svg" alt="Get it on Google Play"></a>
+                </div>
+              </div>
+              <span class="game-more">View game <span aria-hidden="true">→</span></span>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-art">
+              <div class="game-media" aria-hidden="true">
+                <img class="art" src="/mills-landing/images/mills_ad_landscape.jpg" alt="" width="1376" height="768" loading="lazy">
+              </div>
+              <img class="game-icon" src="/images/mills.png" alt="" width="60" height="60" loading="lazy">
+            </div>
+            <div class="game-body">
+              <h3 class="game-title"><a href="/mills-landing/">Mills</a></h3>
+              <p class="game-meta">The traditional nine men's morris strategy board game.</p>
+              <div class="game-foot">
+                <span class="avail">Available on</span>
+                <div class="store-row">
+                  <a href="https://apps.apple.com/pl/app/mills-2-0/id6758081595" target="_blank" rel="noopener"><img src="/images/app_store.svg" alt="Download on the App Store"></a>
+                  <a href="https://play.google.com/store/apps/details?id=io.elixirgames.mills" target="_blank" rel="noopener"><img src="/images/google_play.svg" alt="Get it on Google Play"></a>
+                </div>
+              </div>
+              <span class="game-more">View game <span aria-hidden="true">→</span></span>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-art">
+              <div class="game-media" aria-hidden="true">
+                <img class="art-bg" src="/blocks-landing/images/ad_square_1x1.jpg" alt="" loading="lazy">
+                <img class="art contain" src="/blocks-landing/images/ad_square_1x1.jpg" alt="" width="1024" height="1024" loading="lazy">
+              </div>
+              <img class="game-icon" src="/images/blocks.png" alt="" width="60" height="60" loading="lazy">
+            </div>
+            <div class="game-body">
+              <h3 class="game-title"><a href="/blocks-landing/">Blocks</a></h3>
+              <p class="game-meta">Challenging physics and logic falling block puzzle game.</p>
+              <div class="game-foot">
+                <span class="avail">Available on</span>
+                <div class="store-row">
+                  <a href="https://apps.apple.com/pl/app/blocks-2-0/id6760268812" target="_blank" rel="noopener"><img src="/images/app_store.svg" alt="Download on the App Store"></a>
+                  <a href="https://play.google.com/store/apps/details?id=io.elixirgames.blocks" target="_blank" rel="noopener"><img src="/images/google_play.svg" alt="Get it on Google Play"></a>
+                </div>
+              </div>
+              <span class="game-more">View game <span aria-hidden="true">→</span></span>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-art">
+              <div class="game-media" aria-hidden="true">
+                <img class="art-bg" src="/images/paper_soccer.png" alt="" loading="lazy">
+                <img class="art contain" src="/images/paper_soccer.png" alt="" width="1024" height="1024" loading="lazy">
+              </div>
+              <img class="game-icon" src="/images/paper_soccer.png" alt="" width="60" height="60" loading="lazy">
+            </div>
+            <div class="game-body">
+              <h3 class="game-title"><a href="/paper-soccer-landing/">Paper Soccer</a></h3>
+              <p class="game-meta">Turn-based tactical strategy simulating soccer on a paper grid.</p>
+              <div class="game-foot">
+                <span class="avail">Available on</span>
+                <div class="store-row">
+                  <a href="https://apps.apple.com/pl/app/paper-soccer-2-0/id6758081931" target="_blank" rel="noopener"><img src="/images/app_store.svg" alt="Download on the App Store"></a>
+                  <a href="https://play.google.com/store/apps/details?id=io.elixirgames.paper_soccer" target="_blank" rel="noopener"><img src="/images/google_play.svg" alt="Get it on Google Play"></a>
+                </div>
+              </div>
+              <span class="game-more">View game <span aria-hidden="true">→</span></span>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-art">
+              <div class="game-media" aria-hidden="true">
+                <img class="art-bg" src="/ships-landing/images/ships_main_cropped.png" alt="" loading="lazy">
+                <img class="art contain" src="/ships-landing/images/ships_main_cropped.png" alt="" width="520" height="430" loading="lazy">
+              </div>
+              <img class="game-icon" src="/images/ships.png" alt="" width="60" height="60" loading="lazy">
+            </div>
+            <div class="game-body">
+              <h3 class="game-title"><a href="/ships-landing/">Ships</a></h3>
+              <p class="game-meta">Battleship tactics — grid logic and strategic naval combat.</p>
+              <div class="game-foot">
+                <span class="avail">Available on</span>
+                <div class="store-row">
+                  <a href="https://apps.apple.com/pl/app/ships-2-0/id6758081929" target="_blank" rel="noopener"><img src="/images/app_store.svg" alt="Download on the App Store"></a>
+                  <a href="https://play.google.com/store/apps/details?id=io.elixirgames.battleships" target="_blank" rel="noopener"><img src="/images/google_play.svg" alt="Get it on Google Play"></a>
+                </div>
+              </div>
+              <span class="game-more">View game <span aria-hidden="true">→</span></span>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-art">
+              <div class="game-media" aria-hidden="true">
+                <img class="art-bg" src="/puzzle-landing/images/ad_square_feed.jpg" alt="" loading="lazy">
+                <img class="art contain" src="/puzzle-landing/images/ad_square_feed.jpg" alt="" width="1024" height="1024" loading="lazy">
+              </div>
+              <img class="game-icon" src="/images/puzzle.png" alt="" width="60" height="60" loading="lazy">
+            </div>
+            <div class="game-body">
+              <h3 class="game-title"><a href="/puzzle-landing/">Puzzle</a></h3>
+              <p class="game-meta">Thoughtful spatial block fit and grid board puzzle.</p>
+              <div class="game-foot">
+                <span class="avail">Available on</span>
+                <div class="store-row">
+                  <a href="https://apps.apple.com/pl/app/puzzle-2-0/id6757918654" target="_blank" rel="noopener"><img src="/images/app_store.svg" alt="Download on the App Store"></a>
+                  <a href="https://play.google.com/store/apps/details?id=io.elixirgames.puzzle" target="_blank" rel="noopener"><img src="/images/google_play.svg" alt="Get it on Google Play"></a>
+                </div>
+              </div>
+              <span class="game-more">View game <span aria-hidden="true">→</span></span>
+            </div>
+          </article>
+        </div>
+
+        <p class="games-foot">See developer notes and prototypes on our
+          <a class="gh-link" href="https://github.com/elixir-games" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>GitHub</a>.
+        </p>
+      </section>
+
+      <section id="careers" class="section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Join the team</span>
+            <h2>Careers</h2>
+          </div>
+          <p class="section-copy">Open roles at Elixir Games and how we hire.</p>
+        </div>
+
+        <div class="team-grid">
+          <article class="team-card">
+            <span class="chip">Engineering</span>
+            <h3>Gameplay Engineer</h3>
+            <p>Ship tight, performant gameplay systems; comfortable with low-level optimization.</p>
+            <a class="btn btn-primary btn-sm" href="mailto:contact@elixirgames.io?subject=Gameplay%20Engineer%20Application">Apply</a>
+          </article>
+          <article class="team-card">
+            <span class="chip">Art &amp; tech</span>
+            <h3>Technical Artist</h3>
+            <p>Polish visuals while keeping memory &amp; draw calls lean.</p>
+            <a class="btn btn-primary btn-sm" href="mailto:contact@elixirgames.io?subject=Technical%20Artist%20Application">Apply</a>
+          </article>
+          <article class="team-card">
+            <span class="chip">Community</span>
+            <h3>Community Manager (part-time)</h3>
+            <p>Grow our player base and keep devs &amp; players connected.</p>
+            <a class="btn btn-primary btn-sm" href="mailto:contact@elixirgames.io?subject=Community%20Manager%20Application">Apply</a>
+          </article>
+        </div>
+
+        <ol class="process" aria-label="Hiring process">
+          <li><span>01</span>Apply</li>
+          <li><span>02</span>Short playbook task</li>
+          <li><span>03</span>Pair interview</li>
+          <li><span>04</span>Offer</li>
+        </ol>
+      </section>
+
+      <section id="support" class="section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">Help center</span>
+            <h2>Support</h2>
+          </div>
+          <p class="section-copy">Fast help for players and partners — bugs, refunds, accessibility, and modding guidance.</p>
+        </div>
+
+        <div class="support-grid">
+          <div class="faq">
+            <article class="faq-item">
+              <h3>How do I improve game performance?</h3>
+              <p>Try closing other browser tabs, enabling hardware acceleration in your browser settings, or download our native desktop builds for the best performance.</p>
+            </article>
+            <article class="faq-item">
+              <h3>Do these games support controllers?</h3>
+              <p>Most of our games support intuitive touch controls and keyboard layouts. Specific controller mapping info is listed on each game's play page.</p>
+            </article>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="/contact.html">Report a bug</a>
+              <a class="btn btn-ghost" href="/contact.html">Contact Support</a>
+            </div>
+          </div>
+
+          <aside class="link-panel" aria-label="Community links">
+            <h3>Quick Links</h3>
+            <a class="link-row" href="https://discord.gg/elixir-games" target="_blank" rel="noopener"><span>Join our Discord</span><span aria-hidden="true">→</span></a>
+            <a class="link-row" href="https://github.com/elixir-games" target="_blank" rel="noopener"><span>GitHub Issues</span><span aria-hidden="true">→</span></a>
+          </aside>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="about-grid">
+          <div>
+            <span class="kicker">Our story</span>
+            <h2>About</h2>
+            <p class="lede">Make small games that delight and scale — craft over scope, performance over bloat.</p>
+            <p class="section-copy story">Founded in 2020 by a team of tooling and gameplay engineers, Elixir Games builds compact, high-performance gaming experiences and open-source developer prototypes. We believe in keeping games performant, accessible, and fun.</p>
+          </div>
+
+          <div>
+            <p class="kicker values-kicker">Core values</p>
+            <div class="values">
+              <article class="value">
+                <span class="value-num">01</span>
+                <h3>Player-First Design</h3>
+                <p>We focus on immediate accessibility and deep, satisfying mechanics.</p>
+              </article>
+              <article class="value">
+                <span class="value-num">02</span>
+                <h3>Measurable Performance</h3>
+                <p>Rock-solid frame rates and instant loads, optimized for any device.</p>
+              </article>
+              <article class="value">
+                <span class="value-num">03</span>
+                <h3>Open Tooling</h3>
+                <p>We regularly release our underlying engines and libraries back to the community.</p>
+              </article>
+              <article class="value">
+                <span class="value-num">04</span>
+                <h3>Respectful Experiences</h3>
+                <p>Zero tracking bloat, zero attention-hogging loops — just great gameplay.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <section id="games" class="card">
-      <div class="section-grid">
-        <!-- Yatzy -->
-        <div class="game-card">
-          <div class="game-thumb">
-            <a href="/yatzy-landing/" aria-label="Open Yatzy landing page">
-              <img src="/images/yatzy.png" alt="Yatzy Icon" />
-            </a>
-          </div>
-          <div class="game-details">
-            <div class="game-title">Yatzy</div>
-            <div class="game-meta">Classic dice game — strategy and chance in every roll.</div>
-            <div class="actions">
-              <a href="javascript:void(0)" class="btn disabled" style="padding: 0 16px; width: 135px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; box-sizing: border-box;">Play Now</a>
-              <a href="https://apps.apple.com/pl/app/yatzy-2-0/id6758081832" target="_blank" rel="noopener">
-                <img src="/images/app_store.svg" alt="Download on the App Store" style="height: 40px; display: block;" />
-              </a>
-              <a href="https://play.google.com/store/apps/details?id=io.elixirgames.yatzy" target="_blank" rel="noopener">
-                <img src="/images/google_play.svg" alt="Get it on Google Play" style="height: 40px; display: block;" />
-              </a>
-            </div>
-            <div class="desktop-downloads">
-              <span>Download:</span>
-              <a href="javascript:void(0)" class="download-link disabled"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M0 3.449L9.75 2.1v9.451H0zM0 12.549h9.75v9.451L0 20.651zM10.875 1.95L24 0v11.55H10.875zM10.875 12.549H24v11.55l-13.125-1.95z"/></svg>Windows</a>
-              <a href="https://apps.apple.com/pl/app/yatzy-2-0/id6758081832" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-.96.04-2.13.64-2.82 1.45-.6.69-1.12 1.83-.98 2.94.1.08.21.12.31.12.87 0 1.94-.53 2.5-1.45z"/></svg>macOS</a>
-              <a href="javascript:void(0)" class="download-link disabled"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12 2c-.67 0-1.33.08-2 .23C7.4 2.8 5.76 4.3 5.16 6.57c-.24.91-.25 1.87-.04 2.82.16.73.45 1.43.86 2.05-.12.4-.23.8-.32 1.21-.33 1.54-.2 3.12.36 4.58.4 1.03.97 1.98 1.69 2.8l-.13.3c-.43 1-.76 2.04-.98 3.1-.09.43-.09.87.01 1.3.1.4.31.76.62 1.03.3.26.7.41 1.1.43H18.7c.4-.02.8-.17 1.1-.43.31-.27.52-.63.62-1.03.1-.43.1-.87.01-1.3-.22-1.06-.55-2.1-.98-3.1l-.13-.3c.72-.82 1.29-1.77 1.69-2.8.56-1.46.69-3.04.36-4.58-.09-.41-.2-.81-.32-1.21.41-.62.7-1.32.86-2.05.21-.95.2-1.91-.04-2.82C21.24 4.3 19.6 2.8 17 2.23c-.67-.15-1.33-.23-2-.23zm-.5 2.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm5 0c.28 0 .5 0 .5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/></svg>Linux</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mills -->
-        <div class="game-card">
-          <div class="game-thumb">
-            <a href="/mills-landing/" aria-label="Open Mills landing page">
-              <img src="/images/mills.png" alt="Mills Icon" />
-            </a>
-          </div>
-          <div class="game-details">
-            <div class="game-title">Mills</div>
-            <div class="game-meta">The traditional nine men's morris strategy board game.</div>
-            <div class="actions">
-              <a href="javascript:void(0)" class="btn disabled" style="padding: 0 16px; width: 135px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; box-sizing: border-box;">Play Now</a>
-              <a href="https://apps.apple.com/pl/app/mills-2-0/id6758081595" target="_blank" rel="noopener">
-                <img src="/images/app_store.svg" alt="Download on the App Store" style="height: 40px; display: block;" />
-              </a>
-              <a href="https://play.google.com/store/apps/details?id=io.elixirgames.mills" target="_blank" rel="noopener">
-                <img src="/images/google_play.svg" alt="Get it on Google Play" style="height: 40px; display: block;" />
-              </a>
-            </div>
-            <div class="desktop-downloads">
-              <span>Download:</span>
-              <a href="javascript:void(0)" class="download-link disabled"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M0 3.449L9.75 2.1v9.451H0zM0 12.549h9.75v9.451L0 20.651zM10.875 1.95L24 0v11.55H10.875zM10.875 12.549H24v11.55l-13.125-1.95z"/></svg>Windows</a>
-              <a href="https://apps.apple.com/pl/app/mills-2-0/id6758081595" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-.96.04-2.13.64-2.82 1.45-.6.69-1.12 1.83-.98 2.94.1.08.21.12.31.12.87 0 1.94-.53 2.5-1.45z"/></svg>macOS</a>
-              <a href="javascript:void(0)" class="download-link disabled"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12 2c-.67 0-1.33.08-2 .23C7.4 2.8 5.76 4.3 5.16 6.57c-.24.91-.25 1.87-.04 2.82.16.73.45 1.43.86 2.05-.12.4-.23.8-.32 1.21-.33 1.54-.2 3.12.36 4.58.4 1.03.97 1.98 1.69 2.8l-.13.3c-.43 1-.76 2.04-.98 3.1-.09.43-.09.87.01 1.3.1.4.31.76.62 1.03.3.26.7.41 1.1.43H18.7c.4-.02.8-.17 1.1-.43.31-.27.52-.63.62-1.03.1-.43.1-.87.01-1.3-.22-1.06-.55-2.1-.98-3.1l-.13-.3c.72-.82 1.29-1.77 1.69-2.8.56-1.46.69-3.04.36-4.58-.09-.41-.2-.81-.32-1.21.41-.62.7-1.32.86-2.05.21-.95.2-1.91-.04-2.82C21.24 4.3 19.6 2.8 17 2.23c-.67-.15-1.33-.23-2-.23zm-.5 2.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm5 0c.28 0 .5 0 .5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/></svg>Linux</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Blocks -->
-        <div class="game-card">
-          <div class="game-thumb">
-            <a href="/blocks-landing/" aria-label="Open Blocks landing page">
-              <img src="/images/blocks.png" alt="Blocks Icon" />
-            </a>
-          </div>
-          <div class="game-details">
-            <div class="game-title">Blocks</div>
-            <div class="game-meta">Challenging physics and logic falling block puzzle game.</div>
-            <div class="actions">
-              <a href="javascript:void(0)" class="btn disabled" style="padding: 0 16px; width: 135px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; box-sizing: border-box;">Play Now</a>
-              <a href="https://apps.apple.com/pl/app/blocks-2-0/id6760268812" target="_blank" rel="noopener">
-                <img src="/images/app_store.svg" alt="Download on the App Store" style="height: 40px; display: block;" />
-              </a>
-              <a href="https://play.google.com/store/apps/details?id=io.elixirgames.blocks" target="_blank" rel="noopener">
-                <img src="/images/google_play.svg" alt="Get it on Google Play" style="height: 40px; display: block;" />
-              </a>
-            </div>
-            <div class="desktop-downloads">
-              <span>Download:</span>
-              <a href="javascript:void(0)" class="download-link disabled"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M0 3.449L9.75 2.1v9.451H0zM0 12.549h9.75v9.451L0 20.651zM10.875 1.95L24 0v11.55H10.875zM10.875 12.549H24v11.55l-13.125-1.95z"/></svg>Windows</a>
-              <a href="https://apps.apple.com/pl/app/blocks-2-0/id6760268812" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-.96.04-2.13.64-2.82 1.45-.6.69-1.12 1.83-.98 2.94.1.08.21.12.31.12.87 0 1.94-.53 2.5-1.45z"/></svg>macOS</a>
-              <a href="javascript:void(0)" class="download-link disabled"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12 2c-.67 0-1.33.08-2 .23C7.4 2.8 5.76 4.3 5.16 6.57c-.24.91-.25 1.87-.04 2.82.16.73.45 1.43.86 2.05-.12.4-.23.8-.32 1.21-.33 1.54-.2 3.12.36 4.58.4 1.03.97 1.98 1.69 2.8l-.13.3c-.43 1-.76 2.04-.98 3.1-.09.43-.09.87.01 1.3.1.4.31.76.62 1.03.3.26.7.41 1.1.43H18.7c.4-.02.8-.17 1.1-.43.31-.27.52-.63.62-1.03.1-.43.1-.87.01-1.3-.22-1.06-.55-2.1-.98-3.1l-.13-.3c.72-.82 1.29-1.77 1.69-2.8.56-1.46.69-3.04.36-4.58-.09-.41-.2-.81-.32-1.21.41-.62.7-1.32.86-2.05.21-.95.2-1.91-.04-2.82C21.24 4.3 19.6 2.8 17 2.23c-.67-.15-1.33-.23-2-.23zm-.5 2.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm5 0c.28 0 .5 0 .5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/></svg>Linux</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Paper Soccer -->
-        <div class="game-card">
-          <div class="game-thumb">
-            <a href="/paper-soccer-landing/" aria-label="Open Paper Soccer landing page">
-              <img src="/images/paper_soccer.png" alt="Paper Soccer Icon" />
-            </a>
-          </div>
-          <div class="game-details">
-            <div class="game-title">Paper Soccer</div>
-            <div class="game-meta">Turn-based tactical strategy simulating soccer on a paper grid.</div>
-            <div class="actions">
-              <a href="javascript:void(0)" class="btn disabled" style="padding: 0 16px; width: 135px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; box-sizing: border-box;">Play Now</a>
-              <a href="https://apps.apple.com/pl/app/paper-soccer-2-0/id6758081931" target="_blank" rel="noopener">
-                <img src="/images/app_store.svg" alt="Download on the App Store" style="height: 40px; display: block;" />
-              </a>
-              <a href="https://play.google.com/store/apps/details?id=io.elixirgames.paper_soccer" target="_blank" rel="noopener">
-                <img src="/images/google_play.svg" alt="Get it on Google Play" style="height: 40px; display: block;" />
-              </a>
-            </div>
-            <div class="desktop-downloads">
-              <span>Download:</span>
-              <a href="javascript:void(0)" class="download-link disabled"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M0 3.449L9.75 2.1v9.451H0zM0 12.549h9.75v9.451L0 20.651zM10.875 1.95L24 0v11.55H10.875zM10.875 12.549H24v11.55l-13.125-1.95z"/></svg>Windows</a>
-              <a href="https://apps.apple.com/pl/app/paper-soccer-2-0/id6758081931" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-.96.04-2.13.64-2.82 1.45-.6.69-1.12 1.83-.98 2.94.1.08.21.12.31.12.87 0 1.94-.53 2.5-1.45z"/></svg>macOS</a>
-              <a href="javascript:void(0)" class="download-link disabled"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12 2c-.67 0-1.33.08-2 .23C7.4 2.8 5.76 4.3 5.16 6.57c-.24.91-.25 1.87-.04 2.82.16.73.45 1.43.86 2.05-.12.4-.23.8-.32 1.21-.33 1.54-.2 3.12.36 4.58.4 1.03.97 1.98 1.69 2.8l-.13.3c-.43 1-.76 2.04-.98 3.1-.09.43-.09.87.01 1.3.1.4.31.76.62 1.03.3.26.7.41 1.1.43H18.7c.4-.02.8-.17 1.1-.43.31-.27.52-.63.62-1.03.1-.43.1-.87.01-1.3-.22-1.06-.55-2.1-.98-3.1l-.13-.3c.72-.82 1.29-1.77 1.69-2.8.56-1.46.69-3.04.36-4.58-.09-.41-.2-.81-.32-1.21.41-.62.7-1.32.86-2.05.21-.95.2-1.91-.04-2.82C21.24 4.3 19.6 2.8 17 2.23c-.67-.15-1.33-.23-2-.23zm-.5 2.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm5 0c.28 0 .5 0 .5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/></svg>Linux</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Ships -->
-        <div class="game-card">
-          <div class="game-thumb">
-            <a href="/ships-landing/" aria-label="Open Ships landing page">
-              <img src="/images/ships.png" alt="Ships Icon" />
-            </a>
-          </div>
-          <div class="game-details">
-            <div class="game-title">Ships</div>
-            <div class="game-meta">Battleship tactics — grid logic and strategic naval combat.</div>
-            <div class="actions">
-              <a href="javascript:void(0)" class="btn disabled" style="padding: 0 16px; width: 135px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; box-sizing: border-box;">Play Now</a>
-              <a href="https://apps.apple.com/pl/app/ships-2-0/id6758081929" target="_blank" rel="noopener">
-                <img src="/images/app_store.svg" alt="Download on the App Store" style="height: 40px; display: block;" />
-              </a>
-              <a href="https://play.google.com/store/apps/details?id=io.elixirgames.battleships" target="_blank" rel="noopener">
-                <img src="/images/google_play.svg" alt="Get it on Google Play" style="height: 40px; display: block;" />
-              </a>
-            </div>
-            <div class="desktop-downloads">
-              <span>Download:</span>
-              <a href="javascript:void(0)" class="download-link disabled"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M0 3.449L9.75 2.1v9.451H0zM0 12.549h9.75v9.451L0 20.651zM10.875 1.95L24 0v11.55H10.875zM10.875 12.549H24v11.55l-13.125-1.95z"/></svg>Windows</a>
-              <a href="https://apps.apple.com/pl/app/ships-2-0/id6758081929" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-.96.04-2.13.64-2.82 1.45-.6.69-1.12 1.83-.98 2.94.1.08.21.12.31.12.87 0 1.94-.53 2.5-1.45z"/></svg>macOS</a>
-              <a href="javascript:void(0)" class="download-link disabled"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12 2c-.67 0-1.33.08-2 .23C7.4 2.8 5.76 4.3 5.16 6.57c-.24.91-.25 1.87-.04 2.82.16.73.45 1.43.86 2.05-.12.4-.23.8-.32 1.21-.33 1.54-.2 3.12.36 4.58.4 1.03.97 1.98 1.69 2.8l-.13.3c-.43 1-.76 2.04-.98 3.1-.09.43-.09.87.01 1.3.1.4.31.76.62 1.03.3.26.7.41 1.1.43H18.7c.4-.02.8-.17 1.1-.43.31-.27.52-.63.62-1.03.1-.43.1-.87.01-1.3-.22-1.06-.55-2.1-.98-3.1l-.13-.3c.72-.82 1.29-1.77 1.69-2.8.56-1.46.69-3.04.36-4.58-.09-.41-.2-.81-.32-1.21.41-.62.7-1.32.86-2.05.21-.95.2-1.91-.04-2.82C21.24 4.3 19.6 2.8 17 2.23c-.67-.15-1.33-.23-2-.23zm-.5 2.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm5 0c.28 0 .5 0 .5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/></svg>Linux</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Puzzle -->
-        <div class="game-card">
-          <div class="game-thumb">
-            <a href="/puzzle-landing/" aria-label="Open Puzzle landing page">
-              <img src="/images/puzzle.png" alt="Puzzle Icon" />
-            </a>
-          </div>
-          <div class="game-details">
-            <div class="game-title">Puzzle</div>
-            <div class="game-meta">Thoughtful spatial block fit and grid board puzzle.</div>
-            <div class="actions">
-              <a href="javascript:void(0)" class="btn disabled" style="padding: 0 16px; width: 135px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; box-sizing: border-box;">Play Now</a>
-              <a href="https://apps.apple.com/pl/app/puzzle-2-0/id6757918654" target="_blank" rel="noopener">
-                <img src="/images/app_store.svg" alt="Download on the App Store" style="height: 40px; display: block;" />
-              </a>
-              <a href="https://play.google.com/store/apps/details?id=io.elixirgames.puzzle" target="_blank" rel="noopener">
-                <img src="/images/google_play.svg" alt="Get it on Google Play" style="height: 40px; display: block;" />
-              </a>
-            </div>
-            <div class="desktop-downloads">
-              <span>Download:</span>
-              <a href="javascript:void(0)" class="download-link disabled"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M0 3.449L9.75 2.1v9.451H0zM0 12.549h9.75v9.451L0 20.651zM10.875 1.95L24 0v11.55H10.875zM10.875 12.549H24v11.55l-13.125-1.95z"/></svg>Windows</a>
-              <a href="https://apps.apple.com/pl/app/puzzle-2-0/id6757918654" class="download-link"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.82M15.97 4.17c.66-.81 1.11-1.93.99-3.06-.96.04-2.13.64-2.82 1.45-.6.69-1.12 1.83-.98 2.94.1.08.21.12.31.12.87 0 1.94-.53 2.5-1.45z"/></svg>macOS</a>
-              <a href="javascript:void(0)" class="download-link disabled"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12 2c-.67 0-1.33.08-2 .23C7.4 2.8 5.76 4.3 5.16 6.57c-.24.91-.25 1.87-.04 2.82.16.73.45 1.43.86 2.05-.12.4-.23.8-.32 1.21-.33 1.54-.2 3.12.36 4.58.4 1.03.97 1.98 1.69 2.8l-.13.3c-.43 1-.76 2.04-.98 3.1-.09.43-.09.87.01 1.3.1.4.31.76.62 1.03.3.26.7.41 1.1.43H18.7c.4-.02.8-.17 1.1-.43.31-.27.52-.63.62-1.03.1-.43.1-.87.01-1.3-.22-1.06-.55-2.1-.98-3.1l-.13-.3c.72-.82 1.29-1.77 1.69-2.8.56-1.46.69-3.04.36-4.58-.09-.41-.2-.81-.32-1.21.41-.62.7-1.32.86-2.05.21-.95.2-1.91-.04-2.82C21.24 4.3 19.6 2.8 17 2.23c-.67-.15-1.33-.23-2-.23zm-.5 2.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm5 0c.28 0 .5 0 .5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/></svg>Linux</a>
-            </div>
-          </div>
-        </div>
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <img src="/avatar.png" alt="" width="32" height="32">
+        <span>© <span id="year"></span> Elixir Games — built with care</span>
       </div>
-
-      <div style="margin-top:16px;color:var(--muted);font-size:13px">See developer notes and prototypes on our <a href="https://github.com/elixir-games" style="color:var(--accent-dark);font-weight:600;display:inline-flex;align-items:center;gap:4px;vertical-align:bottom"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>GitHub</a>.</div>
-    </section>
-
-    <section id="careers" class="card">
-      <div class="section-header">
-        <h2>Careers</h2>
-      </div>
-
-      <div class="section-grid" style="margin-top:12px">
-        <div class="team-card">
-          <div style="font-weight:800;color:var(--text-primary)">Gameplay Engineer</div>
-          <div class="game-meta">Ship tight, performant gameplay systems; comfortable with low-level optimization.</div>
-          <div class="actions" style="margin-top:10px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Gameplay%20Engineer%20Application">Apply</a></div>
-        </div>
-        <div class="team-card">
-          <div style="font-weight:800;color:var(--text-primary)">Technical Artist</div>
-          <div class="game-meta">Polish visuals while keeping memory & draw calls lean.</div>
-          <div class="actions" style="margin-top:10px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Technical%20Artist%20Application">Apply</a></div>
-        </div>
-        <div class="team-card">
-          <div style="font-weight:800;color:var(--text-primary)">Community Manager (part-time)</div>
-          <div class="game-meta">Grow our player base and keep devs & players connected.</div>
-          <div class="actions" style="margin-top:10px"><a class="btn" href="mailto:contact@elixirgames.io?subject=Community%20Manager%20Application">Apply</a></div>
-        </div>
-      </div>
-
-      <div style="margin-top:12px;color:var(--muted);font-size:13px">Hiring process: Apply → Short playbook task → Pair interview → Offer.</div>
-    </section>
-
-    <section id="support" class="card" style="padding:32px">
-      <div class="section-header" style="margin-bottom:20px">
-        <h2>Support</h2>
-        <div class="pill">Help</div>
-      </div>
-      <p class="desc" style="font-size:15px;line-height:1.6;margin-bottom:24px">Fast help for players and partners — bugs, refunds, accessibility, and modding guidance.</p>
-
-      <div style="display:grid;grid-template-columns:1fr 280px;gap:32px;align-items:start">
-        <div>
-          <h3 style="margin:0 0 16px 0;font-size:18px">Frequently Asked Questions</h3>
-          
-          <div style="margin-bottom:20px">
-            <div style="font-weight:700;color:var(--text-primary);font-size:14px;margin-bottom:6px">How do I improve game performance?</div>
-            <div style="color:var(--muted);font-size:14px;line-height:1.5">Try closing other browser tabs, enabling hardware acceleration in your browser settings, or download our native desktop builds for the best performance.</div>
-          </div>
-          
-          <div style="margin-bottom:24px">
-            <div style="font-weight:700;color:var(--text-primary);font-size:14px;margin-bottom:6px">Do these games support controllers?</div>
-            <div style="color:var(--muted);font-size:14px;line-height:1.5">Most of our games support intuitive touch controls and keyboard layouts. Specific controller mapping info is listed on each game's play page.</div>
-          </div>
-
-          <div style="margin-top:12px"><a class="btn" href="/contact.html">Report a bug</a> <a class="ghost" href="/contact.html">Contact Support</a></div>
-        </div>
-        <div class="contact-card" style="padding:24px">
-          <div style="font-weight:800;font-size:15px;color:var(--text-primary);margin-bottom:12px">Quick Links</div>
-          <div style="display:flex;flex-direction:column;gap:10px;font-size:13px">
-            <a href="https://discord.gg/elixir-games" target="_blank" rel="noopener" style="color:var(--accent-dark);text-decoration:none;font-weight:600">Join our Discord →</a>
-            <a href="https://github.com/elixir-games" target="_blank" rel="noopener" style="color:var(--accent-dark);text-decoration:none;font-weight:600">GitHub Issues →</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="card" style="padding:32px">
-      <div class="section-header" style="margin-bottom:20px">
-        <h2>About</h2>
-        <div class="pill">Our Story</div>
-      </div>
-      <p class="desc" style="font-size:15px;line-height:1.6;margin-bottom:24px">Make small games that delight and scale — craft over scope, performance over bloat.</p>
-      <div style="margin-top:12px">
-        <h3 style="margin:0 0 8px 0;font-size:18px">Our Story</h3>
-        <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:24px">Founded in 2020 by a team of tooling and gameplay engineers, Elixir Games builds compact, high-performance gaming experiences and open-source developer prototypes. We believe in keeping games performant, accessible, and fun.</p>
-        <h3 style="margin:0 0 12px 0;font-size:18px">Core Values</h3>
-        <ul style="color:var(--muted);font-size:14px;line-height:1.7;margin:0;padding-left:20px;display:grid;gap:10px">
-          <li><strong>Player-First Design:</strong> We focus on immediate accessibility and deep, satisfying mechanics.</li>
-          <li><strong>Measurable Performance:</strong> Rock-solid frame rates and instant loads, optimized for any device.</li>
-          <li><strong>Open Tooling:</strong> We regularly release our underlying engines and libraries back to the community.</li>
-          <li><strong>Respectful Experiences:</strong> Zero tracking bloat, zero attention-hogging loops — just great gameplay.</li>
-        </ul>
-      </div>
-    </section>
-
-    <footer>
-      <div>© Elixir Games — built with care</div>
-      <div style="display:flex;gap:12px">
-        <a class="ghost" href="/privacy.html">Privacy</a>
-        <a class="ghost" href="/contact.html">Contact</a>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/contact.html">Contact</a>
+        <a href="https://github.com/elixir-games" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://discord.gg/elixir-games" target="_blank" rel="noopener">Discord</a>
       </div>
     </footer>
   </div>
+
   <script>
     // Handle #privacy hash - redirect to privacy page
     (function(){
@@ -626,98 +795,55 @@
     })();
   </script>
   <script>
+    // Header: year, mobile menu, and active-section highlight
     (function(){
-      const logoWrap = document.querySelector('.logo');
-      const filt = document.querySelector('#liquid-filter feDisplacementMap');
-      if(!logoWrap || !filt) return;
-      let idle = true;
-      function animateOnce(){
-        if(!idle) return;
-        idle = false;
-        logoWrap.classList.add('liquid-active');
-        // animate displacement scale (bigger, more visible)
-        let start = 0, end = 22, dur = 520; // ms
-        const t0 = performance.now();
-        function frame(t){
-          const p = Math.min(1, (t - t0)/dur);
-          const eased = Math.sin(p * Math.PI);
-          filt.setAttribute('scale', Math.floor(start + (end-start)*eased));
-          if(p < 1) requestAnimationFrame(frame);
-            else {
-            // reverse with a slightly longer decay
-            let r0 = performance.now();
-            let revDur=900;
-            function rev(t2){
-              const q = Math.min(1, (t2 - r0)/revDur);
-              const e2 = Math.cos(q * Math.PI/2);
-              filt.setAttribute('scale', Math.floor(start + (end-start)*e2));
-              if(q < 1) requestAnimationFrame(rev);
-              else {
-                logoWrap.classList.remove('liquid-active');
-                filt.setAttribute('scale', 0);
-                idle = true;
-              }
-            }
-            requestAnimationFrame(rev);
-          }
-        }
-        requestAnimationFrame(frame);
-      }
-      // Only trigger on hover or keyboard focus — remove periodic auto-trigger
-      // also trigger on hover or focus
-      logoWrap.addEventListener('mouseenter', ()=>{ animateOnce(); });
-      logoWrap.addEventListener('focus', ()=>{ animateOnce(); });
-      // remove periodic schedule to make animation less intrusive
-    })();
+      var year = document.getElementById('year');
+      if(year) year.textContent = new Date().getFullYear();
 
-    // mobile nav toggle
-    (function(){
-      const btn = document.querySelector('.nav-toggle');
-      const nav = document.getElementById('site-nav');
-      const backdrop = document.getElementById('nav-backdrop');
-      if(!btn || !nav || !backdrop) return;
-      function open(){
-        nav.classList.add('open');
-        btn.setAttribute('aria-expanded','true');
-        backdrop.hidden = false; backdrop.classList.add('show'); backdrop.setAttribute('aria-hidden','false');
-        document.body.classList.add('nav-open');
-        // hide main content from screen readers while menu is open
-        document.querySelector('main').setAttribute('aria-hidden','true');
-        // move focus into the nav for accessibility
-        const first = nav.querySelector('a, button'); if(first) first.focus();
+      var btn = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      if(!btn || !nav) return;
+
+      function setOpen(open){
+        nav.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        // back-to-top listens for this to re-check its visibility
+        if(!open) document.dispatchEvent(new Event('eg:navclosed'));
       }
-      function close(){
-        nav.classList.remove('open');
-        btn.setAttribute('aria-expanded','false');
-        backdrop.classList.remove('show'); backdrop.hidden = true; backdrop.setAttribute('aria-hidden','true');
-        document.body.classList.remove('nav-open');
-        document.querySelector('main').removeAttribute('aria-hidden');
-        // notify other scripts that nav has closed (useful on mobile)
-        try{ document.dispatchEvent(new Event('eg:navclosed')); }catch(e){}
-        // return focus to the toggle
-        btn.focus();
-      }
-      btn.addEventListener('click', (e)=>{
-        if(nav.classList.contains('open')) close(); else open();
+
+      btn.addEventListener('click', function(){ setOpen(!nav.classList.contains('open')); });
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && nav.classList.contains('open')){ setOpen(false); btn.focus(); }
       });
-      // close on escape
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-      // clicking the backdrop closes menu
-      backdrop.addEventListener('click', (e)=>{ close(); });
-      // close when clicking outside nav on small screens (retain as fallback)
-      document.addEventListener('click',(e)=>{
-        if(window.innerWidth > 900) return;
-        if(!nav.contains(e.target) && !btn.contains(e.target)) close();
+      document.addEventListener('click', function(e){
+        if(!nav.classList.contains('open')) return;
+        if(!nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+      });
+      nav.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', function(){ if(window.innerWidth <= 900) setOpen(false); });
+      });
+      window.addEventListener('resize', function(){
+        if(window.innerWidth > 900 && nav.classList.contains('open')) setOpen(false);
       });
 
-      // close when a nav link is selected (mobile)
-      nav.querySelectorAll('a').forEach(link=>{
-        link.addEventListener('click', (e)=>{
-          if(window.innerWidth <= 900){
-            close();
-          }
+      var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+      var byId = {};
+      links.forEach(function(a){ byId[a.getAttribute('href').slice(1)] = a; });
+      if('IntersectionObserver' in window){
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if(!entry.isIntersecting) return;
+            links.forEach(function(a){ a.classList.remove('active'); });
+            var link = byId[entry.target.id];
+            if(link) link.classList.add('active');
+          });
+        }, { rootMargin: '-30% 0px -60% 0px' });
+        Object.keys(byId).forEach(function(id){
+          var el = document.getElementById(id);
+          if(el) io.observe(el);
         });
-      });
+      }
     })();
   </script>
   <button class="back-to-top" aria-label="Back to top" title="Back to top">
