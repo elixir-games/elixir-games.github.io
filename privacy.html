@@ -15,7 +15,7 @@
   <meta name="robots" content="index, follow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 
   <!-- Open Graph / Social -->
@@ -64,7 +64,7 @@
       --color-scheme:light;
       --max:980px;
       --radius:26px;
-      --display:"Cinzel","Times New Roman",serif;
+      --display:"Russo One","Arial Black",sans-serif;
       --sans:"Manrope","Avenir Next","Segoe UI",sans-serif;
       --ease:cubic-bezier(.2,.9,.3,1);
     }
@@ -124,7 +124,7 @@
     a{color:inherit}
     :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
     h1,h2,h3{margin:0;color:var(--text);text-wrap:balance}
-    h1,h2{font-family:var(--display);color:var(--accent-strong);line-height:1.05}
+    h1,h2{font-family:var(--display);font-weight:400;color:var(--accent-strong);line-height:1.05}
     h1{font-size:clamp(2.5rem,4.6vw,4rem);letter-spacing:.01em}
     h3{font-family:var(--sans);font-size:18px;font-weight:800;line-height:1.3}
 
@@ -152,7 +152,7 @@
     .brand img{width:46px;height:46px;border-radius:14px;box-shadow:0 10px 24px rgba(var(--shadow-rgb),.3);transition:transform .3s var(--ease)}
     .brand:hover img{transform:translateY(-2px) rotate(-4deg)}
     .brand-kicker{display:block;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-text)}
-    .brand-title{display:block;margin-top:2px;font-family:var(--display);font-size:20px;letter-spacing:.04em;color:var(--accent-strong)}
+    .brand-title{display:block;margin-top:2px;font-family:var(--display);font-weight:400;font-size:20px;letter-spacing:.04em;color:var(--accent-strong)}
     .site-nav{display:flex;align-items:center;gap:4px}
     .site-nav a{padding:9px 14px;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px;color:var(--muted);transition:color .2s ease,background .2s ease}
     .site-nav a:hover{color:var(--text);background:rgba(var(--tint),.06)}
@@ -283,7 +283,7 @@
       background:rgba(var(--tint),.04);
       border:1px solid var(--line);
     }
-    .toc h3{margin:0 0 14px;font-family:var(--display);font-size:20px;color:var(--accent-strong)}
+    .toc h3{margin:0 0 14px;font-family:var(--display);font-weight:400;font-size:20px;color:var(--accent-strong)}
     .toc ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 20px}
     .toc li{margin:0}
     .toc a{
