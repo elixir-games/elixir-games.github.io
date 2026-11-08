@@ -1,0 +1,28 @@
+# Elixir Games
+
+> Elixir Games is an indie game studio (founded 2020) making compact, polished board and puzzle games for iOS and Android. Its six games are Yatzy, Mills, Blocks, Paper Soccer, Ships and Puzzle. Each game has its own page with a description and App Store and Google Play links.
+
+Elixir Games builds compact, high-performance games and open-source developer prototypes. The studio is remote-first. Contact: contact@elixirgames.io. Full text for AI systems: https://elixirgames.io/llms-full.txt
+
+## Games
+
+- [Yatzy](https://elixirgames.io/yatzy-landing/): Classic dice game on a warm wooden table, with smart AI opponents and 1–4 local players.
+- [Mills](https://elixirgames.io/mills-landing/): Nine Men's Morris, the traditional strategy board game, with clean presentation and two-player play.
+- [Blocks](https://elixirgames.io/blocks-landing/): Falling-block puzzle with physics and logic, compact retries and satisfying recovery.
+- [Paper Soccer](https://elixirgames.io/paper-soccer-landing/): Turn-based paper-pitch strategy built around bank shots, drawn routes and traps.
+- [Ships](https://elixirgames.io/ships-landing/): Battleship-style duel about hidden setups, scouting and landing the right strike.
+- [Puzzle](https://elixirgames.io/puzzle-landing/): Calm shape-fitting puzzle centered on spatial reads and tight placements.
+
+## Company and help
+
+- [Home](https://elixirgames.io/): Overview of the studio and all six games.
+- [Careers](https://elixirgames.io/#careers): Open roles: Gameplay Engineer, Technical Artist, Community Manager (part-time).
+- [Support](https://elixirgames.io/#support): Help with bugs, refunds, accessibility and modding; answers to common questions.
+- [About](https://elixirgames.io/#about): Founding story and core values.
+- [Contact](https://elixirgames.io/contact.html): Contact form for feedback, press, partnership and bug reports.
+- [Privacy Policy](https://elixirgames.io/privacy.html): How the games and website handle personal data.
+- [GitHub](https://github.com/elixir-games): Developer notes, prototypes and open-source tooling.
+
+## Optional
+
+- [Full text](https://elixirgames.io/llms-full.txt): All of the above, with store links, descriptions and contact details.

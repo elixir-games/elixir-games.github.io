@@ -1,0 +1,88 @@
+# Elixir Games — full text for AI systems
+
+Canonical site: https://elixirgames.io/
+Index of this site for AI systems: https://elixirgames.io/llms.txt
+Language: English. Last content review: see sitemap.xml lastmod values.
+
+## Summary
+
+Elixir Games is an indie game studio. It was founded in 2020 by a team of tooling and gameplay engineers. It builds compact, high-performance gaming experiences and open-source developer prototypes. Its games are board and puzzle games for iOS and Android, and each one has its own page on this site with store links.
+
+Core values stated on the site:
+- Player-first design: immediate accessibility and deep, satisfying mechanics.
+- Measurable performance: steady frame rates and fast loads, optimized for many devices.
+- Open tooling: the studio releases its engines and libraries back to the community.
+- Respectful experiences: no attention-hogging loops; the games are about gameplay.
+
+The studio is remote-first and open to contractors and remote hires.
+
+## Games
+
+Each game page includes a description, screenshots and App Store and Google Play links.
+
+### Yatzy
+- Page: https://elixirgames.io/yatzy-landing/
+- Description: Classic Yatzy on a warm wooden table. Play solo, challenge smart AI, or pass one device around for 1–4 local players.
+- App Store: https://apps.apple.com/pl/app/yatzy-2-0/id6758081832
+- Google Play: https://play.google.com/store/apps/details?id=io.elixirgames.yatzy
+
+### Mills
+- Page: https://elixirgames.io/mills-landing/
+- Description: A polished take on Nine Men's Morris with clean presentation, deliberate placement play, and sharp two-player board pressure.
+- App Store: https://apps.apple.com/pl/app/mills-2-0/id6758081595
+- Google Play: https://play.google.com/store/apps/details?id=io.elixirgames.mills
+
+### Blocks
+- Page: https://elixirgames.io/blocks-landing/
+- Description: A falling-block puzzle with physics flavor, compact retries, and satisfying recovery when the stack gets messy.
+- App Store: https://apps.apple.com/pl/app/blocks-2-0/id6760268812
+- Google Play: https://play.google.com/store/apps/details?id=io.elixirgames.blocks
+
+### Paper Soccer
+- Page: https://elixirgames.io/paper-soccer-landing/
+- Description: Turn-based paper pitch strategy built around bank shots, drawn routes, and clever traps in tight spaces.
+- App Store: https://apps.apple.com/pl/app/paper-soccer-2-0/id6758081931
+- Google Play: https://play.google.com/store/apps/details?id=io.elixirgames.paper_soccer
+
+### Ships
+- Page: https://elixirgames.io/ships-landing/
+- Description: A clean battleship-style duel about hidden setups, careful scouting, and landing the right strike at the right time.
+- App Store: https://apps.apple.com/pl/app/ships-2-0/id6758081929
+- Google Play: https://play.google.com/store/apps/details?id=io.elixirgames.battleships
+
+### Puzzle
+- Page: https://elixirgames.io/puzzle-landing/
+- Description: A calm, thoughtful shape-fitting puzzler centered on spatial reads, tight placements, and clear board flow.
+- App Store: https://apps.apple.com/pl/app/puzzle-2-0/id6757918654
+- Google Play: https://play.google.com/store/apps/details?id=io.elixirgames.puzzle
+
+## Careers
+
+Open roles (apply by email to contact@elixirgames.io with the role in the subject line):
+- Gameplay Engineer: ship tight, performant gameplay systems; comfortable with low-level optimization.
+- Technical Artist: polish visuals while keeping memory and draw calls lean.
+- Community Manager (part-time): grow the player base and keep developers and players connected.
+
+Hiring process: Apply, then a short playbook task, then a pair interview, then an offer.
+
+## Support
+
+- Performance: close other browser tabs, enable hardware acceleration in browser settings, or use the native desktop builds where offered.
+- Controllers: most games support touch controls and keyboard layouts; controller mapping is listed on each game's page.
+- Bugs and refunds: use the contact form at https://elixirgames.io/contact.html or email support@elixirgames.io.
+- Community: Discord https://discord.gg/elixir-games and GitHub issues https://github.com/elixir-games.
+
+## Contact
+
+- General and press: contact@elixirgames.io
+- Support: support@elixirgames.io
+- Privacy requests: privacy@elixirgames.io
+- Contact form: https://elixirgames.io/contact.html (replies usually within 3–5 business days)
+
+## Policies
+
+- Privacy Policy: https://elixirgames.io/privacy.html (last updated December 11, 2025). It describes what data the games and this website collect, how it is used and shared, and the rights of users.
+
+## Source and tooling
+
+- GitHub organization: https://github.com/elixir-games (developer notes, prototypes and open-source tools)

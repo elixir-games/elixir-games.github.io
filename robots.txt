@@ -1,0 +1,9 @@
+# Elixir Games — robots.txt
+# Everything public may be crawled. Machine-readable overviews for AI systems:
+#   https://elixirgames.io/llms.txt       (index)
+#   https://elixirgames.io/llms-full.txt  (full text)
+
+User-agent: *
+Allow: /
+
+Sitemap: https://elixirgames.io/sitemap.xml
